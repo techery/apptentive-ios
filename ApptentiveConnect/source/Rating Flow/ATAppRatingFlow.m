@@ -22,6 +22,7 @@
 #import "ATAppRatingFlow+Internal.h"
 #import "ATUtilities.h"
 #import "ATWebClient.h"
+#import "ATSurveys.h"
 
 
 NSString *const ATAppRatingFlowUserAgreedToRateAppNotification = @"ATAppRatingFlowUserAgreedToRateAppNotification";
@@ -192,10 +193,16 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 			if (!self.viewController) {
 				ATLogError(@"No view controller to present feedback interface!!");
 			} else {
-				NSString *title = ATLocalizedString(@"We're Sorry!", @"We're sorry text");
-				NSString *body = ATLocalizedString(@"What can we do to ensure that you love our app? We appreciate your constructive feedback.", @"Custom placeholder feedback text when user is unhappy with the application.");
-				[[ATBackend sharedBackend] sendAutomatedMessageWithTitle:title body:body];
-				[[ATBackend sharedBackend] presentIntroDialogFromViewController:self.viewController withTitle:title prompt:body placeholderText:nil];
+				BOOL surveyAfterNo = [[ATConnect sharedConnection] showSurveyAfterEnjoymentDialogNo] && [ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:@[ATSurveyTagSurveyAfterEnjoymentDialogNo]]];
+				
+				if (surveyAfterNo) {
+					[ATSurveys presentSurveyControllerWithTags:[NSSet setWithArray:@[ATSurveyTagSurveyAfterEnjoymentDialogNo]] fromViewController:self.viewController];
+				} else {
+					NSString *title = ATLocalizedString(@"We're Sorry!", @"We're sorry text");
+					NSString *body = ATLocalizedString(@"What can we do to ensure that you love our app? We appreciate your constructive feedback.", @"Custom placeholder feedback text when user is unhappy with the application.");
+					[[ATBackend sharedBackend] sendAutomatedMessageWithTitle:title body:body];
+					[[ATBackend sharedBackend] presentIntroDialogFromViewController:self.viewController withTitle:title prompt:body placeholderText:nil];
+				}
 			}
 		} else if (buttonIndex == 1) { // yes
 			[self postNotification:ATAppRatingDidClickEnjoymentButtonNotification forButton:ATAppRatingEnjoymentButtonTypeYes];
@@ -393,6 +400,14 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 		if (dislikes != nil && [dislikes boolValue]) {
 			reasonForNotShowingDialog = @"the user dislikes this version of the app.";
 			break;
+		}
+		
+		// No 'EnjoymentDialogNo'-tagged survey is available to be shown if the user selects 'No'.
+		if ([[ATConnect sharedConnection] showSurveyAfterEnjoymentDialogNo]) {
+			if (![ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:@[ATSurveyTagSurveyAfterEnjoymentDialogNo]]]) {
+				reasonForNotShowingDialog = @"no 'EnjoymentDialogNo'-tagged survey is available to be shown if the user selects 'No'.";
+				break;
+			}
 		}
 		
 		// If we don't have the last version set, update it and don't show

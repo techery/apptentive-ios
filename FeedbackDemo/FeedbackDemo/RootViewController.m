@@ -61,11 +61,16 @@ enum kSurveyRows {
 	tags = [[NSSet alloc] initWithObjects:@"testsurvey", @"testtag", nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyBecameAvailable:) name:ATSurveyNewSurveyAvailableNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyWasSent:) name:ATSurveySentNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
 }
 
 - (void)surveyBecameAvailable:(NSNotification *)notification {
 	[self.tableView reloadData];
+}
+
+- (void)surveyWasSent:(NSNotification *)notification {
+	NSLog(@"Apptentive survey id %@ was sent.", notification.userInfo);
 }
 
 - (void)unreadMessageCountChanged:(NSNotification *)notification {

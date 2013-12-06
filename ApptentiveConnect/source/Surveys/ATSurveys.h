@@ -14,6 +14,8 @@ extern NSString *const ATSurveySentNotification;
 
 extern NSString *const ATSurveyIDKey;
 
+extern NSString *const ATSurveyTagSurveyAfterEnjoymentDialogNo;
+
 /*!
 When a survey is submitted by the user, the ATSurveySentNotification will be sent.
 The userInfo dictionary will have a key named ATSurveyIDKey, with a value of the id of the survey that was sent.

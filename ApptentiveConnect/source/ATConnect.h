@@ -56,6 +56,10 @@ extern NSString *const ATIntegrationKeyUrbanAirship;
  Deprecated in 1.1.1 in favor of server-based configuration of Message Center. */
 @property (nonatomic, assign) BOOL useMessageCenter DEPRECATED_ATTRIBUTE;
 
+/*! Set to YES to show a survey (instead of the feedback form) if the user selects 'No'.
+ A survey with the tag "EnjoymentDialogNo" will be presented, which you must create on the Apptentive website. */
+@property (nonatomic, assign) BOOL showSurveyAfterEnjoymentDialogNo;
+
 + (ATConnect *)sharedConnection;
 
 #if TARGET_OS_IPHONE

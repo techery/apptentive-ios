@@ -28,7 +28,7 @@ NSString *const ATInitialUserEmailAddressKey = @"ATInitialUserEmailAddressKey";
 NSString *const ATIntegrationKeyUrbanAirship = @"urban_airship";
 
 @implementation ATConnect
-@synthesize apiKey, showTagline, showEmailField, initialUserName, initialUserEmailAddress, customPlaceholderText, useMessageCenter;
+@synthesize apiKey, showTagline, showEmailField, initialUserName, initialUserEmailAddress, customPlaceholderText, useMessageCenter, showSurveyAfterEnjoymentDialogNo;
 
 + (ATConnect *)sharedConnection {
 	static ATConnect *sharedConnection = nil;
@@ -47,6 +47,7 @@ NSString *const ATIntegrationKeyUrbanAirship = @"urban_airship";
 		customDeviceData = [[NSMutableDictionary alloc] init];
 		integrationConfiguration = [[NSMutableDictionary alloc] init];
 		useMessageCenter = YES;
+		showSurveyAfterEnjoymentDialogNo = NO;
 		
 		NSDictionary *defaults = @{ATAppConfigurationMessageCenterEnabledKey : [NSNumber numberWithBool:YES],
 								   ATAppConfigurationMessageCenterEmailRequiredKey : [NSNumber numberWithBool:NO]};

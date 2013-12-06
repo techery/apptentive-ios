@@ -14,6 +14,8 @@ NSString *const ATSurveySentNotification = @"ATSurveySentNotification";
 
 NSString *const ATSurveyIDKey = @"ATSurveyIDKey";
 
+NSString *const ATSurveyTagSurveyAfterEnjoymentDialogNo = @"EnjoymentDialogNo";
+
 @interface ATSurveys ()
 + (ATSurveys *)sharedSurveys;
 @end
