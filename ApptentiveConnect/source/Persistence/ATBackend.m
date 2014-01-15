@@ -710,6 +710,7 @@ NSString *const ATInfoDistributionVersionKey = @"ATInfoDistributionVersionKey";
 			// Queued tasks can probably start now.
 			ATTaskQueue *queue = [ATTaskQueue sharedTaskQueue];
 			[queue start];
+			[self updateConfigurationIfNeeded];
 			[self updateDeviceIfNeeded];
 			[self updatePersonIfNeeded];
 		}
