@@ -75,16 +75,15 @@
 }
 
 - (void)dealloc {
-	[_backgroundImageView release], _backgroundImageView = nil;
-	[_buttonFrame release], _buttonFrame = nil;
-	[_sendButtonNewUI release], _sendButtonNewUI = nil;
-	[_cancelButtonNewUI release], _cancelButtonNewUI = nil;
-	[_sendButtonPadding release], _sendButtonPadding = nil;
-	[_cancelButtonPadding release], _cancelButtonPadding = nil;
+	_backgroundImageView = nil;
+	_buttonFrame = nil;
+	_sendButtonNewUI = nil;
+	_cancelButtonNewUI = nil;
+	_sendButtonPadding = nil;
+	_cancelButtonPadding = nil;
 
-	[promptLabel release], promptLabel = nil;
-	[thinBlueLineView release], thinBlueLineView = nil;
-	[super dealloc];
+	promptLabel = nil;
+	thinBlueLineView = nil;
 }
 
 - (void)presentFromViewController:(UIViewController *)newPresentingViewController animated:(BOOL)animated {
@@ -107,14 +106,12 @@
 
 - (void)dismissAnimated:(BOOL)animated completion:(void (^)(void))completion withAction:(ATMessagePanelDismissAction)action {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:ATMessagePanelPresentingViewControllerSwizzledDidRotateNotification object:nil];
-	[self retain];
 	[super dismissAnimated:animated completion:completion withAction:action];
 	
 	CGFloat duration = animated ? 0.3 : 0;
 	[UIView animateWithDuration:duration animations:^(void){
 		self.backgroundImageView.alpha = 0.0;
 	} completion:^(BOOL finished) {
-		[self release];
 	}];
 }
 
@@ -213,7 +210,7 @@
 		CGRect promptLabelFrame = UIEdgeInsetsInsetRect(promptContainerBounds, labelInsets);
 		
 		if (!self.promptContainer) {
-			self.promptContainer = [[[UIView alloc] initWithFrame:promptContainerFrame] autorelease];
+			self.promptContainer = [[UIView alloc] initWithFrame:promptContainerFrame];
 			self.promptContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 			self.promptContainer.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
 			[self.promptContainer addSubview:promptLabel];
@@ -247,7 +244,7 @@
 		emailFrame = CGRectInset(emailFrame, horizontalPadding+extraHorzontalPadding, 0);
 		
 		if (!self.emailField) {
-			self.emailField = [[[UITextField alloc] initWithFrame:emailFrame] autorelease];
+			self.emailField = [[UITextField alloc] initWithFrame:emailFrame];
 			if ([[ATConnect sharedConnection] emailRequired]) {
 				self.emailField.placeholder = ATLocalizedString(@"Email (required)", @"Email Address Field Placeholder (email is required)");
 			}
@@ -294,7 +291,7 @@
 	CGRect feedbackFrame = CGRectMake(0, offsetY, width, 20);
 	feedbackFrame = CGRectInset(feedbackFrame, horizontalPadding, 0);
 	if (!self.feedbackView) {
-		self.feedbackView = [[[ATDefaultTextView alloc] initWithFrame:feedbackFrame] autorelease];
+		self.feedbackView = [[ATDefaultTextView alloc] initWithFrame:feedbackFrame];
 		
 		if (![ATUtilities osVersionGreaterThanOrEqualTo:@"7"]) {
 			UIEdgeInsets insets = UIEdgeInsetsMake(0, -8, 0, 0);

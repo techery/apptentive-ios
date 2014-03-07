@@ -62,8 +62,7 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 }
 
 - (void)dealloc {
-	[availableSurveys release], availableSurveys = nil;
-	[super dealloc];
+	availableSurveys = nil;
 }
 
 - (BOOL)shouldRetrieveNewSurveys {
@@ -92,7 +91,7 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 	if ([self shouldRetrieveNewSurveys]) {
 		ATSurveyGetSurveysTask *task = [[ATSurveyGetSurveysTask alloc] init];
 		[[ATTaskQueue sharedTaskQueue] addTask:task];
-		[task release], task = nil;
+		task = nil;
 	}
 }
 
@@ -103,7 +102,7 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 - (void)resetSurvey {
 	@synchronized(self) {
 		[currentSurvey reset];
-		[currentSurvey release], currentSurvey = nil;
+		currentSurvey = nil;
 	}
 }
 
@@ -122,19 +121,17 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 		[viewController presentModalViewController:nc animated:YES];
 #		pragma clang diagnostic pop
 	}
-	[nc release];
-	[vc release];
 	
 	NSDictionary *metricsInfo = [[NSDictionary alloc] initWithObjectsAndKeys:currentSurvey.identifier, ATSurveyMetricsSurveyIDKey, [NSNumber numberWithInt:ATSurveyWindowTypeSurvey], ATSurveyWindowTypeKey, nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:ATSurveyDidShowWindowNotification object:nil userInfo:metricsInfo];
-	[metricsInfo release], metricsInfo = nil;
+	metricsInfo = nil;
 }
 
 - (void)presentSurveyControllerWithNoTagsFromViewController:(UIViewController *)viewController {
 	if (currentSurvey != nil) {
 		[self resetSurvey];
 	}
-	currentSurvey = [[self surveyWithNoTags] retain];
+	currentSurvey = [self surveyWithNoTags];
 	if (currentSurvey) {
 		[self presentSurveyControllerFromViewControllerWithCurrentSurvey:viewController];
 	} else {
@@ -147,7 +144,7 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 	if (currentSurvey != nil) {
 		[self resetSurvey];
 	}
-	currentSurvey = [[self surveyWithTags:tags] retain];
+	currentSurvey = [self surveyWithTags:tags];
 	
 	if (currentSurvey) {
 		[self presentSurveyControllerFromViewControllerWithCurrentSurvey:viewController];
@@ -166,7 +163,7 @@ NSString *const ATSurveyCachedSurveysExpirationPreferenceKey = @"ATSurveyCachedS
 		[replacementSurveys addObject:survey.identifier];
 		[defaults setObject:replacementSurveys forKey:ATSurveySentSurveysPreferenceKey];
 		[defaults synchronize];
-		[replacementSurveys release], replacementSurveys = nil;
+		replacementSurveys = nil;
 	}
 }
 

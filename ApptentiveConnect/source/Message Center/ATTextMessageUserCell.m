@@ -101,15 +101,13 @@
 
 - (void)dealloc {
 	messageText.delegate = nil;
-	[userIcon release], userIcon = nil;
-	[messageBubbleImage release], messageBubbleImage = nil;
-	[messageText release], messageText = nil;
-	[composingBubble release], composingBubble = nil;
-	[dateLabel release], dateLabel = nil;
-	[chatBubbleContainer release], chatBubbleContainer = nil;
-	[usernameLabel release], usernameLabel = nil;
-	[_tooLongLabel release];
-	[super dealloc];
+	userIcon = nil;
+	messageBubbleImage = nil;
+	messageText = nil;
+	composingBubble = nil;
+	dateLabel = nil;
+	chatBubbleContainer = nil;
+	usernameLabel = nil;
 }
 
 - (CGFloat)cellHeightForWidth:(CGFloat)width {

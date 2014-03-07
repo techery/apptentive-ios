@@ -21,7 +21,7 @@
 	interaction.configuration = [jsonDictionary objectForKey:@"configuration"];
 	interaction.criteria = [jsonDictionary objectForKey:@"criteria"];
 	interaction.version = [jsonDictionary objectForKey:@"version"];
-	return [interaction autorelease];
+	return interaction;
 }
 
 - (NSString *)description {	
@@ -185,7 +185,7 @@
 		}
 	}
 	
-	NSPredicate *result = [[[NSCompoundPredicate alloc] initWithType:predicateType subpredicates:parts] autorelease];
+	NSPredicate *result = [[NSCompoundPredicate alloc] initWithType:predicateType subpredicates:parts];
 	return result;
 }
 

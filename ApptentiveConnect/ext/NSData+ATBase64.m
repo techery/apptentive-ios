@@ -288,11 +288,10 @@ char *ATNewBase64Encode(
 		ATNewBase64Encode([self bytes], [self length], true, &outputLength);
 	
 	NSString *result =
-		[[[NSString alloc]
+		[[NSString alloc]
 			initWithBytes:outputBuffer
 			length:outputLength
-			encoding:NSASCIIStringEncoding]
-		autorelease];
+			encoding:NSASCIIStringEncoding];
 	free(outputBuffer);
 	return result;
 }

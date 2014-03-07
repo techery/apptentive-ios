@@ -45,12 +45,11 @@
 }
 
 - (void)dealloc {
-	[apptentiveID release], apptentiveID = nil;
-	[name release], name = nil;
-	[facebookID release], facebookID = nil;
-	[emailAddress release], emailAddress = nil;
-	[secret release], secret = nil;
-	[super dealloc];
+	apptentiveID = nil;
+	name = nil;
+	facebookID = nil;
+	emailAddress = nil;
+	secret = nil;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -109,7 +108,7 @@
 	} while (NO);
 	
 	if (result != nil && success == NO) {
-		[result release], result = nil;
+		result = nil;
 	}
 	
 	

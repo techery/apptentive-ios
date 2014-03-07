@@ -70,7 +70,7 @@
 		NSDictionary *titleTextAttributes = [[UINavigationBar appearance] titleTextAttributes];
 		
 		if ([ATUtilities osVersionGreaterThanOrEqualTo:@"7"]) {
-			title.attributedText = [[[NSAttributedString alloc] initWithString:title.text attributes:titleTextAttributes] autorelease];
+			title.attributedText = [[NSAttributedString alloc] initWithString:title.text attributes:titleTextAttributes];
 		} else {
 #			pragma clang diagnostic push
 #			pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -112,9 +112,8 @@
 }
 
 - (void)dealloc {
-	[title release], title = nil;
-	[imageView release], imageView = nil;
-	[super dealloc];
+	title = nil;
+	imageView = nil;
 }
 
 - (void)layoutSubviews {

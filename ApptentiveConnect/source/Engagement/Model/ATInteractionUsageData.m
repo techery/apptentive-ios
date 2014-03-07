@@ -38,7 +38,7 @@
 
 + (ATInteractionUsageData *)usageDataForInteraction:(ATInteraction *)interaction {
 	ATInteractionUsageData *usageData = [[ATInteractionUsageData alloc] initWithInteraction:interaction];
-	return [usageData autorelease];
+	return usageData;
 }
 
 - (NSString *)description {
@@ -87,7 +87,6 @@
 	if (!_timeSinceInstallTotal) {
 		NSDate *installDate = [[NSUserDefaults standardUserDefaults] objectForKey:ATEngagementInstallDateKey] ?: [NSDate date];
 		_timeSinceInstallTotal = @(fabs([installDate timeIntervalSinceNow]));
-		[_timeSinceInstallTotal retain];
 	}
 	
 	return _timeSinceInstallTotal;
@@ -97,7 +96,6 @@
 	if (!_timeSinceInstallVersion) {
 		NSDate *versionInstallDate = [[NSUserDefaults standardUserDefaults] objectForKey:ATEngagementUpgradeDateKey] ?: [NSDate date];
 		_timeSinceInstallVersion = @(fabs([versionInstallDate timeIntervalSinceNow]));
-		[_timeSinceInstallVersion retain];
 	}
 	
 	return _timeSinceInstallVersion;
@@ -107,7 +105,6 @@
 	if (!_timeSinceInstallBuild) {
 		NSDate *buildInstallDate = [[NSUserDefaults standardUserDefaults] objectForKey:ATEngagementUpgradeDateKey] ?: [NSDate date];
 		_timeSinceInstallBuild = @(fabs([buildInstallDate timeIntervalSinceNow]));
-		[_timeSinceInstallBuild retain];
 	}
 	
 	return _timeSinceInstallBuild;
@@ -116,7 +113,6 @@
 - (NSString *)applicationVersion {
 	if (!_applicationVersion) {
 		_applicationVersion = [ATUtilities appVersionString] ?: @"";
-		[_applicationVersion retain];
 	}
 	
 	return _applicationVersion;
@@ -125,7 +121,6 @@
 - (NSString *)applicationBuild {
 	if (!_applicationBuild) {
 		_applicationBuild = [ATUtilities buildNumberString] ?: @"";
-		[_applicationBuild retain];
 	}
 	
 	return _applicationBuild;
@@ -134,7 +129,6 @@
 - (NSNumber *)isUpdateVersion {
 	if (!_isUpdateVersion) {
 		_isUpdateVersion = [[NSUserDefaults standardUserDefaults] objectForKey:ATEngagementIsUpdateVersionKey];
-		[_isUpdateVersion retain];
 	}
 	
 	return _isUpdateVersion;
@@ -143,7 +137,6 @@
 - (NSNumber *)isUpdateBuild {
 	if (!_isUpdateBuild) {
 		_isUpdateBuild = [[NSUserDefaults standardUserDefaults] objectForKey:ATEngagementIsUpdateBuildKey];
-		[_isUpdateBuild retain];
 	}
 	
 	return _isUpdateBuild;
@@ -156,7 +149,7 @@
 		for (NSString *codePoint in codePointsInvokesTotal) {
 			[predicateSyntax setObject:[codePointsInvokesTotal objectForKey:codePoint] forKey:[NSString stringWithFormat:@"code_point/%@/invokes/total", codePoint]];
 		}
-		_codePointInvokesTotal = [predicateSyntax retain];
+		_codePointInvokesTotal = predicateSyntax;
 	}
 	
 	return _codePointInvokesTotal;
@@ -169,7 +162,7 @@
 		for (NSString *codePoint in codePointsInvokesVersion) {
 			[predicateSyntax setObject:[codePointsInvokesVersion objectForKey:codePoint] forKey:[NSString stringWithFormat:@"code_point/%@/invokes/version", codePoint]];
 		}
-		_codePointInvokesVersion = [predicateSyntax retain];
+		_codePointInvokesVersion = predicateSyntax;
 	}
 	return _codePointInvokesVersion;
 }
@@ -181,7 +174,7 @@
 		for (NSString *codePoint in codePointsInvokesBuild) {
 			[predicateSyntax setObject:[codePointsInvokesBuild objectForKey:codePoint] forKey:[NSString stringWithFormat:@"code_point/%@/invokes/build", codePoint]];
 		}
-		_codePointInvokesBuild = [predicateSyntax retain];
+		_codePointInvokesBuild = predicateSyntax;
 	}
 	return _codePointInvokesBuild;
 }
@@ -195,7 +188,7 @@
 			NSTimeInterval timeAgo = [[NSDate date] timeIntervalSinceDate:lastDate];
 			[predicateSyntax setObject:@(timeAgo) forKey:[NSString stringWithFormat:@"code_point/%@/invokes/time_ago", codePoint]];
 		}
-		_codePointInvokesTimeAgo = [predicateSyntax retain];
+		_codePointInvokesTimeAgo = predicateSyntax;
 	}
 	return _codePointInvokesTimeAgo;
 }
@@ -207,7 +200,7 @@
 		for (NSString *interactionID in interactionsInvokesTotal) {
 			[predicateSyntax setObject:[interactionsInvokesTotal objectForKey:interactionID] forKey:[NSString stringWithFormat:@"interactions/%@/invokes/total", interactionID]];
 		}
-		_interactionInvokesTotal = [predicateSyntax retain];
+		_interactionInvokesTotal = predicateSyntax;
 	}
 	
 	return _interactionInvokesTotal;
@@ -220,7 +213,7 @@
 		for (NSString *interactionID in interactionsInvokesVersion) {
 			[predicateSyntax setObject:[interactionsInvokesVersion objectForKey:interactionID] forKey:[NSString stringWithFormat:@"interactions/%@/invokes/version", interactionID]];
 		}
-		_interactionInvokesVersion = [predicateSyntax retain];
+		_interactionInvokesVersion = predicateSyntax;
 	}
 
 	return _interactionInvokesVersion;
@@ -233,7 +226,7 @@
 		for (NSString *interactionID in interactionsInvokesBuild) {
 			[predicateSyntax setObject:[interactionsInvokesBuild objectForKey:interactionID] forKey:[NSString stringWithFormat:@"interactions/%@/invokes/build", interactionID]];
 		}
-		_interactionInvokesBuild = [predicateSyntax retain];
+		_interactionInvokesBuild = predicateSyntax;
 	}
 	
 	return _interactionInvokesBuild;
@@ -248,7 +241,7 @@
 			NSTimeInterval timeAgo = [[NSDate date] timeIntervalSinceDate:lastDate];
 			[predicateSyntax setObject:@(timeAgo) forKey:[NSString stringWithFormat:@"interactions/%@/invokes/time_ago", interactionID]];
 		}
-		_interactionInvokesTimeAgo = [predicateSyntax retain];
+		_interactionInvokesTimeAgo = predicateSyntax;
 	}
 	return _interactionInvokesTimeAgo;
 }

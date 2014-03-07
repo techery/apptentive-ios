@@ -28,7 +28,7 @@ NSString * const ATImageViewChoseImage;
 	UIPopoverController *imagePickerPopover;
 	UIActionSheet *imageActionSheet;
 }
-@property (nonatomic, retain) IBOutlet UIView *containerView;
+@property (nonatomic, strong) IBOutlet UIView *containerView;
 
 - (id)initWithDelegate:(NSObject<ATSimpleImageViewControllerDelegate> *)delegate;
 - (IBAction)donePressed:(id)sender;

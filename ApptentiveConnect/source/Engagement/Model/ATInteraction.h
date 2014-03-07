@@ -11,12 +11,12 @@
 @class ATInteractionUsageData;
 
 @interface ATInteraction : NSObject <NSCoding>
-@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, assign) int priority;
-@property (nonatomic, retain) NSString *type;
-@property (nonatomic, retain) NSDictionary *configuration;
-@property (nonatomic, retain) NSDictionary *criteria;
-@property (nonatomic, retain) NSString *version;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSDictionary *configuration;
+@property (nonatomic, strong) NSDictionary *criteria;
+@property (nonatomic, strong) NSString *version;
 
 + (ATInteraction *)interactionWithJSONDictionary:(NSDictionary *)jsonDictionary;
 

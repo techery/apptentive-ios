@@ -24,7 +24,7 @@
 
 	ATAPIRequest *request = [[ATAPIRequest alloc] initWithConnection:conn channelName:[self commonChannelName]];
 	request.returnType = ATAPIRequestReturnTypeData;
-	return [request autorelease];
+	return request;
 }
 
 @end

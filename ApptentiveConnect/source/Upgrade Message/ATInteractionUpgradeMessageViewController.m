@@ -66,7 +66,7 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 		maskLayer.contents = (id)maskImage.CGImage;
 		maskLayer.frame = (CGRect){CGPointZero, self.appIconView.bounds.size};
 		self.appIconView.layer.mask = maskLayer;
-		[maskLayer release], maskLayer = nil;
+		maskLayer = nil;
 	} else {
 		NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.appIconContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
 		[self.appIconContainer addConstraint:constraint];
@@ -126,7 +126,6 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 		self.window.hidden = YES;
 		//[[UIApplication sharedApplication] setStatusBarStyle:startingStatusBarStyle];
 		//[self teardown];
-		[self release];
 		
 		if (completion) {
 			completion();
@@ -142,7 +141,6 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 }
 
 - (void)presentFromViewController:(UIViewController *)newPresentingViewController animated:(BOOL)animated {
-	[self retain];
 	// For viewDidLoad…
 	__unused UIView *v = [self view];
 	
@@ -152,8 +150,8 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 	[newPresentingViewController at_swizzleUpgradeMessageDidRotateFromInterfaceOrientation];
 	
 	if (presentingViewController != newPresentingViewController) {
-		[presentingViewController release], presentingViewController = nil;
-		presentingViewController = [newPresentingViewController retain];
+		presentingViewController = nil;
+		presentingViewController = newPresentingViewController;
 		[presentingViewController.view setUserInteractionEnabled:NO];
 	}
 	
@@ -168,8 +166,8 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 		ATLogError(@"Unable to find parentWindow!");
 	}
 	if (originalPresentingWindow != parentWindow) {
-		[originalPresentingWindow release], originalPresentingWindow = nil;
-		originalPresentingWindow = [parentWindow retain];
+		originalPresentingWindow = nil;
+		originalPresentingWindow = parentWindow;
 	}
 		
 	CGRect animationBounds = CGRectZero;
@@ -315,12 +313,11 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	if (self.window.hidden == NO) {
-		[self retain];
-		[self unhide:NO];
+	@autoreleasepool {
+		if (self.window.hidden == NO) {
+			[self unhide:NO];
+		}
 	}
-	[pool release], pool = nil;
 }
 
 - (void)applyRoundedCorners {
@@ -364,7 +361,6 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 }
 
 - (void)hide:(BOOL)animated {
-	[self retain];
 	
 	self.window.windowLevel = UIWindowLevelNormal;
 	
@@ -389,17 +385,8 @@ NSString *const ATInteractionUpgradeMessageClose = @"ATInteractionUpgradeMessage
 	self.window.alpha = 1.0;
 	[self.window makeKeyAndVisible];
 	[self positionInWindow];
-	[self release];
 }
 
-- (void)dealloc {
-	[_contentView release];
-	[_poweredByBackground release];
-	[_appIconBackgroundView release];
-	[_poweredByApptentiveLogo release];
-	[_appIconContainer release];
-	[super dealloc];
-}
 
 - (void)viewDidUnload {
 	[self setContentView:nil];

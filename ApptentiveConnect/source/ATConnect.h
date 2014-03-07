@@ -63,7 +63,7 @@ Note, though, that Message Center setting will be overridden by server-based con
 #if TARGET_OS_IPHONE
 /*! Overrides the default tintColor acquired from your app, in case you're using one that doesn't
     look great. */
-@property (nonatomic, retain) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *tintColor;
 #endif
 
 + (ATConnect *)sharedConnection;

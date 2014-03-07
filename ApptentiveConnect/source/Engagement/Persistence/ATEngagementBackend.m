@@ -73,15 +73,14 @@ NSString *const ATEngagementCachedInteractionsExpirationPreferenceKey = @"ATEnga
 }
 
 - (void)dealloc {
-	[codePointInteractions release], codePointInteractions = nil;
-	[super dealloc];
+	codePointInteractions = nil;
 }
 
 - (void)checkForEngagementManifest {
 	if ([self shouldRetrieveNewEngagementManifest]) {
 		ATEngagementGetManifestTask *task = [[ATEngagementGetManifestTask alloc] init];
 		[[ATTaskQueue sharedTaskQueue] addTask:task];
-		[task release], task = nil;
+		task = nil;
 	}
 }
 
@@ -233,26 +232,22 @@ NSString *const ATEngagementCachedInteractionsExpirationPreferenceKey = @"ATEnga
 	codePointInvokesTotal = @(codePointInvokesTotal.intValue + 1);
 	[codePointsInvokesTotal setObject:codePointInvokesTotal forKey:codePoint];
 	[defaults setObject:codePointsInvokesTotal forKey:ATEngagementCodePointsInvokesTotalKey];
-	[codePointsInvokesTotal release];
 	
 	NSMutableDictionary *codePointsInvokesVersion = [[defaults objectForKey:ATEngagementCodePointsInvokesVersionKey] mutableCopy];
 	NSNumber *codePointInvokesVersion = [codePointsInvokesVersion objectForKey:codePoint] ?: @0;
 	codePointInvokesVersion = @(codePointInvokesVersion.intValue + 1);
 	[codePointsInvokesVersion setObject:codePointInvokesVersion forKey:codePoint];
 	[defaults setObject:codePointsInvokesVersion forKey:ATEngagementCodePointsInvokesVersionKey];
-	[codePointsInvokesVersion release];
 	
 	NSMutableDictionary *codePointsInvokesBuild = [[defaults objectForKey:ATEngagementCodePointsInvokesBuildKey] mutableCopy];
 	NSNumber *codePointInvokesBuild = [codePointsInvokesBuild objectForKey:codePoint] ?: @0;
 	codePointInvokesBuild = @(codePointInvokesBuild.intValue + 1);
 	[codePointsInvokesBuild setObject:codePointInvokesBuild forKey:codePoint];
 	[defaults setObject:codePointsInvokesBuild forKey:ATEngagementCodePointsInvokesBuildKey];
-	[codePointsInvokesBuild release];
 	
 	NSMutableDictionary *codePointsInvokesTimeAgo = [[defaults objectForKey:ATEngagementCodePointsInvokesLastDateKey] mutableCopy];
 	[codePointsInvokesTimeAgo setObject:[NSDate date] forKey:codePoint];
 	[defaults setObject:codePointsInvokesTimeAgo forKey:ATEngagementCodePointsInvokesLastDateKey];
-	[codePointsInvokesTimeAgo release];
 	
 	[defaults synchronize];
 }
@@ -297,26 +292,22 @@ NSString *const ATEngagementCachedInteractionsExpirationPreferenceKey = @"ATEnga
 	interactionInvokesTotal = @(interactionInvokesTotal.intValue + 1);
 	[interactionsInvokesTotal setObject:interactionInvokesTotal forKey:interaction.identifier];
 	[defaults setObject:interactionsInvokesTotal forKey:ATEngagementInteractionsInvokesTotalKey];
-	[interactionsInvokesTotal release];
 	
 	NSMutableDictionary *interactionsInvokesVersion = [[defaults objectForKey:ATEngagementInteractionsInvokesVersionKey] mutableCopy];
 	NSNumber *interactionInvokesVersion = [interactionsInvokesVersion objectForKey:interaction.identifier] ?: @0;
 	interactionInvokesVersion = @(interactionInvokesVersion.intValue +1);
 	[interactionsInvokesVersion setObject:interactionInvokesVersion forKey:interaction.identifier];
 	[defaults setObject:interactionsInvokesVersion forKey:ATEngagementInteractionsInvokesVersionKey];
-	[interactionsInvokesVersion release];
 	
 	NSMutableDictionary *interactionsInvokesBuild = [[defaults objectForKey:ATEngagementInteractionsInvokesBuildKey] mutableCopy];
 	NSNumber *interactionInvokesBuild = [interactionsInvokesBuild objectForKey:interaction.identifier] ?: @0;
 	interactionInvokesBuild = @(interactionInvokesBuild.intValue +1);
 	[interactionsInvokesBuild setObject:interactionInvokesBuild forKey:interaction.identifier];
 	[defaults setObject:interactionsInvokesBuild forKey:ATEngagementInteractionsInvokesBuildKey];
-	[interactionsInvokesBuild release];
 	
 	NSMutableDictionary *interactionsInvokesLastDate = [[defaults objectForKey:ATEngagementInteractionsInvokesLastDateKey] mutableCopy];
 	[interactionsInvokesLastDate setObject:[NSDate date] forKey:interaction.identifier];
 	[defaults setObject:interactionsInvokesLastDate forKey:ATEngagementInteractionsInvokesLastDateKey];
-	[interactionsInvokesLastDate release];
 	
 	[defaults synchronize];
 }
@@ -338,7 +329,6 @@ NSString *const ATEngagementCachedInteractionsExpirationPreferenceKey = @"ATEnga
 	
 	ATInteractionUpgradeMessageViewController *upgradeMessage = [[ATInteractionUpgradeMessageViewController alloc] initWithInteraction:interaction];
 	[upgradeMessage presentFromViewController:viewController animated:YES];
-	[upgradeMessage release];
 }
 
 - (void)presentEnjoymentDialogInteraction:(ATInteraction *)interaction fromViewController:(UIViewController *)viewController {

@@ -25,7 +25,6 @@
 		if (version >= 2) {
 			self.failureCount = [(NSNumber *)[coder decodeObjectForKey:@"failureCount"] unsignedIntegerValue];
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -33,9 +32,8 @@
 }
 
 - (void)dealloc {
-	[lastErrorTitle release], lastErrorTitle = nil;
-	[lastErrorMessage release], lastErrorMessage = nil;
-	[super dealloc];
+	lastErrorTitle = nil;
+	lastErrorMessage = nil;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -82,12 +80,12 @@
 	[parts addObject:[NSString stringWithFormat:@"inProgress: %@", inProgress ? @"YES" : @"NO"]];
 	[parts addObject:[NSString stringWithFormat:@"finished: %@", finished ? @"YES" : @"NO"]];
 	[parts addObject:[NSString stringWithFormat:@"failed: %@", failed ? @"YES" : @"NO"]];
-	[parts addObject:[NSString stringWithFormat:@"failureCount: %d", failureCount]];
+	[parts addObject:[NSString stringWithFormat:@"failureCount: %lu", (unsigned long)failureCount]];
 	[parts addObject:[NSString stringWithFormat:@"percentComplete: %f", [self percentComplete]]];
 	[parts addObject:[NSString stringWithFormat:@"taskName: %@", [self taskName]]];
 	
 	NSString *d = [parts componentsJoinedByString:@", "];
-	[parts release], parts = nil;
+	parts = nil;
 	return [NSString stringWithFormat:@"<%@ %p: %@>", NSStringFromClass([self class]), self, d];
 }
 @end

@@ -29,16 +29,15 @@
 	}
 	
 	@synchronized(self) {
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		while ([active count] < maximumConnections && [waiting count] > 0) {
-			ATURLConnection *loader = [[waiting objectAtIndex:0] retain];
-			[active addObject:loader];
-			[loader addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:NULL];
-			[waiting removeObjectAtIndex:0];
-			[loader start];
-			[loader release];
+		@autoreleasepool {
+			while ([active count] < maximumConnections && [waiting count] > 0) {
+				ATURLConnection *loader = [waiting objectAtIndex:0];
+				[active addObject:loader];
+				[loader addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:NULL];
+				[waiting removeObjectAtIndex:0];
+				[loader start];
+			}
 		}
-		[pool release], pool = nil;
 	}
 }
 
@@ -90,8 +89,5 @@
 
 - (void)dealloc {
 	[self cancelAllConnections];
-	[active release];
-	[waiting release];
-	[super dealloc];
 }
 @end

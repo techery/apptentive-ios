@@ -30,7 +30,6 @@ NSString *const ATCurrentPersonPreferenceKey = @"ATCurrentPersonPreferenceKey";
 - (void)dealloc {
 	delegate = nil;
 	[self cancel];
-	[super dealloc];
 }
 
 + (BOOL)shouldUpdate {
@@ -42,7 +41,7 @@ NSString *const ATCurrentPersonPreferenceKey = @"ATCurrentPersonPreferenceKey";
 	if ([ATPersonInfo personExists]) {
 		person = [ATPersonInfo currentPerson];
 	} else {
-		person = [[[ATPersonInfo alloc] init] autorelease];
+		person = [[ATPersonInfo alloc] init];
 		person.needsUpdate = YES;
 		[person saveAsCurrentPerson];
 	}
@@ -57,7 +56,7 @@ NSString *const ATCurrentPersonPreferenceKey = @"ATCurrentPersonPreferenceKey";
 		person.needsUpdate = YES;
 		[person saveAsCurrentPerson];
 	}
-	request = [[[ATWebClient sharedClient] requestForUpdatingPerson:person] retain];
+	request = [[ATWebClient sharedClient] requestForUpdatingPerson:person];
 	request.delegate = self;
 	[request start];
 }
@@ -66,7 +65,7 @@ NSString *const ATCurrentPersonPreferenceKey = @"ATCurrentPersonPreferenceKey";
 	if (request) {
 		request.delegate = nil;
 		[request cancel];
-		[request release], request = nil;
+		request = nil;
 	}
 }
 
@@ -114,6 +113,6 @@ NSString *const ATCurrentPersonPreferenceKey = @"ATCurrentPersonPreferenceKey";
 	} else {
 		[delegate personUpdater:self didFinish:NO];
 	}
-	[person release], person = nil;
+	person = nil;
 }
 @end

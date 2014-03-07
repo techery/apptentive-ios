@@ -27,7 +27,6 @@
 
 - (void)dealloc {
 	[self teardown];
-	[super dealloc];
 }
 
 - (BOOL)canStart {
@@ -57,7 +56,6 @@
 - (void)stop {
 	if (configurationUpdater) {
 		[configurationUpdater cancel];
-		[configurationUpdater release];
 		configurationUpdater = nil;
 		self.inProgress = NO;
 	}

@@ -70,13 +70,12 @@
 - (void)dealloc {
 	inputView.delegate = nil;
 	dataSource.delegate = nil;
-	[dataSource release], dataSource = nil;
+	dataSource = nil;
 	dismissalDelegate = nil;
-	[pickedImage release], pickedImage = nil;
-	[defaultTheme release], defaultTheme = nil;
-	[containerView release], containerView = nil;
-	[inputContainerView release], containerView = nil;
-	[super dealloc];
+	pickedImage = nil;
+	defaultTheme = nil;
+	containerView = nil;
+	containerView = nil;
 }
 
 - (void)viewDidLoad {
@@ -88,12 +87,12 @@
 	}
 	
 	self.navigationItem.titleView = [defaultTheme titleViewForMessageCenterViewController:self];
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)] autorelease];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
 	if ([self.navigationItem.leftBarButtonItem respondsToSelector:@selector(initWithImage:landscapeImagePhone:style:target:action:)]) {
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[ATBackend imageNamed:@"at_user_button_image"] landscapeImagePhone:[ATBackend imageNamed:@"at_user_button_image_landscape"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed:)]autorelease];
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[ATBackend imageNamed:@"at_user_button_image"] landscapeImagePhone:[ATBackend imageNamed:@"at_user_button_image_landscape"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed:)];
 		self.navigationItem.rightBarButtonItem.accessibilityLabel = ATLocalizedString(@"Contact Settings", @"Title of contact information edit screen");
 	} else {
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[ATBackend imageNamed:@"at_user_button_image"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed:)]autorelease];
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[ATBackend imageNamed:@"at_user_button_image"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed:)];
 	}
 		
 	[self.view addSubview:self.containerView];
@@ -157,7 +156,7 @@
 	if (showAttachSheetOnBecomingVisible) {
 		showAttachSheetOnBecomingVisible = NO;
 		if (sendImageActionSheet) {
-			[sendImageActionSheet autorelease], sendImageActionSheet = nil;
+			sendImageActionSheet = nil;
 		}
 		sendImageActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ATLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:ATLocalizedString(@"Send Image", @"Send image button title"), nil];
 		if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -195,7 +194,7 @@
 - (IBAction)settingsPressed:(id)sender {
 	ATPersonDetailsViewController *vc = [[ATPersonDetailsViewController alloc] initWithNibName:@"ATPersonDetailsViewController" bundle:[ATConnect resourceBundle]];
 	[self.navigationController pushViewController:vc animated:YES];
-	[vc release], vc = nil;
+	vc = nil;
 }
 
 - (IBAction)cameraPressed:(id)sender {
@@ -210,8 +209,8 @@
 		[self.navigationController presentModalViewController:nc animated:YES];
 #		pragma clang diagnostic pop
 	}
-	[vc release], vc = nil;
-	[nc release], nc = nil;
+	vc = nil;
+	nc = nil;
 }
 
 - (ATMessageCenterDataSource *)dataSource {
@@ -220,12 +219,12 @@
 
 - (void)showRetryMessageActionSheetWithMessage:(ATAbstractMessage *)message {
 	if (retryMessageActionSheet) {
-		[retryMessageActionSheet autorelease], retryMessageActionSheet = nil;
+		retryMessageActionSheet = nil;
 	}
 	if (retryMessage) {
-		[retryMessage release], retryMessage = nil;
+		retryMessage = nil;
 	}
-	retryMessage = [message retain];
+	retryMessage = message;
 	NSArray *errors = [message errorsFromErrorMessage];
 	NSString *errorString = nil;
 	if (errors != nil && [errors count] != 0) {
@@ -245,7 +244,7 @@
 	ATLongMessageViewController *vc = [[ATLongMessageViewController alloc] initWithNibName:@"ATLongMessageViewController" bundle:[ATConnect resourceBundle]];
 	[vc setText:message.body];
 	[self.navigationController pushViewController:vc animated:YES];
-	[vc release], vc = nil;
+	vc = nil;
 }
 
 - (void)relayoutSubviews {
@@ -280,7 +279,7 @@
 		if (composingMessage) {
 			NSManagedObjectContext *context = [[ATBackend sharedBackend] managedObjectContext];
 			[context deleteObject:composingMessage];
-			[composingMessage release], composingMessage = nil;
+			composingMessage = nil;
 		}
 	}
 	[self relayoutSubviews];
@@ -319,9 +318,9 @@
 			task.pendingMessageID = pendingMessageID;
 			[[ATTaskQueue sharedTaskQueue] addTask:task];
 			[[ATTaskQueue sharedTaskQueue] start];
-			[task release], task = nil;
+			task = nil;
 		});
-		[composingMessage release], composingMessage = nil;
+		composingMessage = nil;
 		inputView.text = @"";
 	}
 	
@@ -339,15 +338,15 @@
 		[self.navigationController presentModalViewController:nc animated:YES];
 #		pragma clang diagnostic pop
 	}
-	[vc release], vc = nil;
-	[nc release], nc = nil;
+	vc = nil;
+	nc = nil;
 }
 
 #pragma mark ATSimpleImageViewControllerDelegate
 - (void)imageViewController:(ATSimpleImageViewController *)vc pickedImage:(UIImage *)image fromSource:(ATFeedbackImageSource)source {
 	if (pickedImage != image) {
-		[pickedImage release], pickedImage = nil;
-		pickedImage = [image retain];
+		pickedImage = nil;
+		pickedImage = image;
 		pickedImageSource = source;
 	}
 }
@@ -436,12 +435,12 @@
 		if (buttonIndex == 0) {
 			if (pickedImage) {
 				[[ATBackend sharedBackend] sendImageMessageWithImage:pickedImage fromSource:pickedImageSource];
-				[pickedImage release], pickedImage = nil;
+				pickedImage = nil;
 			}
 		} else if (buttonIndex == 1) {
-			[pickedImage release], pickedImage = nil;
+			pickedImage = nil;
 		}
-		[sendImageActionSheet autorelease], sendImageActionSheet = nil;
+		sendImageActionSheet = nil;
 	} else if (actionSheet == retryMessageActionSheet) {
 		if (buttonIndex == 0) {
 			retryMessage.pendingState = [NSNumber numberWithInt:ATPendingMessageStateSending];
@@ -456,26 +455,26 @@
 				task.pendingMessageID = pendingMessageID;
 				[[ATTaskQueue sharedTaskQueue] addTask:task];
 				[[ATTaskQueue sharedTaskQueue] start];
-				[task release], task = nil;
+				task = nil;
 			});
 			
-			[retryMessage release], retryMessage = nil;
+			retryMessage = nil;
 		} else if (buttonIndex == 1) {
 			[ATData deleteManagedObject:retryMessage];
-			[retryMessage release], retryMessage = nil;
+			retryMessage = nil;
 		}
-		[retryMessageActionSheet autorelease], retryMessageActionSheet = nil;
+		retryMessageActionSheet = nil;
 	}
 }
 
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet {
 	if (actionSheet == sendImageActionSheet) {
 		if (pickedImage) {
-			[pickedImage release], pickedImage = nil;
+			pickedImage = nil;
 		}
-		[sendImageActionSheet autorelease], sendImageActionSheet = nil;
+		sendImageActionSheet = nil;
 	} else if (actionSheet == retryMessageActionSheet) {
-		[retryMessageActionSheet autorelease], retryMessageActionSheet = nil;
+		retryMessageActionSheet = nil;
 	}
 }
 @end

@@ -65,7 +65,7 @@ static NSString *const ATFileMessageUserCellV7Identifier = @"ATFileMessageUserCe
     if (self) {
 		fetchedObjectChanges = [[NSMutableArray alloc] init];
 		fetchedSectionChanges = [[NSMutableArray alloc] init];
-		blurredImage = [[self blurredBackgroundScreenshot] retain];
+		blurredImage = [self blurredBackgroundScreenshot];
     }
     return self;
 }
@@ -80,10 +80,10 @@ static NSString *const ATFileMessageUserCellV7Identifier = @"ATFileMessageUserCe
 	UINib *devTextCellNib = [UINib nibWithNibName:@"ATTextMessageDevCellV7" bundle:[ATConnect resourceBundle]];
 	UINib *userTextCellNib = [UINib nibWithNibName:@"ATTextMessageUserCellV7" bundle:[ATConnect resourceBundle]];
 	UINib *userFileCellNib = [UINib nibWithNibName:@"ATFileMessageUserCellV7" bundle:[ATConnect resourceBundle]];
-	sizingAutomatedCell = [[[automatedCellNib instantiateWithOwner:self options:nil] objectAtIndex:0] retain];
-	sizingDevTextCell = [[[devTextCellNib instantiateWithOwner:self options:nil] objectAtIndex:0] retain];
-	sizingUserTextCell = [[[userTextCellNib instantiateWithOwner:self options:nil] objectAtIndex:0] retain];
-	sizingUserFileCell = [[[userFileCellNib instantiateWithOwner:self options:nil] objectAtIndex:0] retain];
+	sizingAutomatedCell = [[automatedCellNib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	sizingDevTextCell = [[devTextCellNib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	sizingUserTextCell = [[userTextCellNib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	sizingUserFileCell = [[userFileCellNib instantiateWithOwner:self options:nil] objectAtIndex:0];
 	
 	sizingAutomatedCellHorizontalPadding = CGRectGetWidth(sizingAutomatedCell.bounds) - CGRectGetWidth(sizingAutomatedCell.messageLabel.bounds);
 	sizingDevTextCellHorizontalPadding = CGRectGetWidth(sizingDevTextCell.bounds) - CGRectGetWidth(sizingDevTextCell.messageLabel.bounds);
@@ -119,18 +119,15 @@ static NSString *const ATFileMessageUserCellV7Identifier = @"ATFileMessageUserCe
 }
 
 - (void)dealloc {
-	[blurredImage release], blurredImage = nil;
+	blurredImage = nil;
 	[[ATBackend sharedBackend] messageCenterLeftForeground];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[messageDateFormatter release], messageDateFormatter = nil;
+	messageDateFormatter = nil;
 	collectionView.delegate = nil;
-	[collectionView release], collectionView = nil;
-	[fetchedObjectChanges release], fetchedObjectChanges = nil;
-	[fetchedSectionChanges release], fetchedSectionChanges = nil;
-	[_backgroundImageView release];
-	[sizingAutomatedCell release], sizingAutomatedCell = nil;
-	[_flowLayout release];
-	[super dealloc];
+	collectionView = nil;
+	fetchedObjectChanges = nil;
+	fetchedSectionChanges = nil;
+	sizingAutomatedCell = nil;
 }
 
 - (void)viewDidUnload {
@@ -210,7 +207,7 @@ static NSString *const ATFileMessageUserCellV7Identifier = @"ATFileMessageUserCe
 #pragma mark Private
 
 - (NSString *)keyForIndexPath:(NSIndexPath *)indexPath {
-	return [NSString stringWithFormat:@"item:%d", indexPath.item];
+	return [NSString stringWithFormat:@"item:%ld", (long)indexPath.item];
 }
 
 - (void)scrollToBottomOfCollectionView {

@@ -54,7 +54,7 @@
 	XCTAssertEqualObjects([ATAppRatingFlow_Private predicateStringForPromptLogic:[self allAndLogic] withPredicateInfo:info hasError:nil], @"((now >= nextPromptDate) AND (significantEvents >= significantEventsBeforePrompt))", @"Predicate should not contain disabled parameter.");
 	XCTAssertEqualObjects([ATAppRatingFlow_Private predicateStringForPromptLogic:[self allOrLogic] withPredicateInfo:info hasError:nil], @"((now >= nextPromptDate) OR (significantEvents >= significantEventsBeforePrompt))", @"Predicate should not contain disabled parameter.");
 	
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)testDefaultPredicate1 {
@@ -79,7 +79,7 @@
 	predicate = [ATAppRatingFlow_Private predicateForPromptLogic:[self defaultPromptLogic] withPredicateInfo:info];
 	XCTAssertTrue([ATAppRatingFlow_Private evaluatePredicate:predicate withPredicateInfo:info], @"Predicate should be true.");
 	
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)testAllAndPredicate {
@@ -104,7 +104,7 @@
 	predicate = [ATAppRatingFlow_Private predicateForPromptLogic:[self allAndLogic] withPredicateInfo:info];
 
 	XCTAssertFalse([ATAppRatingFlow_Private evaluatePredicate:predicate withPredicateInfo:info], @"Predicate should not be true.");
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)testOrPredicates {
@@ -127,7 +127,7 @@
 	
 	NSPredicate *noClauses = [ATAppRatingFlow_Private predicateForPromptLogic:[NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:nil], @"or", nil] withPredicateInfo:nil];
 	XCTAssertTrue(noClauses == nil, @"noClauses should be nil");
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)testNilInfo {

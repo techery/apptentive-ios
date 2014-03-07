@@ -61,7 +61,6 @@ NSString *const ATSurveyViewDatesKey = @"ATSurveyViewDatesKey";
 			}
 			self.successMessage = [coder decodeObjectForKey:@"successMessage"];
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -87,18 +86,17 @@ NSString *const ATSurveyViewDatesKey = @"ATSurveyViewDatesKey";
 }
 
 - (void)dealloc {
-	[questions release], questions = nil;
-	[identifier release], identifier = nil;
-	[name release], name = nil;
-	[surveyDescription release], surveyDescription = nil;
-	[successMessage release], successMessage = nil;
-	[tags release], tags = nil;
-	[date release], date = nil;
-	[startTime release], startTime = nil;
-	[endTime release], endTime = nil;	
-	[viewCount release], viewCount = nil;
-	[viewPeriod release], viewPeriod = nil;
-	[super dealloc];
+	questions = nil;
+	identifier = nil;
+	name = nil;
+	surveyDescription = nil;
+	successMessage = nil;
+	tags = nil;
+	date = nil;
+	startTime = nil;
+	endTime = nil;	
+	viewCount = nil;
+	viewPeriod = nil;
 }
 
 - (NSString *)description {

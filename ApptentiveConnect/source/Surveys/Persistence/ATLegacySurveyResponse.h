@@ -27,5 +27,5 @@
 @private
 }
 @property (nonatomic, copy) NSString *identifier;
-@property (nonatomic, retain) NSObject<NSCoding> *response;
+@property (nonatomic, strong) NSObject<NSCoding> *response;
 @end

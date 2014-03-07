@@ -70,12 +70,11 @@ UIEdgeInsets insetsForView(UIView *v) {
 - (void)dealloc {
 	delegate = nil;
 	textView.delegate = nil;
-	[textView release], textView = nil;
-	[sendButton release], sendButton = nil;
-	[attachButton release], attachButton = nil;
-	[backgroundImageView release], backgroundImageView = nil;
-	[text release], text = nil;
-	[super dealloc];
+	textView = nil;
+	sendButton = nil;
+	attachButton = nil;
+	backgroundImageView = nil;
+	text = nil;
 }
 
 - (void)layoutSubviews {
@@ -111,7 +110,7 @@ UIEdgeInsets insetsForView(UIView *v) {
 		
 		CGFloat width = CGRectGetWidth(insetRect);
 		NSDictionary *attrs = [textView typingAttributes];
-		NSAttributedString *attributedText = [[[NSAttributedString alloc] initWithString:string attributes:attrs] autorelease];
+		NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:string attributes:attrs];
 		CGRect textSize = [attributedText boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
 		
 		CGFloat verticalPadding = rect.size.height - insetRect.size.height;

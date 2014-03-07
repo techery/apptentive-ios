@@ -62,28 +62,26 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 
 - (void)dealloc {
 #if TARGET_OS_IPHONE
-	[tintColor release], tintColor = nil;
+	tintColor = nil;
 #elif IF_TARGET_OS_MAC
 	if (feedbackWindowController) {
 		[feedbackWindowController release];
 		feedbackWindowController = nil;
 	}
 #endif
-	[customPersonData release], customPersonData = nil;
-	[customDeviceData release], customDeviceData = nil;
-	[integrationConfiguration release], integrationConfiguration = nil;
-	[customPlaceholderText release], customPlaceholderText = nil;
-	[apiKey release], apiKey = nil;
-	[initialUserName release], initialUserName = nil;
-	[initialUserEmailAddress release], initialUserEmailAddress = nil;
-	[super dealloc];
+	customPersonData = nil;
+	customDeviceData = nil;
+	integrationConfiguration = nil;
+	customPlaceholderText = nil;
+	apiKey = nil;
+	initialUserName = nil;
+	initialUserEmailAddress = nil;
 }
 
 - (void)setApiKey:(NSString *)anAPIKey {
 	if (apiKey != anAPIKey) {
-		[apiKey release];
 		apiKey = nil;
-		apiKey = [anAPIKey retain];
+		apiKey = anAPIKey;
 		[[ATBackend sharedBackend] setApiKey:self.apiKey];
 	}
 }
@@ -95,9 +93,8 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 
 - (void)setInitialUserName:(NSString *)anInitialUserName {
 	if (initialUserName != anInitialUserName) {
-		[initialUserName release];
 		initialUserName = nil;
-		initialUserName = [anInitialUserName retain];
+		initialUserName = anInitialUserName;
 		
 		// Set person object's name. Only overwrites previous *initial* names.
 		NSString *previousInitialUserName = [[NSUserDefaults standardUserDefaults] objectForKey:ATInitialUserNameKey];
@@ -120,9 +117,8 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 	}
 		
 	if (initialUserEmailAddress != anInitialUserEmailAddress) {		
-		[initialUserEmailAddress release];
 		initialUserEmailAddress = nil;
-		initialUserEmailAddress = [anInitialUserEmailAddress retain];
+		initialUserEmailAddress = anInitialUserEmailAddress;
 		
 		// Set person object's email. Only overwrites previous *initial* emails.
 		NSString *previousInitialUserEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:ATInitialUserEmailAddressKey];
@@ -313,14 +309,14 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:bundlePath]) {
 		NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-		return [bundle autorelease];
+		return bundle;
 	} else {
 		// Try trigger.io path.
 		bundlePath = [path stringByAppendingPathComponent:@"apptentive.bundle"];
 		bundlePath = [bundlePath stringByAppendingPathComponent:@"ApptentiveResources.bundle"];
 		if ([fm fileExistsAtPath:bundlePath]) {
 			NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-			return [bundle autorelease];
+			return bundle;
 		} else {
 			// Try Titanium path.
 			bundlePath = [path stringByAppendingPathComponent:@"modules"];
@@ -328,7 +324,7 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 			bundlePath = [bundlePath stringByAppendingPathComponent:@"ApptentiveResources.bundle"];
 			if ([fm fileExistsAtPath:bundlePath]) {
 				NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-				return [bundle autorelease];
+				return bundle;
 			} else {
 				return nil;
 			}
@@ -345,7 +341,7 @@ NSString *const ATIntegrationKeyKahuna = @"kahuna";
 NSString *ATLocalizedString(NSString *key, NSString *comment) {
 	static NSBundle *bundle = nil;
 	if (!bundle) {
-		bundle = [[ATConnect resourceBundle] retain];
+		bundle = [ATConnect resourceBundle];
 	}
 	NSString *result = [bundle localizedStringForKey:key value:key table:nil];
 	return result;

@@ -62,7 +62,9 @@ enum {
 - (void)positionInWindow;
 @end
 
-@implementation ATMessagePanelViewController
+@implementation ATMessagePanelViewController {
+	NSMutableArray *arcHack;
+}
 @synthesize window;
 @synthesize cancelButton;
 @synthesize sendButton;
@@ -78,9 +80,18 @@ enum {
 @synthesize showEmailAddressField;
 @synthesize delegate;
 
+- (void)retainSelf {
+	[arcHack addObject:self];
+}
+
+- (void)releaseSelf {
+	[arcHack removeLastObject];
+}
+
 - (id)initWithDelegate:(NSObject<ATMessagePanelDelegate> *)aDelegate {
 	self = [super initWithNibName:@"ATMessagePanelViewController" bundle:[ATConnect resourceBundle]];
 	if (self != nil) {
+		arcHack = [NSMutableArray array];
 		showEmailAddressField = YES;
 		startingStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 		delegate = aDelegate;
@@ -89,23 +100,22 @@ enum {
 }
 
 - (void)dealloc {
-	[_toolbarShadowImage release], _toolbarShadowImage = nil;
+	_toolbarShadowImage = nil;
 	noEmailAddressAlert.delegate = nil;
-	[noEmailAddressAlert release], noEmailAddressAlert = nil;
+	noEmailAddressAlert = nil;
 	invalidEmailAddressAlert.delegate = nil;
-	[invalidEmailAddressAlert release], invalidEmailAddressAlert = nil;
+	invalidEmailAddressAlert = nil;
 	emailRequiredAlert.delegate = nil;
-	[emailRequiredAlert release], emailRequiredAlert = nil;
+	emailRequiredAlert = nil;
 	delegate = nil;
-	[super dealloc];
 }
 
 - (void)presentFromViewController:(UIViewController *)newPresentingViewController animated:(BOOL)animated {
-	[self retain];
+	[self retainSelf];
 	
 	if (presentingViewController != newPresentingViewController) {
-		[presentingViewController release], presentingViewController = nil;
-		presentingViewController = [newPresentingViewController retain];
+		presentingViewController = nil;
+		presentingViewController = newPresentingViewController;
 		[presentingViewController.view setUserInteractionEnabled:NO];
 	}
 	
@@ -120,8 +130,8 @@ enum {
 		ATLogError(@"Unable to find parentWindow!");
 	}
 	if (originalPresentingWindow != parentWindow) {
-		[originalPresentingWindow release], originalPresentingWindow = nil;
-		originalPresentingWindow = [parentWindow retain];
+		originalPresentingWindow = nil;
+		originalPresentingWindow = parentWindow;
 	}
 	
 	[self setupScrollView];
@@ -221,7 +231,7 @@ enum {
 			[self.feedbackView becomeFirstResponder];
 		}
 	}];
-	[shadowView release], shadowView = nil;
+	shadowView = nil;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterIntroDidShowNotification object:self userInfo:nil];
 }
@@ -237,10 +247,10 @@ enum {
 		[self.window setTintColor:[[ATConnect sharedConnection] tintColor]];
 	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedbackChanged:) name:UITextViewTextDidChangeNotification object:self.feedbackView];
-	self.cancelButton = [[[ATCustomButton alloc] initWithButtonStyle:ATCustomButtonStyleCancel] autorelease];
+	self.cancelButton = [[ATCustomButton alloc] initWithButtonStyle:ATCustomButtonStyleCancel];
 	[self.cancelButton setAction:@selector(cancelPressed:) forTarget:self];
 	
-	self.sendButton = [[[ATCustomButton alloc] initWithButtonStyle:ATCustomButtonStyleSend] autorelease];
+	self.sendButton = [[ATCustomButton alloc] initWithButtonStyle:ATCustomButtonStyleSend];
 	[self.sendButton setAction:@selector(sendPressed:) forTarget:self];
 	
 	UIImage *toolbarShadowBase = [ATBackend imageNamed:@"at_message_toolbar_shadow"];
@@ -285,11 +295,11 @@ enum {
 	
 	UIBarButtonItem *titleButton = [[UIBarButtonItem alloc] initWithCustomView:titleLabel];
 	[toolbarItems insertObject:titleButton atIndex:2];
-	[titleButton release], titleButton = nil;
-	[titleLabel release], titleLabel = nil;
+	titleButton = nil;
+	titleLabel = nil;
 		
 	self.toolbar.items = toolbarItems;
-	[toolbarItems release], toolbarItems = nil;
+	toolbarItems = nil;
 	
 	self.toolbar.at_drawRectBlock = ^(NSObject *toolbar, CGRect rect) {
 		UIColor *color = [UIColor colorWithRed:215/255. green:215/255. blue:215/255. alpha:1];
@@ -317,7 +327,7 @@ enum {
 	if (self.showEmailAddressField && [[ATConnect sharedConnection] emailRequired] && self.emailField.text.length == 0) {
 		if (emailRequiredAlert) {
 			emailRequiredAlert.delegate = nil;
-			[emailRequiredAlert release], emailRequiredAlert = nil;
+			emailRequiredAlert = nil;
 		}
 		self.window.windowLevel = UIWindowLevelNormal;
 		self.window.userInteractionEnabled = NO;
@@ -330,7 +340,7 @@ enum {
 		[emailRequiredAlert show];
 	} else if (self.showEmailAddressField && [self.emailField.text length] > 0 && ![ATUtilities emailAddressIsValid:self.emailField.text]) {
 		if (invalidEmailAddressAlert) {
-			[invalidEmailAddressAlert release], invalidEmailAddressAlert = nil;
+			invalidEmailAddressAlert = nil;
 		}
 		self.window.windowLevel = UIWindowLevelNormal;
 		self.window.userInteractionEnabled = NO;
@@ -348,7 +358,7 @@ enum {
 	} else if (self.showEmailAddressField && (!self.emailField.text || [self.emailField.text length] == 0)) {
 		if (noEmailAddressAlert) {
 			noEmailAddressAlert.delegate = nil;
-			[noEmailAddressAlert release], noEmailAddressAlert = nil;
+			noEmailAddressAlert = nil;
 		}
 		self.window.windowLevel = UIWindowLevelNormal;
 		self.window.userInteractionEnabled = NO;
@@ -364,7 +374,6 @@ enum {
 			// iOS 5 and above.
 			[noEmailAddressAlert setAlertViewStyle:2]; // UIAlertViewStylePlainTextInput
 			field = [noEmailAddressAlert textFieldAtIndex:0];
-			[field retain];
 		} else {
 			NSString *messagePadded = [NSString stringWithFormat:@"%@\n\n\n", message];
 			[noEmailAddressAlert setMessage:messagePadded];
@@ -387,7 +396,7 @@ enum {
 		} else {
 			[field becomeFirstResponder];
 		}
-		[field release], field = nil;
+		field = nil;
 		[noEmailAddressAlert sizeToFit];
 		[noEmailAddressAlert show];
 	} else {
@@ -432,7 +441,7 @@ enum {
 			originalPresentingWindow.tintAdjustmentMode = startingTintAdjustmentMode == UIViewTintAdjustmentModeDimmed ? UIViewTintAdjustmentModeAutomatic : startingTintAdjustmentMode;
 		}
 		[self teardown];
-		[self release];
+		[self releaseSelf];
 		
 		if (completion) {
 			completion();
@@ -525,17 +534,17 @@ enum {
 			self.emailField.text = textField.text;
 		}
 		noEmailAddressAlert.delegate = nil;
-		[noEmailAddressAlert release], noEmailAddressAlert = nil;
+		noEmailAddressAlert = nil;
 		[self sendMessageAndDismiss];
 	} else if (invalidEmailAddressAlert && [alertView isEqual:invalidEmailAddressAlert]) {
 		self.window.userInteractionEnabled = YES;
 		invalidEmailAddressAlert.delegate = nil;
-		[invalidEmailAddressAlert release], invalidEmailAddressAlert = nil;
+		invalidEmailAddressAlert = nil;
 		[self.emailField becomeFirstResponder];
 	} else if (emailRequiredAlert && [alertView isEqual:emailRequiredAlert]) {
 		self.window.userInteractionEnabled = YES;
 		emailRequiredAlert.delegate = nil;
-		[emailRequiredAlert release], emailRequiredAlert = nil;
+		emailRequiredAlert = nil;
 		[self.emailField becomeFirstResponder];
 	}
 }
@@ -545,11 +554,11 @@ enum {
 	self.window.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 	self.window.userInteractionEnabled = YES;
 	if (noEmailAddressAlert && [alertView isEqual:noEmailAddressAlert]) {
-		[noEmailAddressAlert release], noEmailAddressAlert = nil;
+		noEmailAddressAlert = nil;
 	} else if (invalidEmailAddressAlert && [alertView isEqual:invalidEmailAddressAlert]) {
-		[invalidEmailAddressAlert release], invalidEmailAddressAlert = nil;
+		invalidEmailAddressAlert = nil;
 	} else if (emailRequiredAlert && [alertView isEqual:emailRequiredAlert]) {
-		[emailRequiredAlert release], emailRequiredAlert = nil;
+		emailRequiredAlert = nil;
 	}
 }
 
@@ -596,8 +605,8 @@ enum {
 		
 		[self.scrollView addSubview:promptView];
 		offsetY += promptView.bounds.size.height;
-		[promptView release], promptView = nil;
-		[promptLabel release], promptLabel = nil;
+		promptView = nil;
+		promptLabel = nil;
 	}
 	
 	CGRect lineFrame = self.scrollView.bounds;
@@ -609,7 +618,7 @@ enum {
 	blueLineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	[self.scrollView addSubview:blueLineView];
 	offsetY += blueLineView.bounds.size.height;
-	[blueLineView release], blueLineView = nil;
+	blueLineView = nil;
 	
 	if (self.showEmailAddressField) {
 		offsetY += 5;
@@ -634,7 +643,7 @@ enum {
 		}
 		emailFrame.size.height = sizedEmail.height;
 		emailFrame.size.width = emailFrame.size.width - (horizontalPadding + extraHorzontalPadding)*2;
-		self.emailField = [[[UITextField alloc] initWithFrame:emailFrame] autorelease];
+		self.emailField = [[UITextField alloc] initWithFrame:emailFrame];
 		if ([[ATConnect sharedConnection] emailRequired]) {
 			self.emailField.placeholder = ATLocalizedString(@"Your Email (required)", @"Email Address Field Placeholder (email is required)");
 		}
@@ -672,7 +681,7 @@ enum {
 		thinBlueLineView.frame = lineFrame;
 		[self.scrollView addSubview:thinBlueLineView];
 		offsetY += lineFrame.size.height;
-		[thinBlueLineView release], thinBlueLineView = nil;
+		thinBlueLineView = nil;
 	}
 	
 	CGRect feedbackFrame = self.scrollView.bounds;
@@ -680,7 +689,7 @@ enum {
 	feedbackFrame.origin.y = offsetY;
 	feedbackFrame.size.height = 20;
 	feedbackFrame.size.width = feedbackFrame.size.width - horizontalPadding*2;
-	self.feedbackView = [[[ATDefaultTextView alloc] initWithFrame:feedbackFrame] autorelease];
+	self.feedbackView = [[ATDefaultTextView alloc] initWithFrame:feedbackFrame];
 	
 	if (![ATUtilities osVersionGreaterThanOrEqualTo:@"7"]) {
 		UIEdgeInsets insets = UIEdgeInsetsMake(0, -8, 0, 0);
@@ -750,8 +759,8 @@ enum {
 	self.feedbackView = nil;
 	self.customPlaceholderText = nil;
 	[originalPresentingWindow makeKeyWindow];
-	[presentingViewController release], presentingViewController = nil;
-	[originalPresentingWindow release], originalPresentingWindow = nil;
+	presentingViewController = nil;
+	originalPresentingWindow = nil;
 }
 
 - (BOOL)shouldReturn:(UIView *)view {
@@ -835,12 +844,12 @@ enum {
 
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	if (self.window.hidden == NO) {
-		[self retain];
-		[self unhide:NO];
+	@autoreleasepool {
+		if (self.window.hidden == NO) {
+			[self retainSelf];
+			[self unhide:NO];
+		}
 	}
-	[pool release], pool = nil;
 }
 
 - (void)feedbackChanged:(NSNotification *)notification {
@@ -850,7 +859,7 @@ enum {
 }
 
 - (void)hide:(BOOL)animated {
-	[self retain];
+	[self retainSelf];
 	
 	self.window.windowLevel = UIWindowLevelNormal;
 	[self.emailField resignFirstResponder];
@@ -884,7 +893,7 @@ enum {
 	} else {
 		[self.feedbackView becomeFirstResponder];
 	}
-	[self release];
+	[self releaseSelf];
 }
 
 - (void)sendMessageAndDismiss {

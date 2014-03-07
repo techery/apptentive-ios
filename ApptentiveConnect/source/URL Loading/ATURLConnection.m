@@ -83,58 +83,54 @@
 
 - (void)setHTTPMethod:(NSString *)method {
 	if (HTTPMethod != method) {
-		[HTTPMethod release];
-		HTTPMethod = [method retain];
+		HTTPMethod = method;
 	}
 }
 
 - (void)setHTTPBody:(NSData *)body {
 	if (HTTPBody != body) {
-		[HTTPBody release];
-		HTTPBody = [body retain];
+		HTTPBody = body;
 	}
 }
 
 - (void)setHTTPBodyStream:(NSInputStream *)stream {
 	if (HTTPBodyStream != stream) {
-		[HTTPBodyStream release];
-		HTTPBodyStream = [stream retain];
+		HTTPBodyStream = stream;
 	}
 }
 
 - (void)start {
 	@synchronized (self) {
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		
-		do { // once
-			if ([self isCancelled]) {
-				self.finished = YES;
-				break;
-			}
-			if ([self isFinished]) {
-				break;
-			}
-			if (request) {
-				[request release], request = nil;
-			}
-			request = [[NSMutableURLRequest alloc] initWithURL:self.targetURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeoutInterval];
-			for (NSString *key in headers) {
-				[request setValue:[headers objectForKey:key] forHTTPHeaderField:key];
-			}
-			if (HTTPMethod) {
-				[request setHTTPMethod:HTTPMethod];
-			}
-			if (HTTPBody) {
-				[request setHTTPBody:HTTPBody];
-			} else if (HTTPBodyStream) {
-				[request setHTTPBodyStream:HTTPBodyStream];
-			}
-			self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO] autorelease];
-			[self.connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-			[self.connection start];
-			self.executing = YES;
-		} while (NO);
-		[pool drain];
+		@autoreleasepool {
+			do { // once
+				if ([self isCancelled]) {
+					self.finished = YES;
+					break;
+				}
+				if ([self isFinished]) {
+					break;
+				}
+				if (request) {
+					request = nil;
+				}
+				request = [[NSMutableURLRequest alloc] initWithURL:self.targetURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeoutInterval];
+				for (NSString *key in headers) {
+					[request setValue:[headers objectForKey:key] forHTTPHeaderField:key];
+				}
+				if (HTTPMethod) {
+					[request setHTTPMethod:HTTPMethod];
+				}
+				if (HTTPBody) {
+					[request setHTTPBody:HTTPBody];
+				} else if (HTTPBodyStream) {
+					[request setHTTPBodyStream:HTTPBodyStream];
+				}
+				self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+				[self.connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+				[self.connection start];
+				self.executing = YES;
+			} while (NO);
+		}
 	}
 }
 
@@ -200,7 +196,6 @@
 					ATLogError(@"Orphaned connection. No delegate or nonresponsive delegate.");
 				}
 			}
-			[data release];
 			data = nil;
 		} else if (delegate && ![self isCancelled]) {
 			if (delegate && [delegate respondsToSelector:@selector(connectionFailed:)]){
@@ -275,7 +270,7 @@
 
 - (NSURLRequest *)connection:(NSURLConnection *)inConnection willSendRequest:(NSURLRequest *)inRequest redirectResponse: (NSURLResponse *)inRedirectResponse {
 	if (inRedirectResponse) {
-		NSMutableURLRequest *r = [[request mutableCopy] autorelease];
+		NSMutableURLRequest *r = [request mutableCopy];
 		[r setURL:[inRequest URL]];
 		return r;
 	} else {
@@ -302,27 +297,13 @@
 - (void)dealloc {
 	@synchronized (self) {
 		delegate = nil;
-		[request release], request = nil;
-		[targetURL release];
-		if (connection) {
-			[connection release];
-		}
-		[data release];
+		request = nil;
 		data = nil;
 		
-		if (credential) {
-			[credential release];
-		}
-		if (connectionError) {
-			[connectionError release];
-		}
 		
-		[headers release];
-		[HTTPMethod release];
-		[HTTPBody release], HTTPBody = nil;
-		[HTTPBodyStream release], HTTPBodyStream = nil;
+		HTTPBody = nil;
+		HTTPBodyStream = nil;
 	}
-	[super dealloc];
 }
 
 - (NSString *)requestAsString {
@@ -334,7 +315,7 @@
 	}
 	[result appendString:@"\n\n"];
 	if (HTTPBody) {
-		NSString *a = [[[NSString alloc] initWithData:HTTPBody encoding:NSUTF8StringEncoding] autorelease];
+		NSString *a = [[NSString alloc] initWithData:HTTPBody encoding:NSUTF8StringEncoding];
 		if (a) {
 			[result appendString:a];
 		} else {

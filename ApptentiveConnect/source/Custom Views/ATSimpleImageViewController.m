@@ -34,7 +34,7 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		self.modalPresentationStyle = UIModalPresentationFormSheet;
 	}
 	if (self != nil) {
-		delegate = [aDelegate retain];
+		delegate = aDelegate;
 	}
 	return self;
 }
@@ -42,14 +42,13 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 - (void)dealloc {
 	[self cleanupImageActionSheet];
 	imagePickerPopover.delegate = nil;
-	[imagePickerPopover release], imagePickerPopover = nil;
-	[delegate release], delegate = nil;
+	imagePickerPopover = nil;
+	delegate = nil;
 	scrollView.delegate = nil;
 	[scrollView removeFromSuperview];
-	[scrollView release], scrollView = nil;
+	scrollView = nil;
 	[containerView removeFromSuperview];
-	[containerView release], containerView = nil;
-	[super dealloc];
+	containerView = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,15 +59,14 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.navigationItem.title = ATLocalizedString(@"Screenshot", @"Screenshot view title");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto:)] autorelease];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)] autorelease];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto:)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
 }
 
 - (void)setupScrollView {
 	if (scrollView) {
 		scrollView.delegate = nil;
 		[scrollView removeFromSuperview];
-		[scrollView release];
 		scrollView = nil;
 	}
 	
@@ -108,8 +106,8 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		UIView *container = nil;
 		UITextView *label = nil;
 		if ([self.containerView viewWithTag:kATContainerViewTag]) {
-			container = [[self.containerView viewWithTag:kATContainerViewTag] retain];
-			label = [(UITextView *)[self.containerView viewWithTag:kATLabelViewTag] retain];
+			container = [self.containerView viewWithTag:kATContainerViewTag];
+			label = (UITextView *)[self.containerView viewWithTag:kATLabelViewTag];
 		} else {
 			container = [[UIView alloc] initWithFrame:self.containerView.bounds];
 			container.tag = kATContainerViewTag;
@@ -134,8 +132,6 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		CGRect labelRect = CGRectMake(20, topOffset, labelWidth, labelSize.height);
 		label.frame = labelRect;
 		label.center = container.center;
-		[label release];
-		[container release];
 	}
 }
 
@@ -151,13 +147,13 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 - (void)viewWillDisappear:(BOOL)animated {
 	if (shouldResign) {
 		[delegate imageViewControllerWillDismiss:self animated:animated];
-		[delegate release], delegate = nil;
+		delegate = nil;
 	}
 }
 
 - (void)viewDidUnload {
 	[containerView removeFromSuperview];
-	[containerView release], containerView = nil;
+	containerView = nil;
 	[super viewDidUnload];
 }
 
@@ -165,12 +161,9 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 	shouldResign = YES;
 	[self cleanupImageActionSheet];
 	if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-		id blockSelf = [self retain];
-		NSObject<ATSimpleImageViewControllerDelegate> *blockDelegate = [delegate retain];
+		NSObject<ATSimpleImageViewControllerDelegate> *blockDelegate = delegate;
 		[self.navigationController dismissViewControllerAnimated:YES completion:^{
 			[blockDelegate imageViewControllerDidDismiss:self];
-			[blockSelf release];
-			[blockDelegate release];
 		}];
 	} else {
 		if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
@@ -214,7 +207,7 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 	}
 	if (actionSheet && imageActionSheet && [actionSheet isEqual:imageActionSheet]) {
 		imageActionSheet.delegate = nil;
-		[imageActionSheet release], imageActionSheet = nil;
+		imageActionSheet = nil;
 	}
 }
 
@@ -282,7 +275,7 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	if (popoverController == imagePickerPopover) {
 		imagePickerPopover.delegate = nil;
-		[imagePickerPopover release], imagePickerPopover = nil;
+		imagePickerPopover = nil;
 	}
 }
 
@@ -297,7 +290,7 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		if (imagePickerPopover) {
 			imagePickerPopover.delegate = nil;
 			[imagePickerPopover dismissPopoverAnimated:NO];
-			[imagePickerPopover release], imagePickerPopover = nil;
+			imagePickerPopover = nil;
 		}
 		imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
 		imagePickerPopover.delegate = self;
@@ -320,7 +313,6 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		[self presentModalViewController:imagePicker animated:YES];
 #		pragma clang diagnostic pop
 	}
-	[imagePicker release];
 }
 
 - (void)takePhoto {
@@ -339,14 +331,13 @@ NSString * const ATImageViewChoseImage = @"ATImageViewChoseImage";
 		[self presentModalViewController:imagePicker animated:YES];
 #		pragma clang diagnostic pop
 	}
-	[imagePicker release];
 }
 
 - (void)cleanupImageActionSheet {
 	if (imageActionSheet) {
 		imageActionSheet.delegate = nil;
 		[imageActionSheet dismissWithClickedButtonIndex:-1 animated:NO];
-		[imageActionSheet release], imageActionSheet = nil;
+		imageActionSheet = nil;
 	}
 }
 

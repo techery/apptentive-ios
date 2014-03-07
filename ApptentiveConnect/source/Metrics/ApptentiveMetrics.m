@@ -192,7 +192,6 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 - (BOOL)upgradeLegacyMetric:(ATMetric *)metric {
@@ -205,15 +204,15 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 	event.label = metric.name;
 	[event addEntriesFromDictionary:[metric info]];
 	if (![ATData save]) {
-		[event release], event = nil;
+		event = nil;
 		return NO;
 	}
 	
 	ATRecordRequestTask *task = [[ATRecordRequestTask alloc] init];
 	[task setTaskProvider:event];
 	[[ATTaskQueue sharedTaskQueue] addTask:task];
-	[event release], event = nil;
-	[task release], task = nil;
+	event = nil;
+	task = nil;
 	return YES;
 }
 @end
@@ -236,15 +235,15 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 	event.label = name;
 	[event addEntriesFromDictionary:userInfo];
 	if (![ATData save]) {
-		[event release], event = nil;
+		event = nil;
 		return;
 	}
 	
 	ATRecordRequestTask *task = [[ATRecordRequestTask alloc] init];
 	[task setTaskProvider:event];
 	[[ATTaskQueue sharedTaskQueue] addTask:task];
-	[event release], event = nil;
-	[task release], task = nil;
+	event = nil;
+	task = nil;
 }
 
 - (ATFeedbackWindowType)windowTypeFromNotification:(NSNotification *)notification {
@@ -372,7 +371,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		[info setObject:surveyID forKey:@"id"];
 	}
 	[self addMetricWithName:ATMetricNameSurveyLaunch info:info];
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)surveyDidHide:(NSNotification *)notification {
@@ -389,7 +388,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		[self addMetricWithName:ATMetricNameSurveyCancel info:info];
 	}
 	
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)surveyDidAnswerQuestion:(NSNotification *)notification {
@@ -407,7 +406,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		[self addMetricWithName:ATMetricNameSurveyAnswerQuestion info:info];
 	}
 	
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)appWillTerminate:(NSNotification *)notification {
@@ -441,7 +440,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		info[@"message_id"] = messageID;
 	}
 	[self addMetricWithName:ATMetricNameMessageCenterRead info:info];
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)messageCenterDidSend:(NSNotification *)notification {
@@ -451,7 +450,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		info[@"nonce"] = nonce;
 	}
 	[self addMetricWithName:ATMetricNameMessageCenterSend info:info];
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)messageCenterIntroDidLaunch:(NSNotification *)notification {
@@ -465,7 +464,7 @@ static NSString *ATMetricNameInteractionUpgradeMessageClose = @"upgrade_message.
 		info[@"nonce"] = nonce;
 	}
 	[self addMetricWithName:ATMetricNameMessageCenterIntroSend info:info];
-	[info release], info = nil;
+	info = nil;
 }
 
 - (void)messageCenterIntroDidCancel:(NSNotification *)notification {

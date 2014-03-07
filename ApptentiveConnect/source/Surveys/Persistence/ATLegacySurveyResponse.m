@@ -40,7 +40,6 @@
 				questionResponses = [[NSMutableArray alloc] init];
 			}
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -56,9 +55,8 @@
 }
 
 - (void)dealloc {
-	[identifier release], identifier = nil;
-	[questionResponses release], questionResponses = nil;
-	[super dealloc];
+	identifier = nil;
+	questionResponses = nil;
 }
 
 - (void)addQuestionResponse:(ATSurveyQuestionResponse *)response {
@@ -133,7 +131,6 @@
 			self.identifier = [coder decodeObjectForKey:@"identifier"];
 			self.response = [coder decodeObjectForKey:@"response"];
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -147,8 +144,7 @@
 }
 
 - (void)dealloc {
-	[identifier release], identifier = nil;
-	[response release], response = nil;
-	[super dealloc];
+	identifier = nil;
+	response = nil;
 }
 @end

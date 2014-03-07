@@ -35,7 +35,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 
 #if TARGET_OS_IPHONE
 @interface ATAppRatingFlow ()
-@property (nonatomic, retain) UIViewController *viewController;
+@property (nonatomic, strong) UIViewController *viewController;
 @end
 #endif
 
@@ -140,14 +140,12 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 - (void)dealloc {
 #if	TARGET_OS_IPHONE
 	enjoymentDialog.delegate = nil;
-	[enjoymentDialog release], enjoymentDialog = nil;
+	enjoymentDialog = nil;
 	ratingDialog.delegate = nil;
-	[ratingDialog release], ratingDialog = nil;
-	self.viewController = nil;
+	ratingDialog = nil;
 #endif
-	[lastUseOfApp release], lastUseOfApp = nil;
-	[appID release], appID = nil;
-	[super dealloc];
+	lastUseOfApp = nil;
+	appID = nil;
 }
 
 #if TARGET_OS_IPHONE
@@ -205,7 +203,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 #pragma mark UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (alertView == enjoymentDialog) {
-		[enjoymentDialog release], enjoymentDialog = nil;
+		enjoymentDialog = nil;
 		if (buttonIndex == 0) { // no
 			[self postNotification:ATAppRatingDidClickEnjoymentButtonNotification forButton:ATAppRatingEnjoymentButtonTypeNo];
 			[self setUserDislikesThisVersion];
@@ -228,7 +226,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 			[self showRatingDialog:self.viewController];
 		}
 	} else if (alertView == ratingDialog) {
-		[ratingDialog release], ratingDialog = nil;
+		ratingDialog = nil;
 		if (buttonIndex == 1) { // rate
 			[self postNotification:ATAppRatingDidClickRatingButtonNotification forButton:ATAppRatingButtonTypeRateApp];
 			[self userAgreedToRateApp];
@@ -246,10 +244,10 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	ATLogDebug(@"ATAppRatingFlow dismissing alert view %@, %d", alertView, buttonIndex);
 	if (alertView == enjoymentDialog) {
-		[enjoymentDialog release], enjoymentDialog = nil;
+		enjoymentDialog = nil;
 		self.viewController = nil;
 	} else if (alertView == ratingDialog) {
-		[ratingDialog release], ratingDialog = nil;
+		ratingDialog = nil;
 		self.viewController = nil;
 	}
 }
@@ -279,7 +277,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 	}
 	
 	if (lastUseOfApp) {
-		[lastUseOfApp release], lastUseOfApp = nil;
+		lastUseOfApp = nil;
 	}
 	lastUseOfApp = date;
 }
@@ -314,7 +312,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 
 #if TARGET_OS_IPHONE
 - (void)showUnableToOpenAppStoreDialog {
-	UIAlertView *errorAlert = [[[UIAlertView alloc] initWithTitle:ATLocalizedString(@"Oops!", @"Unable to load the App Store title") message:ATLocalizedString(@"Unable to load the App Store", @"Unable to load the App Store message") delegate:nil cancelButtonTitle:ATLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] autorelease];
+	UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:ATLocalizedString(@"Oops!", @"Unable to load the App Store title") message:ATLocalizedString(@"Unable to load the App Store", @"Unable to load the App Store message") delegate:nil cancelButtonTitle:ATLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil];
 	[errorAlert show];
 	[self setRatedApp:NO];
 }
@@ -368,7 +366,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 
 - (void)openAppStoreViaStoreKit {
 	if ([SKStoreProductViewController class] != NULL && self.appID) {
-		SKStoreProductViewController *vc = [[[SKStoreProductViewController alloc] init] autorelease];
+		SKStoreProductViewController *vc = [[SKStoreProductViewController alloc] init];
 		vc.delegate = self;
 		[vc loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:self.appID} completionBlock:^(BOOL result, NSError *error) {
 			if (error) {
@@ -491,7 +489,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 		} else {
 			ATLogError(@"Predicate not correct");
 		}
-		[info release], info = nil;
+		info = nil;
 	} while (NO);
 	
 	if (reasonForNotShowingDialog) {
@@ -703,48 +701,48 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 		[self performSelectorOnMainThread:@selector(tryToShowDialogWaitingForReachability) withObject:nil waitUntilDone:NO];
 		return;
 	}
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 #if TARGET_OS_IPHONE
-	UIViewController *vc = [self rootViewControllerForCurrentWindow];
-	
-	if (vc && [self requirementsToShowDialogMet]) {
-		// We can get a root view controller and we should be showing a dialog.
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
-	}
+		UIViewController *vc = [self rootViewControllerForCurrentWindow];
+		
+		if (vc && [self requirementsToShowDialogMet]) {
+			// We can get a root view controller and we should be showing a dialog.
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
+		}
 #elif TARGET_OS_MAC
-	if ([self requirementsToShowDialogMet]) {
-		// We should show a ratings dialog.
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
-	}
+		if ([self requirementsToShowDialogMet]) {
+			// We should show a ratings dialog.
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
+		}
 #endif
-	[pool release], pool = nil;
+	}
 }
 
 - (void)reachabilityChangedAndPendingDialog:(NSNotification *)notification {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:ATReachabilityStatusChanged object:nil];
+	@autoreleasepool {
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:ATReachabilityStatusChanged object:nil];
 
 #if TARGET_OS_IPHONE
-	UIViewController *vc = [self rootViewControllerForCurrentWindow];
-	
-	if (vc && [self requirementsToShowDialogMet]) {
-		if ([[ATReachability sharedReachability] currentNetworkStatus] == ATNetworkNotReachable) {
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
-		} else {
-			[self showEnjoymentDialog:vc];
-		}
+		UIViewController *vc = [self rootViewControllerForCurrentWindow];
 		
-	}
-#elif TARGET_OS_MAC
-	if ([self requirementsToShowDialogMet]) {
-		if ([[ATReachability sharedReachability] currentNetworkStatus] == ATNetworkNotReachable) {
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
-		} else {
-			[self showEnjoymentDialog:self];
+		if (vc && [self requirementsToShowDialogMet]) {
+			if ([[ATReachability sharedReachability] currentNetworkStatus] == ATNetworkNotReachable) {
+				[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
+			} else {
+				[self showEnjoymentDialog:vc];
+			}
+			
 		}
-	}
+#elif TARGET_OS_MAC
+		if ([self requirementsToShowDialogMet]) {
+			if ([[ATReachability sharedReachability] currentNetworkStatus] == ATNetworkNotReachable) {
+				[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChangedAndPendingDialog:) name:ATReachabilityStatusChanged object:nil];
+			} else {
+				[self showEnjoymentDialog:self];
+			}
+		}
 #endif
-	[pool release], pool = nil;
+	}
 }
 
 - (void)preferencesChanged:(NSNotification *)notification {
@@ -777,7 +775,7 @@ static CFAbsoluteTime ratingsLoadTime = 0.0;
 	}
 	ATLogInfo(@"Rating Flow usage data: %@", usageData);
 	ATLogInfo(@"Rating Flow conditions: %@", predicate);
-	[info release], info = nil;
+	info = nil;
 }
 @end
 

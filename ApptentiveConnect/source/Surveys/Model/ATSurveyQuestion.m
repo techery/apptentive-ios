@@ -61,7 +61,6 @@
 				self.multiline = YES;
 			}
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -84,14 +83,13 @@
 }
 
 - (void)dealloc {
-	[identifier release], identifier = nil;
-	[questionText release], questionText = nil;
-	[instructionsText release], instructionsText = nil;
-	[value release], value = nil;
-	[answerChoices release], answerChoices = nil;
-	[answerText release], answerText = nil;
-	[selectedAnswerChoices release], selectedAnswerChoices = nil;
-	[super dealloc];
+	identifier = nil;
+	questionText = nil;
+	instructionsText = nil;
+	value = nil;
+	answerChoices = nil;
+	answerText = nil;
+	selectedAnswerChoices = nil;
 }
 
 - (void)addAnswerChoice:(ATSurveyQuestionAnswer *)answer {
@@ -157,7 +155,6 @@
 			self.identifier = [coder decodeObjectForKey:@"identifier"];
 			self.value = [coder decodeObjectForKey:@"value"];
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -171,8 +168,7 @@
 }
 
 - (void)dealloc {
-	[identifier release], identifier = nil;
-	[value release], value = nil;
-	[super dealloc];
+	identifier = nil;
+	value = nil;
 }
 @end

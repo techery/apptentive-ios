@@ -30,7 +30,7 @@
 	
 	ATAPIRequest *request = [[ATAPIRequest alloc] initWithConnection:conn channelName:[self commonChannelName]];
 	request.returnType = ATAPIRequestReturnTypeData;
-	return [request autorelease];
+	return request;
 }
 
 
@@ -50,7 +50,7 @@
 	conn.timeoutInterval = 240.0;
 	ATAPIRequest *request = [[ATAPIRequest alloc] initWithConnection:conn channelName:ATWebClientDefaultChannelName];
 	request.returnType = ATAPIRequestReturnTypeJSON;
-	return [request autorelease];
+	return request;
 }
 
 - (ATAPIRequest *)requestForPostingSurveyResponse:(ATSurveyResponse *)surveyResponse {
@@ -75,7 +75,7 @@
 	
 	ATAPIRequest *request = [[ATAPIRequest alloc] initWithConnection:conn channelName:[self commonChannelName]];
 	request.returnType = ATAPIRequestReturnTypeJSON;
-	return [request autorelease];
+	return request;
 }
 @end
 

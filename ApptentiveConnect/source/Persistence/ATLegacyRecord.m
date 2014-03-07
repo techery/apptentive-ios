@@ -37,7 +37,6 @@
 			if (c.carrierName) {
 				self.carrier = c.carrierName;
 			}
-			[netInfo release];
 		}
 #elif TARGET_OS_MAC
 		self.model = [ATUtilities currentMachineName];
@@ -50,12 +49,11 @@
 }
 
 - (void)dealloc {
-	[uuid release], uuid = nil;
-	[model release], model = nil;
-	[os_version release], os_version = nil;
-	[carrier release], carrier = nil;
-	[date release], date = nil;
-	[super dealloc];
+	uuid = nil;
+	model = nil;
+	os_version = nil;
+	carrier = nil;
+	date = nil;
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -77,7 +75,6 @@
 				self.date = [coder decodeObjectForKey:@"date"];
 			}
 		} else {
-			[self release];
 			return nil;
 		}
 	}

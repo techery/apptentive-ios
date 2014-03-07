@@ -31,7 +31,6 @@
 
 - (void)dealloc {
 	[self teardown];
-	[super dealloc];
 }
 
 - (BOOL)canStart {
@@ -56,7 +55,7 @@
 	self.failureOkay = YES;
 	if (checkSurveysRequest == nil) {
 		ATWebClient *client = [ATWebClient sharedClient];
-		checkSurveysRequest = [[client requestForGettingSurveys] retain];
+		checkSurveysRequest = [client requestForGettingSurveys];
 		checkSurveysRequest.delegate = self;
 		self.inProgress = YES;
 		[checkSurveysRequest start];
@@ -69,7 +68,7 @@
 	if (checkSurveysRequest) {
 		checkSurveysRequest.delegate = nil;
 		[checkSurveysRequest cancel];
-		[checkSurveysRequest release], checkSurveysRequest = nil;
+		checkSurveysRequest = nil;
 		self.inProgress = NO;
 	}
 }
@@ -89,7 +88,6 @@
 #pragma mark ATAPIRequestDelegate
 - (void)at_APIRequestDidFinish:(ATAPIRequest *)request result:(NSObject *)result {
 	@synchronized(self) {
-		[self retain];
 		if (request == checkSurveysRequest) {
 			ATSurveyParser *parser = [[ATSurveyParser alloc] init];
 			
@@ -100,17 +98,15 @@
 				[[ATSurveysBackend sharedBackend] didReceiveNewSurveys:surveys maxAge:[request expiresMaxAge]];
 			}
 			checkSurveysRequest.delegate = nil;
-			[checkSurveysRequest release], checkSurveysRequest = nil;
-			[parser release], parser = nil;
+			checkSurveysRequest = nil;
+			parser = nil;
 			self.finished = YES;
 		}
-		[self release];
 	}
 }
 
 - (void)at_APIRequestDidFail:(ATAPIRequest *)request {
 	@synchronized(self) {
-		[self retain];
 		if (request == checkSurveysRequest) {
 			ATLogError(@"Survey request failed: %@: %@", request.errorTitle, request.errorMessage);
 			self.lastErrorTitle = request.errorTitle;
@@ -118,7 +114,6 @@
 			self.failed = YES;
 			[self stop];
 		}
-		[self release];
 	}
 }
 @end

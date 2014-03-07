@@ -55,7 +55,7 @@
 	ATSurveyQuestion *question = [[survey questions] objectAtIndex:0];
 	XCTAssertTrue([question.answerChoices count] == 6, @"First question should have 6 answers");
 	
-	[parser release], parser = nil;
+	parser = nil;
 }
 
 - (void)testSingleLineParsing {
@@ -80,7 +80,7 @@
 	question = [[survey questions] objectAtIndex:1];
 	XCTAssertTrue(question.multiline, @"Question should be multiple lines.");
 	
-	[parser release], parser = nil;
+	parser = nil;
 }
 
 - (void)testEmptySurvey {

@@ -30,10 +30,9 @@
 }
 
 - (void)dealloc {
-	[token release], token = nil;
-	[personID release], personID = nil;
-	[deviceID release], deviceID = nil;
-	[super dealloc];
+	token = nil;
+	personID = nil;
+	deviceID = nil;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {

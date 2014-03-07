@@ -44,7 +44,7 @@ NSString *const ATAppRatingFlowSignificantEventsCountKey;
 	NSUInteger significantEventsBeforePrompt;
 	NSUInteger usesBeforePrompt;
 }
-@property (nonatomic, retain) NSDate *firstUse;
+@property (nonatomic, strong) NSDate *firstUse;
 @property (nonatomic, assign) NSUInteger significantEvents;
 @property (nonatomic, assign) NSUInteger appUses;
 

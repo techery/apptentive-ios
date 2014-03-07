@@ -22,21 +22,21 @@ NSString *const ATInteractionUpgradeMessageClose;
 	CGAffineTransform lastSeenPresentingViewControllerTransform;
 }
 
-@property (nonatomic, retain) ATInteraction *upgradeMessageInteraction;
+@property (nonatomic, strong) ATInteraction *upgradeMessageInteraction;
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet UIView *alertView;
-@property (nonatomic, retain) IBOutlet UIView *contentView;
-@property (retain, nonatomic) IBOutlet UIView *appIconContainer;
-@property (nonatomic, retain) IBOutlet UIImageView *appIconView;
-@property (nonatomic, retain) IBOutlet UIImageView *appIconBackgroundView;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIView *okButtonBackgroundView;
-@property (nonatomic, retain) IBOutlet UIView *poweredByBackground;
-@property (retain, nonatomic) IBOutlet UILabel *poweredByApptentiveLogo;
-@property (nonatomic, retain) IBOutlet UIImageView *poweredByApptentiveIconView;
-@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) IBOutlet UIView *alertView;
+@property (nonatomic, strong) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIView *appIconContainer;
+@property (nonatomic, strong) IBOutlet UIImageView *appIconView;
+@property (nonatomic, strong) IBOutlet UIImageView *appIconBackgroundView;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIView *okButtonBackgroundView;
+@property (nonatomic, strong) IBOutlet UIView *poweredByBackground;
+@property (strong, nonatomic) IBOutlet UILabel *poweredByApptentiveLogo;
+@property (nonatomic, strong) IBOutlet UIImageView *poweredByApptentiveIconView;
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
 
 - (id)initWithInteraction:(ATInteraction *)interaction;
 

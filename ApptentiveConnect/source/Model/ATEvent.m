@@ -32,7 +32,7 @@
 
 - (NSDictionary *)apiJSON {
 	NSDictionary *parentJSON = [super apiJSON];
-	NSMutableDictionary *result = [[[NSMutableDictionary alloc] init] autorelease];
+	NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
 
 	if (parentJSON) {
 		[result addEntriesFromDictionary:parentJSON];
@@ -62,8 +62,11 @@
 	if (!result[@"nonce"]) {
 		ATLogError(@"Event json should include a `nonce`.");
 	}
-		
-	return @{@"event": result};
+	if (!result) {
+		return @{@"event": @{}};
+	} else {
+		return @{@"event": result};
+	}
 }
 
 - (void)setup {
@@ -74,7 +77,7 @@
 		CFUUIDRef uuidRef = CFUUIDCreate(NULL);
 		CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
 		
-		self.pendingEventID = [NSString stringWithFormat:@"event:%@", (NSString *)uuidStringRef];
+		self.pendingEventID = [NSString stringWithFormat:@"event:%@", (__bridge NSString *)uuidStringRef];
 		
 		CFRelease(uuidRef), uuidRef = NULL;
 		CFRelease(uuidStringRef), uuidStringRef = NULL;
@@ -87,7 +90,7 @@
 	if (dictionary == nil) {
 		mutableDictionary = [NSMutableDictionary dictionary];
 	} else {
-		mutableDictionary = [[dictionary mutableCopy] autorelease];
+		mutableDictionary = [dictionary mutableCopy];
 	}
 	if (incomingDictionary != nil) {
 		[mutableDictionary addEntriesFromDictionary:incomingDictionary];

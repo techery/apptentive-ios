@@ -31,7 +31,7 @@
 			self.name = [coder decodeObjectForKey:@"name"];
 			NSDictionary *d = [coder decodeObjectForKey:@"info"];
 			if (info) {
-				[info release], info = nil;
+				info = nil;
 			}
 			if (d != nil) {
 				info = [d mutableCopy];
@@ -39,7 +39,6 @@
 				info = [[NSMutableDictionary alloc] init];
 			}
 		} else {
-			[self release];
 			return nil;
 		}
 	}
@@ -54,9 +53,8 @@
 }
 
 - (void)dealloc {
-	[name release], name = nil;
-	[info release], info = nil;
-	[super dealloc];
+	name = nil;
+	info = nil;
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
