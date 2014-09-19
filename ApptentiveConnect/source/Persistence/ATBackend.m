@@ -589,7 +589,7 @@ static NSURLCache *imageCache = nil;
 	}
 	
 	// Attempt to present the remotely customized Engagement Framework version of Message Center.
-	BOOL engagementMessageCenter = [[ATConnect sharedConnection] engage:@"com.apptentive#app#present_message_center" withCustomData:customData fromViewController:viewController];
+	BOOL engagementMessageCenter = [[ATEngagementBackend sharedBackend] engageEvent:@"present_message_center" fromVendor:ATEngagementCodePointApptentiveVendorKey fromInteraction:ATEngagementCodePointApptentiveAppInteractionKey userInfo:nil customData:customData extendedData:nil fromViewController:viewController];
 	
 	// Legacy Message Center, customized locally on device.
 	if (!engagementMessageCenter) {

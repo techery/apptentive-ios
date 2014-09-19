@@ -23,6 +23,11 @@ NSString *const ATEngagementInteractionsInvokesVersionKey;
 NSString *const ATEngagementInteractionsInvokesBuildKey;
 NSString *const ATEngagementInteractionsInvokesLastDateKey;
 
+NSString *const ATEngagementCodePointHostAppVendorKey;
+NSString *const ATEngagementCodePointHostAppInteractionKey;
+NSString *const ATEngagementCodePointApptentiveVendorKey;
+NSString *const ATEngagementCodePointApptentiveAppInteractionKey;
+
 @class ATInteraction;
 
 @interface ATEngagementBackend : NSObject {
