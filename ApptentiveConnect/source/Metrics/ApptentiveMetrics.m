@@ -31,7 +31,6 @@ static NSString *ATMetricNameFeedbackDialogLaunch = @"feedback_dialog.launch";
 static NSString *ATMetricNameFeedbackDialogCancel = @"feedback_dialog.cancel";
 static NSString *ATMetricNameFeedbackDialogSubmit = @"feedback_dialog.submit";
 
-static NSString *ATMetricNameMessageCenterSend = @"message_center.send";
 
 static NSString *ATMetricNameMessageCenterIntroSend = @"message_center.intro.send";
 static NSString *ATMetricNameMessageCenterIntroCancel = @"message_center.intro.cancel";
@@ -48,8 +47,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 - (void)appWillTerminate:(NSNotification *)notification;
 - (void)appDidEnterBackground:(NSNotification *)notification;
 - (void)appWillEnterForeground:(NSNotification *)notification;
-
-- (void)messageCenterDidSend:(NSNotification *)notification;
 
 - (void)messageCenterIntroDidSend:(NSNotification *)notification;
 - (void)messageCenterIntroDidCancel:(NSNotification *)notification;
@@ -177,7 +174,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 #endif
 		
 		[self performSelector:@selector(addLaunchMetric) withObject:nil afterDelay:0.1];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidSend:) name:ATMessageCenterDidSendNotification object:nil];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterIntroDidSend:) name:ATMessageCenterIntroDidSendNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterIntroDidCancel:) name:ATMessageCenterIntroDidCancelNotification object:nil];
@@ -288,16 +284,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 
 - (void)appWillEnterForeground:(NSNotification *)notification {
 	[[ATEngagementBackend sharedBackend] engageApptentiveAppEvent:ATInteractionAppEventLabelLaunch];
-}
-
-- (void)messageCenterDidSend:(NSNotification *)notification {
-	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	NSString *nonce = [[notification userInfo] objectForKey:ATMessageCenterMessageNonceKey];
-	if (nonce != nil) {
-		info[@"nonce"] = nonce;
-	}
-	[self addMetricWithName:ATMetricNameMessageCenterSend info:info];
-	[info release], info = nil;
 }
 
 - (void)messageCenterIntroDidSend:(NSNotification *)notification {

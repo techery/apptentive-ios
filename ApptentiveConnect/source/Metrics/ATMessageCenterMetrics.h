@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NSString *const ATMessageCenterDidSendNotification;
-
 NSString *const ATMessageCenterMessageNonceKey;
 
 NSString *const ATMessageCenterIntroDidSendNotification;

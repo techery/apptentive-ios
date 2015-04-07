@@ -36,6 +36,7 @@
 #import "ATPersonUpdater.h"
 #import "ATEngagementBackend.h"
 #import "ATMessagePanelNewUIViewController.h"
+#import "ATMessageCenterBaseViewController.h"
 
 typedef NS_ENUM(NSInteger, ATBackendState){
 	ATBackendStateStarting,
@@ -328,7 +329,13 @@ static NSURLCache *imageCache = nil;
 		completion(message.pendingMessageID);
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterDidSendNotification object:@{ATMessageCenterMessageNonceKey:message.pendingMessageID}];
+	NSDictionary *messageInfo = nil;
+	NSString *messageID = message.pendingMessageID;
+	if (messageID) {
+		messageInfo = @{@"nonce": messageID};
+	}
+	
+	[[ATInteraction messageCenterInteraction] engage:ATInteractionMessageCenterEventLabelSend fromViewController:nil userInfo:messageInfo];
 	
 	// Give it a wee bit o' delay.
 	NSString *pendingMessageID = [message pendingMessageID];

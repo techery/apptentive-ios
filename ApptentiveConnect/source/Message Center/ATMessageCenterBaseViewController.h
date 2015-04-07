@@ -16,6 +16,8 @@
 
 @protocol ATMessageCenterDismissalDelegate;
 
+NSString *const ATInteractionMessageCenterEventLabelSend;
+
 @interface ATMessageCenterBaseViewController : UIViewController <ATMessageCenterDataSourceDelegate, ATMessageInputViewDelegate, ATSimpleImageViewControllerDelegate, UIActionSheetDelegate>
 @property (retain, nonatomic) IBOutlet UIView *containerView;
 @property (retain, nonatomic) IBOutlet UIView *inputContainerView;

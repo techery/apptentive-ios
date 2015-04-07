@@ -29,6 +29,7 @@
 
 NSString *const ATInteractionMessageCenterEventLabelLaunch = @"launch";
 NSString *const ATInteractionMessageCenterEventLabelClose = @"close";
+NSString *const ATInteractionMessageCenterEventLabelSend = @"send";
 
 @interface ATMessageCenterBaseViewController ()
 - (void)showSendImageUIIfNecessary;
@@ -301,8 +302,14 @@ NSString *const ATInteractionMessageCenterEventLabelClose = @"close";
 		
 		[[[ATBackend sharedBackend] managedObjectContext] save:nil];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterDidSendNotification object:@{ATMessageCenterMessageNonceKey:composingMessage.pendingMessageID}];
+		NSDictionary *messageInfo = nil;
+		NSString *messageID = composingMessage.pendingMessageID;
+		if (messageID) {
+			messageInfo = @{@"nonce": messageID};
+		}
 		
+		[[ATInteraction messageCenterInteraction] engage:ATInteractionMessageCenterEventLabelSend fromViewController:self userInfo:messageInfo];
+	
 		// Give it a wee bit o' delay.
 		NSString *pendingMessageID = [composingMessage pendingMessageID];
 		double delayInSeconds = 1.5;
