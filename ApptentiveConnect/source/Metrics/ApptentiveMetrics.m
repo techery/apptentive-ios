@@ -31,7 +31,6 @@ static NSString *ATMetricNameFeedbackDialogLaunch = @"feedback_dialog.launch";
 static NSString *ATMetricNameFeedbackDialogCancel = @"feedback_dialog.cancel";
 static NSString *ATMetricNameFeedbackDialogSubmit = @"feedback_dialog.submit";
 
-static NSString *ATMetricNameMessageCenterClose = @"message_center.close";
 static NSString *ATMetricNameMessageCenterAttach = @"message_center.attach";
 static NSString *ATMetricNameMessageCenterRead = @"message_center.read";
 static NSString *ATMetricNameMessageCenterSend = @"message_center.send";
@@ -52,7 +51,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 - (void)appDidEnterBackground:(NSNotification *)notification;
 - (void)appWillEnterForeground:(NSNotification *)notification;
 
-- (void)messageCenterDidClose:(NSNotification *)notification;
 - (void)messageCenterDidAttach:(NSNotification *)notification;
 - (void)messageCenterDidRead:(NSNotification *)notification;
 - (void)messageCenterDidSend:(NSNotification *)notification;
@@ -183,7 +181,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 #endif
 		
 		[self performSelector:@selector(addLaunchMetric) withObject:nil afterDelay:0.1];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidClose:) name:ATMessageCenterDidHideNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidAttach:) name:ATMessageCenterDidAttachNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidRead:) name:ATMessageCenterDidReadNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidSend:) name:ATMessageCenterDidSendNotification object:nil];
@@ -297,10 +294,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 
 - (void)appWillEnterForeground:(NSNotification *)notification {
 	[[ATEngagementBackend sharedBackend] engageApptentiveAppEvent:ATInteractionAppEventLabelLaunch];
-}
-
-- (void)messageCenterDidClose:(NSNotification *)notification {
-	[self addMetricWithName:ATMetricNameMessageCenterClose info:nil];
 }
 
 - (void)messageCenterDidAttach:(NSNotification *)notification {

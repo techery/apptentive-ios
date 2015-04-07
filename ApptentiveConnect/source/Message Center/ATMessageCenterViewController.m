@@ -106,9 +106,6 @@ typedef enum {
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	
-	// This metric is added in `ATMessageCenterBaseViewController`. Do not add it twice.
-	//[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterDidHideNotification object:nil];
-	
 	if (self.dismissalDelegate && [self.dismissalDelegate respondsToSelector:@selector(messageCenterDidDismiss:)]) {
 		[self.dismissalDelegate messageCenterDidDismiss:self];
 	}

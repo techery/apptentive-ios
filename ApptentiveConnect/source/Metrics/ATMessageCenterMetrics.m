@@ -8,8 +8,6 @@
 
 #import "ATMessageCenterMetrics.h"
 
-NSString *const ATMessageCenterDidHideNotification = @"ATMessageCenterDidHideNotification";
-
 NSString *const ATMessageCenterDidAttachNotification = @"ATMessageCenterDidAttachNotification";
 NSString *const ATMessageCenterDidReadNotification = @"ATMessageCenterDidReadNotification";
 NSString *const ATMessageCenterDidSendNotification = @"ATMessageCenterDidSendNotification";

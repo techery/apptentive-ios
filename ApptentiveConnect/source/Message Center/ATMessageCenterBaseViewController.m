@@ -28,6 +28,8 @@
 #import "ATInteraction.h"
 
 NSString *const ATInteractionMessageCenterEventLabelLaunch = @"launch";
+NSString *const ATInteractionMessageCenterEventLabelClose = @"close";
+
 
 @interface ATMessageCenterBaseViewController ()
 - (void)showSendImageUIIfNecessary;
@@ -151,7 +153,9 @@ NSString *const ATInteractionMessageCenterEventLabelLaunch = @"launch";
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterDidHideNotification object:nil];
+
+	[[ATInteraction messageCenterInteraction] engage:ATInteractionMessageCenterEventLabelClose fromViewController:self];
+	
 	if (self.dismissalDelegate && [self.dismissalDelegate respondsToSelector:@selector(messageCenterDidDismiss:)]) {
 		[self.dismissalDelegate messageCenterDidDismiss:self];
 	}
