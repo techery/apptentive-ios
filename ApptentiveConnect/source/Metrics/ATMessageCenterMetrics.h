@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NSString *const ATMessageCenterDidAttachNotification;
 NSString *const ATMessageCenterDidReadNotification;
 NSString *const ATMessageCenterDidSendNotification;
 
