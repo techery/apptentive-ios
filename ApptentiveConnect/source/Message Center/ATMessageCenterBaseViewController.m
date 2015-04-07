@@ -30,7 +30,6 @@
 NSString *const ATInteractionMessageCenterEventLabelLaunch = @"launch";
 NSString *const ATInteractionMessageCenterEventLabelClose = @"close";
 
-
 @interface ATMessageCenterBaseViewController ()
 - (void)showSendImageUIIfNecessary;
 - (CGRect)formRectToShow;

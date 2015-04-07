@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-NSString *const ATMessageCenterDidReadNotification;
 NSString *const ATMessageCenterDidSendNotification;
 
-NSString *const ATMessageCenterMessageIDKey;
 NSString *const ATMessageCenterMessageNonceKey;
 
 NSString *const ATMessageCenterIntroDidSendNotification;

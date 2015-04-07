@@ -31,7 +31,6 @@ static NSString *ATMetricNameFeedbackDialogLaunch = @"feedback_dialog.launch";
 static NSString *ATMetricNameFeedbackDialogCancel = @"feedback_dialog.cancel";
 static NSString *ATMetricNameFeedbackDialogSubmit = @"feedback_dialog.submit";
 
-static NSString *ATMetricNameMessageCenterRead = @"message_center.read";
 static NSString *ATMetricNameMessageCenterSend = @"message_center.send";
 
 static NSString *ATMetricNameMessageCenterIntroSend = @"message_center.intro.send";
@@ -50,7 +49,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 - (void)appDidEnterBackground:(NSNotification *)notification;
 - (void)appWillEnterForeground:(NSNotification *)notification;
 
-- (void)messageCenterDidRead:(NSNotification *)notification;
 - (void)messageCenterDidSend:(NSNotification *)notification;
 
 - (void)messageCenterIntroDidSend:(NSNotification *)notification;
@@ -179,7 +177,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 #endif
 		
 		[self performSelector:@selector(addLaunchMetric) withObject:nil afterDelay:0.1];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidRead:) name:ATMessageCenterDidReadNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterDidSend:) name:ATMessageCenterDidSendNotification object:nil];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCenterIntroDidSend:) name:ATMessageCenterIntroDidSendNotification object:nil];
@@ -291,16 +288,6 @@ static NSString *ATMetricNameMessageCenterThankYouClose = @"message_center.thank
 
 - (void)appWillEnterForeground:(NSNotification *)notification {
 	[[ATEngagementBackend sharedBackend] engageApptentiveAppEvent:ATInteractionAppEventLabelLaunch];
-}
-
-- (void)messageCenterDidRead:(NSNotification *)notification {
-	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	NSString *messageID = [[notification userInfo] objectForKey:ATMessageCenterMessageIDKey];
-	if (messageID != nil) {
-		info[@"message_id"] = messageID;
-	}
-	[self addMetricWithName:ATMetricNameMessageCenterRead info:info];
-	[info release], info = nil;
 }
 
 - (void)messageCenterDidSend:(NSNotification *)notification {

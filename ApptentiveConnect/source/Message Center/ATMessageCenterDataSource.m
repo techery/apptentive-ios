@@ -14,6 +14,9 @@
 #import "ATData.h"
 #import "ATMessageCenterMetrics.h"
 #import "ATTextMessage.h"
+#import "ATInteraction.h"
+
+NSString *const ATInteractionMessageCenterEventLabelRead = @"read";
 
 @interface ATMessageCenterDataSource () <NSFetchedResultsControllerDelegate>
 
@@ -100,7 +103,8 @@
 		for (ATAbstractMessage *message in results) {
 			[message setSeenByUser:@(YES)];
 			if (message.apptentiveID != nil && [message.sentByUser boolValue] != YES) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:ATMessageCenterDidReadNotification object:self userInfo:@{ATMessageCenterMessageIDKey:message.apptentiveID}];
+				NSDictionary *eventInfo = @{@"message_id": message.apptentiveID};
+				[[ATInteraction messageCenterInteraction] engage:ATInteractionMessageCenterEventLabelRead fromViewController:nil userInfo:eventInfo];
 			}
 		}
 		[ATData save];
