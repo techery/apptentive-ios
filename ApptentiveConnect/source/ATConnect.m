@@ -562,37 +562,8 @@ NSString *const ATConnectCustomDeviceDataChangedNotification = @"ATConnectCustom
 #endif
 
 + (NSBundle *)resourceBundle {
-#if TARGET_OS_IPHONE
-	NSString *path = [[NSBundle bundleForClass:[ATBackend class]] bundlePath];
-	NSString *bundlePath = [path stringByAppendingPathComponent:@"ApptentiveResources.bundle"];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:bundlePath]) {
-		NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-		return bundle;
-	} else {
-		// Try trigger.io path.
-		bundlePath = [path stringByAppendingPathComponent:@"apptentive.bundle"];
-		bundlePath = [bundlePath stringByAppendingPathComponent:@"ApptentiveResources.bundle"];
-		if ([fm fileExistsAtPath:bundlePath]) {
-			NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-			return bundle;
-		} else {
-			// Try Titanium path.
-			bundlePath = [path stringByAppendingPathComponent:@"modules"];
-			bundlePath = [bundlePath stringByAppendingPathComponent:@"com.apptentive.titanium"];
-			bundlePath = [bundlePath stringByAppendingPathComponent:@"ApptentiveResources.bundle"];
-			if ([fm fileExistsAtPath:bundlePath]) {
-				NSBundle *bundle = [[NSBundle alloc] initWithPath:bundlePath];
-				return bundle;
-			} else {
-				return nil;
-			}
-		}
-	}
-#elif TARGET_OS_MAC
 	NSBundle *bundle = [NSBundle bundleForClass:[ATConnect class]];
 	return bundle;
-#endif
 }
 
 #pragma mark - Message notification banner
