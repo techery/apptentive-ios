@@ -24,13 +24,15 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentAdd = @"attachment
 NSString *const ATInteractionMessageCenterEventLabelAttachmentCancel = @"attachment_cancel";
 NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachment_delete";
 
+
 @interface ATAttachmentController ()
 
-@property (nonatomic, strong) UIPopoverController *imagePickerPopoverController;
+@property (strong, nonatomic) UIPopoverController *imagePickerPopoverController;
 @property (strong, nonatomic) NSMutableArray *mutableAttachments;
 @property (assign, nonatomic) CGSize collectionViewFooterSize;
 
 @end
+
 
 @implementation ATAttachmentController
 
@@ -42,6 +44,12 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 	self.collectionView.layer.shadowRadius = 2.0;
 	self.collectionView.layer.masksToBounds = NO;
 	self.collectionView.layer.shadowColor = [UIColor grayColor].CGColor;
+
+	// Hide the attach button if tapping it will cause a crash (due to unsupported portrait orientation).
+	BOOL isPhone = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone;
+	BOOL supportsPortraitOrientation = ([[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:self.attachButton.window] & UIInterfaceOrientationMaskPortrait) != 0;
+
+	self.attachButton.hidden = isPhone && !supportsPortraitOrientation;
 
 	CGSize marginWithInsets = CGSizeMake(ATTACHMENT_MARGIN.width - (ATTACHMENT_INSET.left), ATTACHMENT_MARGIN.height - (ATTACHMENT_INSET.top));
 	CGFloat height = [ATAttachmentCell heightForScreen:[UIScreen mainScreen] withMargin:marginWithInsets];
@@ -81,9 +89,9 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 
 		for (UIImage *image in self.mutableAttachments) {
 			NSString *name = [NSString stringWithFormat:ATLocalizedString(@"Attachment %ld", @"Placeholder name for attachment"), (long)index];
-			ATFileAttachment *attachment = [ATFileAttachment newInstanceWithFileData:UIImageJPEGRepresentation(image, 0.6) MIMEType:@"image/jpeg"name:name];
+			ATFileAttachment *attachment = [ATFileAttachment newInstanceWithFileData:UIImageJPEGRepresentation(image, 0.6) MIMEType:@"image/jpeg" name:name];
 
-			index ++;
+			index++;
 			[attachments addObject:attachment];
 		}
 		_attachments = attachments;
@@ -119,9 +127,9 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 		[self.viewController.interaction engage:ATInteractionMessageCenterEventLabelAttachmentListOpen fromViewController:self.viewController];
 		[self becomeFirstResponder];
 		[self updateBadge];
-	}
 
-	self.active = YES;
+		self.active = YES;
+	}
 }
 
 - (IBAction)chooseImage:(UIButton *)sender {
@@ -183,7 +191,7 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 #pragma mark - Image picker controller delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-		UIImage *photo = info[UIImagePickerControllerOriginalImage];
+	UIImage *photo = info[UIImagePickerControllerOriginalImage];
 	if (photo) {
 		[self insertImage:photo];
 	} else {
@@ -191,6 +199,13 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 	}
 
 	[self dismissImagePicker:picker];
+
+	if (!self.active) {
+		[self becomeFirstResponder];
+		self.active = YES;
+		[self.viewController.interaction engage:ATInteractionMessageCenterEventLabelAttachmentListOpen fromViewController:self.viewController];
+	}
+
 	[self.viewController.interaction engage:ATInteractionMessageCenterEventLabelAttachmentAdd fromViewController:self.viewController];
 }
 
@@ -242,7 +257,9 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 		self.imagePickerPopoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
 		self.imagePickerPopoverController.delegate = self;
 
-		[self.imagePickerPopoverController presentPopoverFromRect:sender.superview.frame inView:self.collectionView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		CGRect fromRect = (sender == self.attachButton) ? self.attachButton.frame : sender.superview.frame;
+		UIView *inView = (sender == self.attachButton) ? self.attachButton.superview : self.collectionView;
+		[self.imagePickerPopoverController presentPopoverFromRect:fromRect inView:inView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 	} else {
 		imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
@@ -251,6 +268,7 @@ NSString *const ATInteractionMessageCenterEventLabelAttachmentDelete = @"attachm
 }
 
 @end
+
 
 @implementation ATAttachmentController (QuickLook)
 

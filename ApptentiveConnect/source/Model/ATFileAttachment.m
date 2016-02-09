@@ -8,7 +8,7 @@
 
 #import "ATFileAttachment.h"
 #import "ATBackend.h"
-#import "ATMessage.h"
+#import "ATCompoundMessage.h"
 #import "ATUtilities.h"
 #import "ATData.h"
 #import "NSDictionary+ATAdditions.h"
@@ -16,11 +16,13 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <ImageIO/ImageIO.h>
 
+
 @interface ATFileAttachment ()
 + (NSString *)fullLocalPathForFilename:(NSString *)filename;
 - (NSString *)filenameForThumbnailOfSize:(CGSize)size;
 - (void)deleteSidecarIfNecessary;
 @end
+
 
 @implementation ATFileAttachment
 @dynamic localPath;
@@ -42,8 +44,11 @@
 			CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
 			if (MIMEType) {
 				[thumbnailableMIMETypes addObject:(__bridge id _Nonnull)(MIMEType)];
+				CFRelease(MIMEType);
 			}
 		}
+
+		CFRelease(thumbnailableUTIs);
 	});
 
 	return [thumbnailableMIMETypes containsObject:MIMEType];
@@ -62,7 +67,7 @@
 	return attachment;
 }
 
-+ (void)addMissingExtensions	 {
++ (void)addMissingExtensions {
 	NSArray *allAttachments = [ATData findEntityNamed:NSStringFromClass(self) withPredicate:[NSPredicate predicateWithValue:YES]];
 
 	for (ATFileAttachment *attachment in allAttachments) {
@@ -186,12 +191,31 @@
 }
 
 - (NSString *)extension {
+	NSString *_extension = nil;
+
 	if (self.mimeType) {
 		CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef _Nonnull)(self.mimeType), NULL);
-		return (__bridge NSString *)UTTypeCopyPreferredTagWithClass(uti, kUTTagClassFilenameExtension);
-	} else {
-		return @"attachment";
+		CFStringRef cf_extension = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassFilenameExtension);
+		CFRelease(uti);
+		if (cf_extension) {
+			_extension = [(__bridge NSString *)cf_extension copy];
+			CFRelease(cf_extension);
+		}
 	}
+
+	if (_extension.length == 0 && self.name) {
+		_extension = self.name.pathExtension;
+	}
+
+	if (_extension.length == 0 && self.remoteURL) {
+		_extension = self.remoteURL.pathExtension;
+	}
+
+	if (_extension.length == 0) {
+		_extension = @"file";
+	}
+
+	return _extension;
 }
 
 - (BOOL)canCreateThumbnail {
@@ -234,7 +258,7 @@
 			for (NSString *filename in filenames) {
 				if ([filename rangeOfString:self.localPath].location == 0) {
 					NSString *thumbnailPath = [[self class] fullLocalPathForFilename:filename];
-					
+
 					if (![fm removeItemAtPath:thumbnailPath error:&error]) {
 						ATLogError(@"Error removing attachment thumbnail at path: %@. %@", thumbnailPath, error);
 						continue;
@@ -260,12 +284,14 @@
 }
 
 - (UIImage *)createThumbnailOfSize:(CGSize)size {
-	CGImageSourceRef src = CGImageSourceCreateWithURL((__bridge CFURLRef) [NSURL fileURLWithPath:self.fullLocalPath], NULL);
+	CGImageSourceRef src = CGImageSourceCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.fullLocalPath], NULL);
 	CFDictionaryRef options = (__bridge CFDictionaryRef) @{
-															   (id) kCGImageSourceCreateThumbnailWithTransform : @YES,
-															   (id) kCGImageSourceCreateThumbnailFromImageAlways : @YES,
-															   (id) kCGImageSourceThumbnailMaxPixelSize : @(fmax(size.width, size.height))
-															   };
+		(id)kCGImageSourceCreateThumbnailWithTransform: @YES,
+		(id)
+		kCGImageSourceCreateThumbnailFromImageAlways: @YES,
+		(id)
+		kCGImageSourceThumbnailMaxPixelSize: @(fmax(size.width, size.height))
+	};
 	CGImageRef thumbnail = CGImageSourceCreateThumbnailAtIndex(src, 0, options);
 	CFRelease(src);
 
@@ -284,6 +310,7 @@
 }
 
 @end
+
 
 @implementation ATFileAttachment (QuickLook)
 

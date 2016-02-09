@@ -1,3 +1,24 @@
+2016-02-05 frankus v2.1.1
+-------------------------
+Version 2.1.2 contains a fix for a namespace collision with a system
+framework. It also fixes a race condition in the deallocation of Message Center.
+It sets the module name for CocoaPods users to simplify integration
+with Swift projects.
+
+2016-01-14 frankus v2.1.1
+-------------------------
+Version 2.1.1 contains bug fixes and fixes several deprecation warnings for
+iOS 8 deployment targets. The code formatting has been made more consistent.
+
+2015-12-09 frankus v2.1.0
+--------------------------------
+Version 2.1 contains several major features:
+
+- Restores the ability to send images in Message Center.
+- Adds remote notification background fetch capability for new messages in Message Center.
+- Adds new strongly-typed setters for custom person and device data.
+- Includes numerous bug fixes and improvements.
+
 2015-10-27 frankus v2.0.5
 --------------------------------
 

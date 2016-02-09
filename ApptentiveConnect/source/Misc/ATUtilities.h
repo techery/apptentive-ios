@@ -14,6 +14,7 @@
 
 #define kApptentiveHostName @"apptentive.com"
 
+
 @interface ATUtilities : NSObject
 #if TARGET_OS_IPHONE
 + (UIImage *)imageByTakingScreenshot;
@@ -40,6 +41,7 @@
 + (NSString *)currentSystemBuild;
 
 + (NSString *)stringByEscapingForURLArguments:(NSString *)string;
++ (NSString *)stringByEscapingForPredicate:(NSString *)string;
 + (NSString *)randomStringOfLength:(NSUInteger)length;
 
 + (void)uniquifyArray:(NSMutableArray *)array;
@@ -66,7 +68,7 @@
 + (BOOL)dictionary:(NSDictionary *)a isEqualToDictionary:(NSDictionary *)b;
 + (NSTimeInterval)maxAgeFromCacheControlHeader:(NSString *)cacheControl;
 + (BOOL)array:(NSArray *)a isEqualToArray:(NSArray *)b;
-+ (NSDictionary *)diffDictionary:(NSDictionary *)new againstDictionary:(NSDictionary *)old;
++ (NSDictionary *)diffDictionary:(NSDictionary *) new againstDictionary:(NSDictionary *)old;
 
 #if TARGET_OS_IPHONE
 + (UIEdgeInsets)edgeInsetsOfView:(UIView *)view;

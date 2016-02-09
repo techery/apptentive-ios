@@ -13,12 +13,12 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
-#define kATConnectVersionString @"2.1"
+#define kATConnectVersionString @"2.1.2"
 
 #if TARGET_OS_IPHONE
-#	define kATConnectPlatformString @"iOS"
+#define kATConnectPlatformString @"iOS"
 #elif TARGET_OS_MAC
-#	define kATConnectPlatformString @"Mac OS X"
+#define kATConnectPlatformString @"Mac OS X"
 @class ATFeedbackWindowController;
 #endif
 
@@ -45,7 +45,7 @@ extern NSString *const ATSurveySentNotification;
 extern NSString *const ATSurveyIDKey;
 
 /** Supported Push Providers for use in `setPushNotificationIntegration:withDeviceToken:` */
-typedef NS_ENUM(NSInteger, ATPushProvider){
+typedef NS_ENUM(NSInteger, ATPushProvider) {
 	/** Specifies the Apptentive push provider. */
 	ATPushProviderApptentive,
 	/** Specifies the Urban Airship push provider. */
@@ -114,28 +114,35 @@ Before calling any other methods on the shared `ATConnect` instance, set the API
 
  This key is found on the Apptentive website under Settings, API & Development.
  */
-@property (nonatomic, copy) NSString *apiKey;
+@property (copy, nonatomic) NSString *_Nullable apiKey;
 
 /**
  The app's iTunes App ID.
 
  You can find this in iTunes Connect, and is the numeric "Apple ID" shown on your app details page.
  */
-@property (nonatomic, copy) NSString *appID;
+@property (copy, nonatomic) NSString *_Nullable appID;
 
 /** The shared singleton of `ATConnect`. */
 + (ATConnect *)sharedConnection;
 
 /** An object conforming to the `ATConnectDelegate` protocol */
-@property (nonatomic, weak) id<ATConnectDelegate> delegate;
+@property (weak, nonatomic) id<ATConnectDelegate> delegate;
 
 ///---------------------------------
 /// @name Interface Customization
 ///---------------------------------
-/** Toggles the display of an email field in the message panel. `YES` by default. */
-@property (nonatomic, assign) BOOL showEmailField;
-/** Set this if you want some custom text to appear as a placeholder in the feedback text box. */
-@property (nonatomic, copy) NSString *customPlaceholderText;
+/** Toggles the display of an email field in the message panel. `YES` by default.
+ 
+	@deprecated This property no longer has any effect. It is included for compatibility but will be removed in the next major version release.
+ */
+@property (assign, nonatomic) BOOL showEmailField DEPRECATED_ATTRIBUTE;
+
+/** Set this if you want some custom text to appear as a placeholder in the feedback text box.
+ 
+ @deprecated This property no longer has any effect. It is included for compatibility but will be removed in the next major version release.
+*/
+@property (copy, nonatomic) NSString *customPlaceholderText DEPRECATED_ATTRIBUTE;
 #if TARGET_OS_IPHONE
 /**
  A tint color to use in Apptentive-specific UI.
@@ -145,7 +152,7 @@ Before calling any other methods on the shared `ATConnect` instance, set the API
 
  @deprecated Use `[UIAppearance appearanceWhenContainedIn:[ATNavigationController class], nil].tintColor`
  */
-@property (nonatomic, strong) UIColor *tintColor DEPRECATED_ATTRIBUTE;
+@property (strong, nonatomic) UIColor *tintColor DEPRECATED_ATTRIBUTE;
 #endif
 
 #if TARGET_OS_IPHONE
@@ -197,7 +204,6 @@ Before calling any other methods on the shared `ATConnect` instance, set the API
  @return The number of unread messages.
  */
 - (NSUInteger)unreadMessageCount;
-
 
 /**
  Returns a "badge" than can be used as a UITableViewCell accessoryView to indicate the current number of unread messages.
@@ -429,9 +435,9 @@ Returns a Boolean value indicating whether the given event will cause an Interac
 ///---------------------------------------
 
 /** The name of the app user when communicating with Apptentive. */
-@property (nonatomic, copy) NSString *personName;
+@property (copy, nonatomic) NSString *_Nullable personName;
 /** The email address of the app user in form fields and communicating with Apptentive. */
-@property (nonatomic, copy) NSString *personEmailAddress;
+@property (copy, nonatomic) NSString *_Nullable personEmailAddress;
 
 /**
  Adds custom data associated with the current person.
@@ -504,29 +510,7 @@ Returns a Boolean value indicating whether the given event will cause an Interac
  @param boolValue Custom data of type `BOOL`.
  @param key A key to associate the data with.
  */
-- (void)addCustomDeviceDataBOOL:(BOOL)boolValue withKey:(NSString *)key;
-
-/**
- Adds custom version information associated with the current device.
-
- Adds an additional data field to any feedback sent. This will show up in the device data in the
- conversation on your Apptentive dashboard.
-
- @param versionObject An `NSDictionary` object created with `+versionObjectWithVersion:`.
- @param key A key to associate the data with.
- */
-- (void)addCustomDeviceDataVersion:(NSDictionary *)versionObject withKey:(NSString *)key;
-
-/**
- Adds custom timestamp data associated with the current device.
-
- Adds an additional data field to any feedback sent. This will show up in the device data in the
- conversation on your Apptentive dashboard.
-
- @param timestampObject An `NSDictionary` object created with `+timestampObjectWithDate:`.
- @param key A key to associate the data with.
- */
-- (void)addCustomDeviceDataTimestamp:(NSDictionary *)timestampObject withKey:(NSString *)key;
+- (void)addCustomDeviceDataBool:(BOOL)boolValue withKey:(NSString *)key;
 
 /**
  Adds custom text data associated with the current person.
@@ -559,48 +543,7 @@ Returns a Boolean value indicating whether the given event will cause an Interac
  @param boolValue Custom data of type `BOOL`.
  @param key A key to associate the data with.
  */
-- (void)addCustomPersonDataBOOL:(BOOL)boolValue withKey:(NSString *)key;
-
-/**
- Adds custom version data associated with the current person.
-
- Adds an additional data field to any feedback sent. This will show up in the person data in the
- conversation on your Apptentive dashboard.
-
- @param versionObject An `NSDictionary` object created with `+versionObjectWithVersion:`.
- @param key A key to associate the data with.
- */
-- (void)addCustomPersonDataVersion:(NSDictionary *)versionObject withKey:(NSString *)key;
-
-/**
- Adds custom timestamp data associated with the current person.
-
- Adds an additional data field to any feedback sent. This will show up in the person data in the
- conversation on your Apptentive dashboard.
-
- @param timestampObject An `NSDictionary` object created with `+timestampObjectWithDate:`.
- @param key A key to associate the data with.
- */
-- (void)addCustomPersonDataTimestamp:(NSDictionary *)timestampObject withKey:(NSString *)key;
-
-/**
- Creates a dictionary representation of the specified version string suitable for use with
- `-addCustomDeviceDataVersion:withKey:` or `-addCustomPersonDataVersion:withKey:`
-
- @param version A string specifying a version (up to three non-negative integers separated by periods).
-
- @return an `NSDictionary` object suitable for use with `-addCustomDeviceDataVersion:withKey:` or `-addCustomPersonDataVersion:withKey:`.
- */
-+ (NSDictionary *)versionObjectWithVersion:(NSString *)version;
-
-/**
- Creates a dictionary representation of the specified timestamp suitable for use with `-addCustomDeviceDataTimestamp:withKey:` or `-addCustomPersonDataTimestamp:withKey:`
-
- @param date An `NSDate` object specifying point in time.
-
- @return an `NSDictionary` object suitable for use with `-addCustomDeviceDataTimestamp:withKey:` or `-addCustomPersonDataTimestamp:withKey:`
- */
-+ (NSDictionary *)timestampObjectWithDate:(NSDate *)date;
+- (void)addCustomPersonDataBool:(BOOL)boolValue withKey:(NSString *)key;
 
 /**
  Adds the specified custom data value associated with the specified key.
