@@ -11,14 +11,14 @@ Pod::Spec.new do |s|
   s.source_files   = 'ApptentiveConnect/source/**/*.{h,m}'
   s.requires_arc = true
   s.frameworks     = 'AVFoundation', 'CoreGraphics', 'Foundation', 'ImageIO', 'MobileCoreServices', 'QuartzCore', 'SystemConfiguration', 'UIKit', 'CoreData'
-  s.resource_bundle = { 'ApptentiveResources' => [
+  s.resources = [
 		'ApptentiveConnect/source/Model/*.xcdatamodeld',
 		'ApptentiveConnect/source/Model/*.xcmappingmodel',
 		'ApptentiveConnect/resources/localization/*.lproj',
 		'ApptentiveConnect/resources/images/**/*.*',
 		'ApptentiveConnect/resources/Apptentive.storyboard',
 		'ApptentiveConnect/resources/CocoaPodsResources/Info.plist'
-		] }
+		]
   s.weak_frameworks = 'StoreKit', 'CoreTelephony'
   s.prefix_header_contents = '#import "ATLog.h"'
   s.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "AT_LOGGING_LEVEL_ERROR=1" }
