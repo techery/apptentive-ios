@@ -31,40 +31,40 @@ class PicturesViewController: UICollectionViewController, UICollectionViewDelega
 		self.source = manager.pictureDataSource
 	}
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		self.collectionView?.reloadData()
 	}
 	
-	override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+	override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
 		self.collectionViewLayout.invalidateLayout()
 	}
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
 	}
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.source.numberOfPictures() ?? 0
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PictureCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PictureCell
 		
-		cell.imageView.image = self.source.imageAtIndex(indexPath.item)
-		cell.likesLabel.text = "\(self.source.likeCountAtIndex(indexPath.item)) Likes"
-		cell.likeButton.tag = indexPath.item
-		cell.likeButton.selected = self.source.isLikedAtIndex(indexPath.item) ?? false
+		cell.imageView.image = self.source.imageAtIndex((indexPath as NSIndexPath).item)
+		cell.likesLabel.text = "\(self.source.likeCountAtIndex((indexPath as NSIndexPath).item)) Likes"
+		cell.likeButton.tag = (indexPath as NSIndexPath).item
+		cell.likeButton.isSelected = self.source.isLikedAtIndex((indexPath as NSIndexPath).item) ?? false
 		
         return cell
     }
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		if indexPath.item > self.source.numberOfPictures() {
-			return CGSizeZero;
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		if (indexPath as NSIndexPath).item > self.source.numberOfPictures() {
+			return CGSize.zero;
 		}
 		
 		if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -76,36 +76,36 @@ class PicturesViewController: UICollectionViewController, UICollectionViewDelega
 			let columns = floor((effectiveWidth + spacing) / (self.minimumWidth + spacing))
 			
 			let width = ((effectiveWidth + spacing) / columns) - spacing
-			let imageSize = self.source.imageSizeAtIndex(indexPath.item)
+			let imageSize = self.source.imageSizeAtIndex((indexPath as NSIndexPath).item)
 			let factor = imageSize.width / imageSize.height
 			let height = width / factor
 			
 			return CGSize(width: width, height: height + 44)
 		}
 		
-		return CGSizeZero
+		return CGSize.zero
 	}
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let previewController = QLPreviewController()
 		previewController.dataSource = self.source
 		previewController.hidesBottomBarWhenPushed = true
-		previewController.currentPreviewItemIndex = indexPath.item
+		previewController.currentPreviewItemIndex = (indexPath as NSIndexPath).item
 		
 		self.navigationController?.pushViewController(previewController, animated: true)
 		
 		Apptentive.sharedConnection().engage("photo_viewed", withCustomData: ["photo_name": self.source.imageNameAtIndex(indexPath.item)], fromViewController: previewController)
 	}
 	
-	@IBAction func toggleLike(sender: UIButton) {
-		sender.selected = !sender.selected
+	@IBAction func toggleLike(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
 		let index = sender.tag
 		
-		self.source?.setLiked(index, liked: sender.selected)
+		self.source?.setLiked(index, liked: sender.isSelected)
 		
-		self.collectionView!.reloadItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+		self.collectionView!.reloadItems(at: [IndexPath(item: index, section: 0)])
 		
-		if (sender.selected) {
+		if (sender.isSelected) {
 			Apptentive.sharedConnection().engage("photo_liked", withCustomData: ["photo_name": self.source.imageNameAtIndex(index)], fromViewController: self)
 		} else {
 			Apptentive.sharedConnection().engage("photo_unliked", withCustomData: ["photo_name": self.source.imageNameAtIndex(index)], fromViewController: self)

@@ -171,6 +171,9 @@
 				TargetAttributes = {
 					014E03391B7401A50059A3C6 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = Q5794689T7;
+						DevelopmentTeamName = "Laika Systems";
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -334,6 +337,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apptentive.iOSExample;
 				PRODUCT_NAME = iOSExample;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -347,6 +351,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apptentive.iOSExample;
 				PRODUCT_NAME = iOSExample;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

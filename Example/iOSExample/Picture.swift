@@ -11,11 +11,11 @@ import QuickLook
 import ImageIO
 
 class Picture: NSObject {
-	let URL: NSURL
+	let URL: Foundation.URL
 	let image: UIImage?
 	var likeCount: Int
 	
-	init(URL: NSURL, likeCount: Int) {
+	init(URL: Foundation.URL, likeCount: Int) {
 		self.URL = URL
 		self.likeCount = likeCount
 		
@@ -25,7 +25,7 @@ class Picture: NSObject {
 				kCGImageSourceCreateThumbnailFromImageIfAbsent: true
 			] as [NSObject: AnyObject]
 			
-			self.image = UIImage(CGImage: CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)!)
+			self.image = UIImage(cgImage: CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)!)
 		} else {
 			self.image = nil
 		}
@@ -38,7 +38,7 @@ extension Picture: QLPreviewItem {
 			return "\(self.likeCount) Likes"
 		}
 	}
-	var previewItemURL: NSURL {
+	var previewItemURL: Foundation.URL {
 		get {
 			return self.URL
 		}
