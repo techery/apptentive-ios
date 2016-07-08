@@ -16,41 +16,41 @@ private let baseURLKey = "baseURL"
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		self.registerDefaults()
 
 		UITabBar.appearance().tintColor = UIColor.apptentiveRed()
 
-		if let APIKey = NSUserDefaults.standardUserDefaults().stringForKey(APIKeyKey) {
+		if let APIKey = UserDefaults.standard.string(forKey: APIKeyKey) {
 			self.connectWithAPIKey(APIKey)
 		}
 
 		return true
 	}
 
-	func applicationDidBecomeActive(application: UIApplication) {
-		if NSUserDefaults.standardUserDefaults().stringForKey(APIKeyKey) == nil {
+	func applicationDidBecomeActive(_ application: UIApplication) {
+		if UserDefaults.standard.string(forKey: APIKeyKey) == nil {
 			if let rootViewController = self.window?.rootViewController  {
-				rootViewController.performSegueWithIdentifier("ShowAPI", sender: self)
+				rootViewController.performSegue(withIdentifier: "ShowAPI", sender: self)
 			}
 		}
 	}
 
-	func connectWithAPIKey(APIKey: String) {
-		let apptentiveBaseURL: NSURL
-		if let baseURLString = NSUserDefaults.standardUserDefaults().stringForKey(baseURLKey), baseURL = NSURL(string: baseURLString) {
+	func connectWithAPIKey(_ APIKey: String) {
+		let apptentiveBaseURL: URL
+		if let baseURLString = UserDefaults.standard.string(forKey: baseURLKey), baseURL = URL(string: baseURLString) {
 			apptentiveBaseURL = baseURL
 		} else {
-			apptentiveBaseURL = NSURL(string: "https://api.apptentive.com")!
+			apptentiveBaseURL = URL(string: "https://api.apptentive.com")!
 		}
 
 		Apptentive.sharedConnection().setAPIKey(APIKey, baseURL: apptentiveBaseURL)
-		NSUserDefaults.standardUserDefaults().setObject(APIKey, forKey: APIKeyKey)
+		UserDefaults.standard.set(APIKey, forKey: APIKeyKey)
 	}
 
 	private func registerDefaults() {
-		if let defaultDefaultsURL = NSBundle.mainBundle().URLForResource("Defaults", withExtension: "plist"), defaultDefaults = NSDictionary(contentsOfURL:defaultDefaultsURL) as? [String : AnyObject] {
-			NSUserDefaults.standardUserDefaults().registerDefaults(defaultDefaults)
+		if let defaultDefaultsURL = Bundle.main.urlForResource("Defaults", withExtension: "plist"), defaultDefaults = NSDictionary(contentsOf:defaultDefaultsURL) as? [String : AnyObject] {
+			UserDefaults.standard.register(defaultDefaults)
 		}
 	}
 }

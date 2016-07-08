@@ -13,7 +13,7 @@ class iOSDemoUITests: XCTestCase {
         super.setUp()
 
 		let app = XCUIApplication()
-		guard let APIKey = NSUserDefaults.standardUserDefaults().stringForKey("APIKey") else {
+		guard let APIKey = UserDefaults.standard.string(forKey: "APIKey") else {
 			XCTFail("API Key must be set as a launch argument to the test runner")
 			return
 		}
@@ -34,9 +34,9 @@ class iOSDemoUITests: XCTestCase {
 		}
 
 		let actionButton = app.navigationBars["Interactions"].buttons["Share"]
-		let enabled = NSPredicate(format: "enabled == 1")
-		expectationForPredicate(enabled, evaluatedWithObject: actionButton, handler: nil)
-		waitForExpectationsWithTimeout(30, handler: nil)
+		let enabled = Predicate(format: "enabled == 1")
+		expectation(for: enabled, evaluatedWith: actionButton, handler: nil)
+		waitForExpectations(withTimeout: 30, handler: nil)
     }
 
     func testSendingMessage() {
@@ -80,12 +80,12 @@ class iOSDemoUITests: XCTestCase {
 		submitButton.tap()
 		XCTAssertTrue(app.toolbars.count == 1)
 
-		let requiredSingleLineCell = collectionViewsQuery.childrenMatchingType(.Cell).elementBoundByIndex(1)
+		let requiredSingleLineCell = collectionViewsQuery.children(matching: .cell).elementBound(by: 1)
 		let requiredSingleLineTextField = requiredSingleLineCell.textFields["Please provide a response"]
 		requiredSingleLineTextField.tap()
 		app.typeText("Test\n")
 
-		let requiredMultilineCell = collectionViewsQuery.childrenMatchingType(.Cell).elementBoundByIndex(3)
+		let requiredMultilineCell = collectionViewsQuery.children(matching: .cell).elementBound(by: 3)
 		requiredMultilineCell.textViews["Please leave detailed feedback"].tap()
 		app.typeText("\t \n")
 
@@ -168,15 +168,15 @@ class iOSDemoUITests: XCTestCase {
 		XCTAssertTrue(app.toolbars.count == 1)
 
 		collectionViewsQuery.cells["5"].tap()
-		XCTAssert(collectionViewsQuery.cells["5"].selected)
+		XCTAssert(collectionViewsQuery.cells["5"].isSelected)
 
 		collectionViewsQuery.cells["6"].tap()
 
 		// Validation should succeed
 		XCTAssertTrue(app.toolbars.count == 0)
 
-		XCTAssertFalse(collectionViewsQuery.cells["5"].selected)
-		XCTAssert(collectionViewsQuery.cells["6"].selected)
+		XCTAssertFalse(collectionViewsQuery.cells["5"].isSelected)
+		XCTAssert(collectionViewsQuery.cells["6"].isSelected)
 
 		// Validation should succeed
 		XCTAssertTrue(app.toolbars.count == 0)

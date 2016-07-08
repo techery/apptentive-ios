@@ -20,11 +20,11 @@ class ConnectionViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if let appVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+		if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
 			appVersionLabel.text = appVersion
 		}
 
-		if let appBuild = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+		if let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
 			appBuildLabel.text = appBuild
 		}
 
@@ -32,31 +32,31 @@ class ConnectionViewController: UITableViewController {
 
 		refresh()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refresh), name: ApptentiveConversationCreatedNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name.ApptentiveConversationCreated, object: nil)
 	}
 
-	override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 
-	override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+	override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: AnyObject?) -> Bool {
 		return action == #selector(NSObject.copy(_:))
 	}
 
-	override func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+	override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: AnyObject?) {
 		if action == #selector(NSObject.copy(_:)) {
-			if let cell = tableView.cellForRowAtIndexPath(indexPath), let text = cell.detailTextLabel?.text {
-				UIPasteboard.generalPasteboard().setValue(text, forPasteboardType: kUTTypeUTF8PlainText as String)
+			if let cell = tableView.cellForRow(at: indexPath), let text = cell.detailTextLabel?.text {
+				UIPasteboard.general().setValue(text, forPasteboardType: kUTTypeUTF8PlainText as String)
 			}
 		}
 	}
 
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	@objc private func refresh() {
-		APIKeyLabel.text = Apptentive.sharedConnection().APIKey
+		APIKeyLabel.text = Apptentive.sharedConnection().apiKey
 		conversationTokenLabel.text = Apptentive.sharedConnection().conversationToken
 		baseURLLabel.text = Apptentive.sharedConnection().baseURL?.absoluteString
 	}

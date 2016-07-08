@@ -27,13 +27,13 @@ class StringViewController: UIViewController {
 		}
     }
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
 		self.stringTextField.becomeFirstResponder()
 	}
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "Save" {
 			self.string = self.stringTextField.text
 		}

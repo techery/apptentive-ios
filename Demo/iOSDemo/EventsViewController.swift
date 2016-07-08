@@ -20,86 +20,86 @@ class EventsViewController: UITableViewController {
 
 		updateEventList()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventsViewController.updateEventList), name: NSUserDefaultsDidChangeNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.updateEventList), name: UserDefaults.didChangeNotification, object: nil)
     }
 
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Event", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Event", for: indexPath)
 
-		cell.textLabel?.text = events[indexPath.row]
+		cell.textLabel?.text = events[(indexPath as NSIndexPath).row]
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-			events.removeAtIndex(indexPath.row)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+			events.remove(at: (indexPath as NSIndexPath).row)
 			saveEventList()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
 	// MARK: Table view delegate
 
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if self.editing {
-			if let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StringNavigation") as? UINavigationController, let eventViewController = navigationController.viewControllers.first as? StringViewController {
-				eventViewController.string = self.events[indexPath.row]
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if self.isEditing {
+			if let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "StringNavigation") as? UINavigationController, let eventViewController = navigationController.viewControllers.first as? StringViewController {
+				eventViewController.string = self.events[(indexPath as NSIndexPath).row]
 				eventViewController.title = "Edit Event"
-				self.presentViewController(navigationController, animated: true, completion: nil)
+				self.present(navigationController, animated: true, completion: nil)
 			}
 		} else {
-			Apptentive.sharedConnection().engage(events[indexPath.row], fromViewController: self)
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			Apptentive.sharedConnection().engage(events[(indexPath as NSIndexPath).row], from: self)
+			tableView.deselectRow(at: indexPath, animated: true)
 		}
 	}
 
 	// MARK: - Segues
 
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
 		if let navigationController = segue.destinationViewController as? UINavigationController, let eventViewController = navigationController.viewControllers.first {
 			eventViewController.title = "New Event"
 		}
 	}
 
-	@IBAction func returnToEventList(sender: UIStoryboardSegue) {
+	@IBAction func returnToEventList(_ sender: UIStoryboardSegue) {
 		if let name = (sender.sourceViewController as? StringViewController)?.string	{
-			if let selectedIndex = self.tableView.indexPathForSelectedRow?.row {
+			if let selectedIndex = (self.tableView.indexPathForSelectedRow as NSIndexPath?)?.row {
 				events[selectedIndex] = name
 			} else {
 				events.append(name)
 			}
 
-			events.sortInPlace()
+			events.sort()
 			saveEventList()
-			tableView.reloadSections(NSIndexSet(index:0), withRowAnimation: .Automatic)
+			tableView.reloadSections(IndexSet(integer:0), with: .automatic)
 		}
 	}
 
 	// MARK: - Private
 
 	@objc private func updateEventList() {
-		if let events = NSUserDefaults.standardUserDefaults().arrayForKey(EventsKey) as? [String] {
+		if let events = UserDefaults.standard.array(forKey: EventsKey) as? [String] {
 			self.events = events
 		}
 	}
 
 	private func saveEventList() {
-		NSUserDefaults.standardUserDefaults().setObject(events, forKey: EventsKey)
+		UserDefaults.standard.set(events, forKey: EventsKey)
 	}
 	
 }

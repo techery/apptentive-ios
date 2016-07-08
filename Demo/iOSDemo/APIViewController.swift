@@ -13,23 +13,23 @@ class APIViewController: UITableViewController {
 	@IBOutlet var APIKeyField: UITextField!
 
 	@IBAction func openDashboard() {
-		UIApplication.sharedApplication().openURL(NSURL(string: "https://be.apptentive.com/apps/current/settings/api")!)
+		UIApplication.shared().openURL(URL(string: "https://be.apptentive.com/apps/current/settings/api")!)
 	}
 
-	@IBAction func APIKeyChanged(sender: UITextField) {
+	@IBAction func APIKeyChanged(_ sender: UITextField) {
 		var result = false
 
-		if let text = sender.text where text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 64 && text.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "abcdef0123456789").invertedSet) == nil {
+		if let text = sender.text where text.lengthOfBytes(using: String.Encoding.utf8) == 64 && text.rangeOfCharacter(from: CharacterSet(charactersIn: "abcdef0123456789").inverted) == nil {
 					result = true
 		}
 
-		self.saveButtonItem.enabled = result
+		self.saveButtonItem.isEnabled = result
 	}
 
 	@IBAction func save() {
-		if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+		if let appDelegate = UIApplication.shared().delegate as? AppDelegate {
 			appDelegate.connectWithAPIKey(APIKeyField.text!)
 		}
-		dismissViewControllerAnimated(true, completion: nil)
+		dismiss(animated: true, completion: nil)
 	}
 }
