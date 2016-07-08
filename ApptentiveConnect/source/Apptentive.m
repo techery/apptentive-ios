@@ -125,14 +125,6 @@ NSString *const ApptentiveCustomPersonDataPreferenceKey = @"ApptentiveCustomPers
 	return self.webClient.APIKey;
 }
 
-- (NSString *)apiKey {
-	return self.APIKey;
-}
-
-- (void)setApiKey:(NSString *)apiKey {
-	self.APIKey = apiKey;
-}
-
 - (id<ApptentiveStyle>)styleSheet {
 	_didAccessStyleSheet = YES;
 

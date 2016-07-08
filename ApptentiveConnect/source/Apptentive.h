@@ -102,13 +102,6 @@ Before calling any other methods on the shared `Apptentive` instance, set the AP
 @property (copy, nonatomic, nullable) NSString *APIKey;
 
 /**
-  APIKey property with legacy capitalization.
- 
- @deprecated Capitalize `API` in the property/setter name.
- */
-@property (copy, nonatomic, nullable) NSString *apiKey __deprecated_msg("Use 'APIKey' instead.");
-
-/**
  The app's iTunes App ID.
 
  You can find this in iTunes Connect, and is the numeric "Apple ID" shown on your app details page.
