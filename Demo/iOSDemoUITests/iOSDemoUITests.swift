@@ -80,12 +80,12 @@ class iOSDemoUITests: XCTestCase {
 		submitButton.tap()
 		XCTAssertTrue(app.toolbars.count == 1)
 
-		let requiredSingleLineCell = collectionViewsQuery.children(matching: .cell).elementBound(by: 1)
+		let requiredSingleLineCell = collectionViewsQuery.children(matching: .cell).element(boundBy: 1)
 		let requiredSingleLineTextField = requiredSingleLineCell.textFields["Please provide a response"]
 		requiredSingleLineTextField.tap()
 		app.typeText("Test\n")
 
-		let requiredMultilineCell = collectionViewsQuery.children(matching: .cell).elementBound(by: 3)
+		let requiredMultilineCell = collectionViewsQuery.children(matching: .cell).element(boundBy: 3)
 		requiredMultilineCell.textViews["Please leave detailed feedback"].tap()
 		app.typeText("\t \n")
 
@@ -207,10 +207,11 @@ class iOSDemoUITests: XCTestCase {
 		XCTAssert(collectionViewsQuery.cells["Twee pug bitters, portland polaroid artisan iPhone retro single-origin coffee."].exists)
 		XCTAssert(collectionViewsQuery.cells["Kinfolk lomo hashtag migas stumptown before they sold out."].exists)
 
-		collectionViewsQuery.element.swipeUp()
-
 		// Multi-choice question
 		XCTAssert(collectionViewsQuery.staticTexts["Dreamcatcher taxidermy PBR&B deep v. Art party ugh ethical wolf migas disrupt?"].exists)
+
+		collectionViewsQuery.element.swipeUp()
+
 		XCTAssert(collectionViewsQuery.cells["Trust fund skateboard 90's cronut 8-bit celiac fanny pack."].exists)
 		XCTAssert(collectionViewsQuery.cells["Crucifix VHS organic beard, echo park shabby chic master cleanse hoodie sartorial raw denim yuccie disrupt mustache letterpress single-origin coffee."].exists)
 
