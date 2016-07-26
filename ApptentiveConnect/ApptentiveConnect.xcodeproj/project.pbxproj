@@ -303,6 +303,195 @@
 		58E9580B190740BC005063DC /* ATSurveyQuestionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E95809190740BC005063DC /* ATSurveyQuestionResponse.m */; };
 		58EEBE2317C7E8150039A0F5 /* ATInteraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 58EEBE2117C7E8150039A0F5 /* ATInteraction.h */; };
 		58EEBE2417C7E8150039A0F5 /* ATInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EEBE2217C7E8150039A0F5 /* ATInteraction.m */; };
+		E2F84E921D4750E40033E3B9 /* ApptentiveFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F84E911D4750E40033E3B9 /* ApptentiveFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2F84E991D4751030033E3B9 /* ATDataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 01C7C4D51BEAD0A4005D6EC1 /* ATDataModel.xcdatamodeld */; };
+		E2F84E9A1D4751030033E3B9 /* ATDataModel v3 to v4.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 583E3969188E08DD0030B51E /* ATDataModel v3 to v4.xcmappingmodel */; };
+		E2F84E9B1D4751030033E3B9 /* ATDataModel v2 to v3.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 58CD20131821B78D0071CC72 /* ATDataModel v2 to v3.xcmappingmodel */; };
+		E2F84E9C1D4751030033E3B9 /* ATDataModel v1 to v2.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 49FECBE217D02BAD00069502 /* ATDataModel v1 to v2.xcmappingmodel */; };
+		E2F84E9D1D4751030033E3B9 /* ATDataModel v4 to v5.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 013BB6121BF6A82300BB6C27 /* ATDataModel v4 to v5.xcmappingmodel */; };
+		E2F84E9E1D4751090033E3B9 /* ATConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C00297133413BB0071F088 /* ATConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2F84E9F1D4751170033E3B9 /* ATConnect_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4967278116B9D9CB00C679B8 /* ATConnect_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E2F84EA01D4751170033E3B9 /* ATURLConnection_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 49352ADC138CA1DC000E464A /* ATURLConnection_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E2F84EA11D4751170033E3B9 /* ATWebClient_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B877101464958C00594A5D /* ATWebClient_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E2F84EA21D47512F0033E3B9 /* ATConnect_Debugging.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FD7AF219089F1500A707C2 /* ATConnect_Debugging.h */; };
+		E2F84EA31D47512F0033E3B9 /* ATNetworkImageIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CC8BC81B1D0598006C4D30 /* ATNetworkImageIconView.h */; };
+		E2F84EA41D47512F0033E3B9 /* ATDefaultTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4936AE471379DE3100A4B17F /* ATDefaultTextView.h */; };
+		E2F84EA51D47512F0033E3B9 /* ATHUDView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4936AE491379DE3100A4B17F /* ATHUDView.h */; };
+		E2F84EA61D47512F0033E3B9 /* ATNetworkImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4960A531171F70530082669B /* ATNetworkImageView.h */; };
+		E2F84EA71D47512F0033E3B9 /* ATUnreadMessagesBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 583C27091B34BFD800525001 /* ATUnreadMessagesBadgeView.h */; };
+		E2F84EA81D47512F0033E3B9 /* ATMessageCenterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 585A8E5D1B0D609A00BDF4CC /* ATMessageCenterViewController.h */; };
+		E2F84EA91D47512F0033E3B9 /* ATMessageCenterErrorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 013C1A791B713D5C002434B8 /* ATMessageCenterErrorViewController.h */; };
+		E2F84EAA1D47512F0033E3B9 /* ATBannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 01AE42051B38E38D006B9191 /* ATBannerViewController.h */; };
+		E2F84EAB1D47512F0033E3B9 /* ATAboutViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 01F1A95E1B6823CD0088DBF0 /* ATAboutViewController.h */; };
+		E2F84EAC1D47512F0033E3B9 /* ATAttachmentController.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D0C38A1BF3DC330024BA1A /* ATAttachmentController.h */; };
+		E2F84EAD1D47512F0033E3B9 /* ATAttachButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D0C38E1BF3DED50024BA1A /* ATAttachButton.h */; };
+		E2F84EAE1D47512F0033E3B9 /* ATMessageCenterGreetingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C30CE91B0D09F8006BC911 /* ATMessageCenterGreetingView.h */; };
+		E2F84EAF1D47512F0033E3B9 /* ATMessageCenterStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 017D97401B0E3770004E045C /* ATMessageCenterStatusView.h */; };
+		E2F84EB01D47512F0033E3B9 /* ATMessageCenterMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 017D97441B0E5795004E045C /* ATMessageCenterMessageCell.h */; };
+		E2F84EB11D47512F0033E3B9 /* ATMessageCenterReplyCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 017D97481B0E57C2004E045C /* ATMessageCenterReplyCell.h */; };
+		E2F84EB21D47512F0033E3B9 /* ATCompoundMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0127EA0A1BF1271C0005481A /* ATCompoundMessageCell.h */; };
+		E2F84EB31D47512F0033E3B9 /* ATCompoundReplyCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0171DFEB1BF2D019006F8BEA /* ATCompoundReplyCell.h */; };
+		E2F84EB41D47512F0033E3B9 /* ATMessageCenterContextMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 588F66481B601F0B00F388E3 /* ATMessageCenterContextMessageCell.h */; };
+		E2F84EB51D47512F0033E3B9 /* ATMessageCenterInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01BD9E021B55E465004F12AB /* ATMessageCenterInputView.h */; };
+		E2F84EB61D47512F0033E3B9 /* ATMessageCenterProfileView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01B147B11B5D8D3A0000D041 /* ATMessageCenterProfileView.h */; };
+		E2F84EB71D47512F0033E3B9 /* ATProgressNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D3128C1B69349900B369E1 /* ATProgressNavigationBar.h */; };
+		E2F84EB81D47512F0033E3B9 /* ATIndexedCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0127EA0C1BF1271C0005481A /* ATIndexedCollectionView.h */; };
+		E2F84EB91D47512F0033E3B9 /* ATAttachmentCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0127EA081BF1271C0005481A /* ATAttachmentCell.h */; };
+		E2F84EBA1D47512F0033E3B9 /* ATMessageCenterCellProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 0171DFEF1BF2D1F1006F8BEA /* ATMessageCenterCellProtocols.h */; };
+		E2F84EBB1D47512F0033E3B9 /* ATFeedbackTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 491E03D81640D01F00DC3E18 /* ATFeedbackTypes.h */; };
+		E2F84EBC1D47512F0033E3B9 /* ATMessageCenterDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 49735D601832DF1F00D48DE7 /* ATMessageCenterDataSource.h */; };
+		E2F84EBD1D47512F0033E3B9 /* ATPersonUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 4961A409161BBE0800E30037 /* ATPersonUpdater.h */; };
+		E2F84EBE1D47512F0033E3B9 /* ATDeviceUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 4961A40D161BBE1F00E30037 /* ATDeviceUpdater.h */; };
+		E2F84EBF1D47512F0033E3B9 /* ATConversationUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AC178016C0987400BE1615 /* ATConversationUpdater.h */; };
+		E2F84EC01D47512F0033E3B9 /* ATJSONModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AC178C16C0A0BC00BE1615 /* ATJSONModel.h */; };
+		E2F84EC11D47512F0033E3B9 /* ATMessageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 4961A400161BBD7000E30037 /* ATMessageTask.h */; };
+		E2F84EC21D47512F0033E3B9 /* ATGetMessagesTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E3A26D1628F4FF000675B4 /* ATGetMessagesTask.h */; };
+		E2F84EC31D47512F0033E3B9 /* ATWebClient+MessageCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 499912A6161B6AF700FDA15F /* ATWebClient+MessageCenter.h */; };
+		E2F84EC41D47512F0033E3B9 /* ATInteraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 58EEBE2117C7E8150039A0F5 /* ATInteraction.h */; };
+		E2F84EC51D47512F0033E3B9 /* ATMessageCenterInteraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 58B703F61B0FAE6D0024478C /* ATMessageCenterInteraction.h */; };
+		E2F84EC61D47512F0033E3B9 /* ATInteractionInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 583DF0651A390DDA00BF0207 /* ATInteractionInvocation.h */; };
+		E2F84EC71D47512F0033E3B9 /* ATInteractionUsageData.h in Headers */ = {isa = PBXBuildFile; fileRef = 589274A4180CC33A0029E5CE /* ATInteractionUsageData.h */; };
+		E2F84EC81D47512F0033E3B9 /* ATEngagementManifestParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 584647C417C426E800BFD6E6 /* ATEngagementManifestParser.h */; };
+		E2F84EC91D47512F0033E3B9 /* ATInteractionTextModalController.h in Headers */ = {isa = PBXBuildFile; fileRef = 584EAC6C1A786E4500AC7F05 /* ATInteractionTextModalController.h */; };
+		E2F84ECA1D47512F0033E3B9 /* ATInteractionNavigateToLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 583DF06C1A44CD6E00BF0207 /* ATInteractionNavigateToLink.h */; };
+		E2F84ECB1D47512F0033E3B9 /* ATInteractionSurveyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58AB416518F608500034FAA5 /* ATInteractionSurveyController.h */; };
+		E2F84ECC1D47512F0033E3B9 /* ATInteractionAppStoreController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58AB415518E3A9870034FAA5 /* ATInteractionAppStoreController.h */; };
+		E2F84ECD1D47512F0033E3B9 /* ATInteractionEnjoymentDialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = 586C47A718B424E900725C22 /* ATInteractionEnjoymentDialogController.h */; };
+		E2F84ECE1D47512F0033E3B9 /* ATInteractionRatingDialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D17D4518C5674000D123BC /* ATInteractionRatingDialogController.h */; };
+		E2F84ECF1D47512F0033E3B9 /* ATInteractionMessageCenterController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D17D4D18C5676F00D123BC /* ATInteractionMessageCenterController.h */; };
+		E2F84ED01D47512F0033E3B9 /* ATInteractionUpgradeMessageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 58DCC0D2180F445700A3A7AE /* ATInteractionUpgradeMessageViewController.h */; };
+		E2F84ED11D47512F0033E3B9 /* ATEngagementBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = 58C5921F17C55ADD000FA428 /* ATEngagementBackend.h */; };
+		E2F84ED21D47512F0033E3B9 /* ATWebClient+EngagementAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 58C5922917C59BE3000FA428 /* ATWebClient+EngagementAdditions.h */; };
+		E2F84ED31D47512F0033E3B9 /* ATEngagementGetManifestTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 5898DF8A17C2E0CE0048F11F /* ATEngagementGetManifestTask.h */; };
+		E2F84ED41D47512F0033E3B9 /* ApptentiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4987FA95157AE53500AF2078 /* ApptentiveMetrics.h */; };
+		E2F84ED51D47512F0033E3B9 /* ATMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = 4987FA97157AE53500AF2078 /* ATMetric.h */; };
+		E2F84ED61D47512F0033E3B9 /* ATSurveyMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4987FA7E157ACAB500AF2078 /* ATSurveyMetrics.h */; };
+		E2F84ED71D47512F0033E3B9 /* ATWebClient+Metrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4987FA9A157AE53700AF2078 /* ATWebClient+Metrics.h */; };
+		E2F84ED81D47512F0033E3B9 /* ATUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4936AE751379DEBB00A4B17F /* ATUtilities.h */; };
+		E2F84ED91D47512F0033E3B9 /* ATLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 491E03CC163F261C00DC3E18 /* ATLog.h */; };
+		E2F84EDA1D47512F0033E3B9 /* ATLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 495E9C1A16EABD8E00AE3B03 /* ATLogger.h */; };
+		E2F84EDB1D47512F0033E3B9 /* NSDictionary+ATAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E6208516C5E8C2000C9F5A /* NSDictionary+ATAdditions.h */; };
+		E2F84EDC1D47512F0033E3B9 /* ATTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AAC853175FFA4800F08879 /* ATTypes.h */; };
+		E2F84EDD1D47512F0033E3B9 /* ATJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 497A9A0217762512002B6F96 /* ATJSONSerialization.h */; };
+		E2F84EDE1D47512F0033E3B9 /* ATConversation.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFCD16CC4A550070FFEA /* ATConversation.h */; };
+		E2F84EDF1D47512F0033E3B9 /* ATData.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFCF16CC4A550070FFEA /* ATData.h */; };
+		E2F84EE01D47512F0033E3B9 /* ATDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFD316CC4A550070FFEA /* ATDeviceInfo.h */; };
+		E2F84EE11D47512F0033E3B9 /* ATEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFFD16CC56570070FFEA /* ATEvent.h */; };
+		E2F84EE21D47512F0033E3B9 /* ATFileAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 492B81D816D595A00031BEF6 /* ATFileAttachment.h */; };
+		E2F84EE31D47512F0033E3B9 /* ATMessageSender.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFDB16CC4A550070FFEA /* ATMessageSender.h */; };
+		E2F84EE41D47512F0033E3B9 /* ATCompoundMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C7C4E11BEAD105005D6EC1 /* ATCompoundMessage.h */; };
+		E2F84EE51D47512F0033E3B9 /* ATPersonInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFDD16CC4A550070FFEA /* ATPersonInfo.h */; };
+		E2F84EE61D47512F0033E3B9 /* ATRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F8AFF916CC4D860070FFEA /* ATRecord.h */; };
+		E2F84EE71D47512F0033E3B9 /* ATBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = 4936AE7B1379DECE00A4B17F /* ATBackend.h */; };
+		E2F84EE81D47512F0033E3B9 /* ATLegacyRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EA5AAE14BD08AD004F8A4D /* ATLegacyRecord.h */; };
+		E2F84EE91D47512F0033E3B9 /* ATAppConfigurationUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 49CEFF5B15168B53006D8BA8 /* ATAppConfigurationUpdater.h */; };
+		E2F84EEA1D47512F0033E3B9 /* ATDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 496F577F174060CE003BF516 /* ATDataManager.h */; };
+		E2F84EEB1D47512F0033E3B9 /* ATReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 49509A5F135658E200793EEC /* ATReachability.h */; };
+		E2F84EEC1D47512F0033E3B9 /* ATSurvey.h in Headers */ = {isa = PBXBuildFile; fileRef = 493AEB1915990A4D00DFD4C7 /* ATSurvey.h */; };
+		E2F84EED1D47512F0033E3B9 /* ATSurveyParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 493AEB1B15990A4D00DFD4C7 /* ATSurveyParser.h */; };
+		E2F84EEE1D47512F0033E3B9 /* ATSurveyQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 493AEB1D15990A4D00DFD4C7 /* ATSurveyQuestion.h */; };
+		E2F84EEF1D47512F0033E3B9 /* ATSurveyResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B7E914178BA8060059E776 /* ATSurveyResponse.h */; };
+		E2F84EF01D47512F0033E3B9 /* ATSurveyQuestionResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 58E95808190740BC005063DC /* ATSurveyQuestionResponse.h */; };
+		E2F84EF11D47512F0033E3B9 /* ATWebClient+SurveyAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 493AEB2515990A4D00DFD4C7 /* ATWebClient+SurveyAdditions.h */; };
+		E2F84EF21D47512F0033E3B9 /* ATSurveyViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 493AEB2815990A4D00DFD4C7 /* ATSurveyViewController.h */; };
+		E2F84EF31D47512F0033E3B9 /* ATSurveyResponseTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B7E919178BAB8D0059E776 /* ATSurveyResponseTask.h */; };
+		E2F84EF41D47512F0033E3B9 /* ATTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 49D1124D13368CC200603373 /* ATTask.h */; };
+		E2F84EF51D47512F0033E3B9 /* ATRecordTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EA5ABB14BD0F4D004F8A4D /* ATRecordTask.h */; };
+		E2F84EF61D47512F0033E3B9 /* ATTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 49D112711337CC9E00603373 /* ATTaskQueue.h */; };
+		E2F84EF71D47512F0033E3B9 /* ATAppConfigurationUpdateTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 498EFB6E15BA48B200A1043B /* ATAppConfigurationUpdateTask.h */; };
+		E2F84EF81D47512F0033E3B9 /* ATRecordRequestTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 492F2F1A16ED597F0030E48A /* ATRecordRequestTask.h */; };
+		E2F84EF91D47512F0033E3B9 /* ATConnectionChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 491748B21341177000A7D11E /* ATConnectionChannel.h */; };
+		E2F84EFA1D47512F0033E3B9 /* ATConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 491748B41341177000A7D11E /* ATConnectionManager.h */; };
+		E2F84EFB1D47512F0033E3B9 /* ATURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 491748B61341177000A7D11E /* ATURLConnection.h */; };
+		E2F84EFC1D47512F0033E3B9 /* ATWebClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 491748B81341177000A7D11E /* ATWebClient.h */; };
+		E2F84EFD1D47512F0033E3B9 /* ATAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 49352AC1138C97A2000E464A /* ATAPIRequest.h */; };
+		E2F84EFE1D47513E0033E3B9 /* ATConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C00298133413BB0071F088 /* ATConnect.m */; };
+		E2F84EFF1D47513E0033E3B9 /* ATNetworkImageIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CC8BC91B1D0598006C4D30 /* ATNetworkImageIconView.m */; };
+		E2F84F001D47513E0033E3B9 /* ATDefaultTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936AE481379DE3100A4B17F /* ATDefaultTextView.m */; };
+		E2F84F011D47513E0033E3B9 /* ATHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936AE4A1379DE3100A4B17F /* ATHUDView.m */; };
+		E2F84F021D47513E0033E3B9 /* ATNetworkImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960A532171F70530082669B /* ATNetworkImageView.m */; };
+		E2F84F031D47513E0033E3B9 /* ATUnreadMessagesBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583C270A1B34BFD800525001 /* ATUnreadMessagesBadgeView.m */; };
+		E2F84F041D47513E0033E3B9 /* ATMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585A8E5E1B0D609A00BDF4CC /* ATMessageCenterViewController.m */; };
+		E2F84F051D47513E0033E3B9 /* ATMessageCenterErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013C1A7A1B713D5C002434B8 /* ATMessageCenterErrorViewController.m */; };
+		E2F84F061D47513E0033E3B9 /* ATBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AE42061B38E38D006B9191 /* ATBannerViewController.m */; };
+		E2F84F071D47513E0033E3B9 /* ATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1A95F1B6823CD0088DBF0 /* ATAboutViewController.m */; };
+		E2F84F081D47513E0033E3B9 /* ATAttachmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D0C38B1BF3DC330024BA1A /* ATAttachmentController.m */; };
+		E2F84F091D47513E0033E3B9 /* ATAttachButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D0C38F1BF3DED50024BA1A /* ATAttachButton.m */; };
+		E2F84F0A1D47513E0033E3B9 /* ATMessageCenterGreetingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C30CEA1B0D09F8006BC911 /* ATMessageCenterGreetingView.m */; };
+		E2F84F0B1D47513E0033E3B9 /* ATMessageCenterStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D97411B0E3770004E045C /* ATMessageCenterStatusView.m */; };
+		E2F84F0C1D47513E0033E3B9 /* ATMessageCenterMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D97451B0E5795004E045C /* ATMessageCenterMessageCell.m */; };
+		E2F84F0D1D47513E0033E3B9 /* ATMessageCenterReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D97491B0E57C2004E045C /* ATMessageCenterReplyCell.m */; };
+		E2F84F0E1D47513E0033E3B9 /* ATCompoundMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0127EA0B1BF1271C0005481A /* ATCompoundMessageCell.m */; };
+		E2F84F0F1D47513E0033E3B9 /* ATCompoundReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171DFEC1BF2D019006F8BEA /* ATCompoundReplyCell.m */; };
+		E2F84F101D47513E0033E3B9 /* ATMessageCenterContextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F66491B601F0B00F388E3 /* ATMessageCenterContextMessageCell.m */; };
+		E2F84F111D47513E0033E3B9 /* ATMessageCenterInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD9E031B55E465004F12AB /* ATMessageCenterInputView.m */; };
+		E2F84F121D47513E0033E3B9 /* ATMessageCenterProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B147B21B5D8D3A0000D041 /* ATMessageCenterProfileView.m */; };
+		E2F84F131D47513E0033E3B9 /* ATProgressNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D3128D1B69349900B369E1 /* ATProgressNavigationBar.m */; };
+		E2F84F141D47513E0033E3B9 /* ATIndexedCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0127EA0D1BF1271C0005481A /* ATIndexedCollectionView.m */; };
+		E2F84F151D47513E0033E3B9 /* ATAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0127EA091BF1271C0005481A /* ATAttachmentCell.m */; };
+		E2F84F161D47513E0033E3B9 /* ATMessageCenterDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49735D611832DF1F00D48DE7 /* ATMessageCenterDataSource.m */; };
+		E2F84F171D47513E0033E3B9 /* ATPersonUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4961A40A161BBE0800E30037 /* ATPersonUpdater.m */; };
+		E2F84F181D47513E0033E3B9 /* ATDeviceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4961A40E161BBE1F00E30037 /* ATDeviceUpdater.m */; };
+		E2F84F191D47513E0033E3B9 /* ATConversationUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC178116C0987400BE1615 /* ATConversationUpdater.m */; };
+		E2F84F1A1D47513E0033E3B9 /* ATMessageTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4961A401161BBD7000E30037 /* ATMessageTask.m */; };
+		E2F84F1B1D47513E0033E3B9 /* ATGetMessagesTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3A26E1628F4FF000675B4 /* ATGetMessagesTask.m */; };
+		E2F84F1C1D47513E0033E3B9 /* ATWebClient+MessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 499912A7161B6AF700FDA15F /* ATWebClient+MessageCenter.m */; };
+		E2F84F1D1D47513E0033E3B9 /* ATInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EEBE2217C7E8150039A0F5 /* ATInteraction.m */; };
+		E2F84F1E1D47513E0033E3B9 /* ATMessageCenterInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B703F71B0FAE6D0024478C /* ATMessageCenterInteraction.m */; };
+		E2F84F1F1D47513E0033E3B9 /* ATInteractionInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583DF0661A390DDA00BF0207 /* ATInteractionInvocation.m */; };
+		E2F84F201D47513E0033E3B9 /* ATInteractionUsageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 589274A5180CC33A0029E5CE /* ATInteractionUsageData.m */; };
+		E2F84F211D47513E0033E3B9 /* ATEngagementManifestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 584647C517C426E800BFD6E6 /* ATEngagementManifestParser.m */; };
+		E2F84F221D47513E0033E3B9 /* ATInteractionTextModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 584EAC6D1A786E4500AC7F05 /* ATInteractionTextModalController.m */; };
+		E2F84F231D47513E0033E3B9 /* ATInteractionNavigateToLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 583DF06D1A44CD6E00BF0207 /* ATInteractionNavigateToLink.m */; };
+		E2F84F241D47513E0033E3B9 /* ATInteractionSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AB416618F608500034FAA5 /* ATInteractionSurveyController.m */; };
+		E2F84F251D47513E0033E3B9 /* ATInteractionAppStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AB415618E3A9870034FAA5 /* ATInteractionAppStoreController.m */; };
+		E2F84F261D47513E0033E3B9 /* ATInteractionEnjoymentDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586C47A818B424E900725C22 /* ATInteractionEnjoymentDialogController.m */; };
+		E2F84F271D47513E0033E3B9 /* ATInteractionRatingDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D17D4618C5674000D123BC /* ATInteractionRatingDialogController.m */; };
+		E2F84F281D47513E0033E3B9 /* ATInteractionMessageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D17D4E18C5676F00D123BC /* ATInteractionMessageCenterController.m */; };
+		E2F84F291D47513E0033E3B9 /* ATInteractionUpgradeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DCC0D3180F445700A3A7AE /* ATInteractionUpgradeMessageViewController.m */; };
+		E2F84F2A1D47513E0033E3B9 /* ATEngagementBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C5922017C55ADD000FA428 /* ATEngagementBackend.m */; };
+		E2F84F2B1D47513E0033E3B9 /* ATWebClient+EngagementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C5922A17C59BE3000FA428 /* ATWebClient+EngagementAdditions.m */; };
+		E2F84F2C1D47513E0033E3B9 /* ATEngagementGetManifestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5898DF8B17C2E0CE0048F11F /* ATEngagementGetManifestTask.m */; };
+		E2F84F2D1D47513E0033E3B9 /* ApptentiveMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987FA96157AE53500AF2078 /* ApptentiveMetrics.m */; };
+		E2F84F2E1D47513E0033E3B9 /* ATMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987FA98157AE53600AF2078 /* ATMetric.m */; };
+		E2F84F2F1D47513E0033E3B9 /* ATSurveyMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987FA7F157ACAB500AF2078 /* ATSurveyMetrics.m */; };
+		E2F84F301D47513E0033E3B9 /* ATWebClient+Metrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987FA9B157AE53700AF2078 /* ATWebClient+Metrics.m */; };
+		E2F84F311D47513E0033E3B9 /* ATUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936AE761379DEBB00A4B17F /* ATUtilities.m */; };
+		E2F84F321D47513E0033E3B9 /* ATLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 495E9C1B16EABD8E00AE3B03 /* ATLogger.m */; };
+		E2F84F331D47513E0033E3B9 /* NSDictionary+ATAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E6208616C5E8C2000C9F5A /* NSDictionary+ATAdditions.m */; };
+		E2F84F341D47513E0033E3B9 /* ATJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 497A9A0317762512002B6F96 /* ATJSONSerialization.m */; };
+		E2F84F351D47513E0033E3B9 /* ATConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFCE16CC4A550070FFEA /* ATConversation.m */; };
+		E2F84F361D47513E0033E3B9 /* ATData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFD016CC4A550070FFEA /* ATData.m */; };
+		E2F84F371D47513E0033E3B9 /* ATDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFD416CC4A550070FFEA /* ATDeviceInfo.m */; };
+		E2F84F381D47513E0033E3B9 /* ATEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFFE16CC56570070FFEA /* ATEvent.m */; };
+		E2F84F391D47513E0033E3B9 /* ATFileAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 492B81D916D595A00031BEF6 /* ATFileAttachment.m */; };
+		E2F84F3A1D47513E0033E3B9 /* ATMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFDC16CC4A550070FFEA /* ATMessageSender.m */; };
+		E2F84F3B1D47513E0033E3B9 /* ATCompoundMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C7C4E21BEAD105005D6EC1 /* ATCompoundMessage.m */; };
+		E2F84F3C1D47513E0033E3B9 /* ATPersonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFDE16CC4A550070FFEA /* ATPersonInfo.m */; };
+		E2F84F3D1D47513E0033E3B9 /* ATRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AFFA16CC4D860070FFEA /* ATRecord.m */; };
+		E2F84F3E1D47513E0033E3B9 /* ATBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936AE7C1379DECE00A4B17F /* ATBackend.m */; };
+		E2F84F3F1D47513E0033E3B9 /* ATLegacyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EA5AAF14BD08AD004F8A4D /* ATLegacyRecord.m */; };
+		E2F84F401D47513E0033E3B9 /* ATAppConfigurationUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CEFF5C15168B53006D8BA8 /* ATAppConfigurationUpdater.m */; };
+		E2F84F411D47513E0033E3B9 /* ATDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496F5780174060CE003BF516 /* ATDataManager.m */; };
+		E2F84F421D47513E0033E3B9 /* ATReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 49509A60135658E200793EEC /* ATReachability.m */; };
+		E2F84F431D47513E0033E3B9 /* ATSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AEB1A15990A4D00DFD4C7 /* ATSurvey.m */; };
+		E2F84F441D47513E0033E3B9 /* ATSurveyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AEB1C15990A4D00DFD4C7 /* ATSurveyParser.m */; };
+		E2F84F451D47513E0033E3B9 /* ATSurveyQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AEB1E15990A4D00DFD4C7 /* ATSurveyQuestion.m */; };
+		E2F84F461D47513E0033E3B9 /* ATSurveyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B7E915178BA8060059E776 /* ATSurveyResponse.m */; };
+		E2F84F471D47513E0033E3B9 /* ATSurveyQuestionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E95809190740BC005063DC /* ATSurveyQuestionResponse.m */; };
+		E2F84F481D47513E0033E3B9 /* ATWebClient+SurveyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AEB2615990A4D00DFD4C7 /* ATWebClient+SurveyAdditions.m */; };
+		E2F84F491D47513E0033E3B9 /* ATSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AEB2915990A4D00DFD4C7 /* ATSurveyViewController.m */; };
+		E2F84F4A1D47513E0033E3B9 /* ATSurveyResponseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B7E91A178BAB8D0059E776 /* ATSurveyResponseTask.m */; };
+		E2F84F4B1D47513E0033E3B9 /* ATTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D1124E13368CC200603373 /* ATTask.m */; };
+		E2F84F4C1D47513E0033E3B9 /* ATRecordTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EA5ABC14BD0F4D004F8A4D /* ATRecordTask.m */; };
+		E2F84F4D1D47513E0033E3B9 /* ATTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D112721337CC9F00603373 /* ATTaskQueue.m */; };
+		E2F84F4E1D47513E0033E3B9 /* ATAppConfigurationUpdateTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EFB6F15BA48B300A1043B /* ATAppConfigurationUpdateTask.m */; };
+		E2F84F4F1D47513E0033E3B9 /* ATRecordRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 492F2F1B16ED597F0030E48A /* ATRecordRequestTask.m */; };
+		E2F84F501D47513E0033E3B9 /* ATConnectionChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 491748B31341177000A7D11E /* ATConnectionChannel.m */; };
+		E2F84F511D47513E0033E3B9 /* ATConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491748B51341177000A7D11E /* ATConnectionManager.m */; };
+		E2F84F521D47513E0033E3B9 /* ATURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 491748B71341177000A7D11E /* ATURLConnection.m */; };
+		E2F84F531D47513E0033E3B9 /* ATWebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 491748B91341177000A7D11E /* ATWebClient.m */; };
+		E2F84F541D47513E0033E3B9 /* ATAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49352AC2138C97A2000E464A /* ATAPIRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +508,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 496DC37E1333D35600743F65;
 			remoteInfo = ApptentiveConnect;
+		};
+		E2F84E971D4750FA0033E3B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 496DC3761333D35600743F65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49D1118B13341A7C00603373;
+			remoteInfo = ApptentiveResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -669,6 +865,9 @@
 		58EEBE2217C7E8150039A0F5 /* ATInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATInteraction.m; sourceTree = "<group>"; };
 		58EF81BE1B87CC7A003C760A /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		58EF81BF1B87CC7A003C760A /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E2F84E8F1D4750E40033E3B9 /* ApptentiveFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApptentiveFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2F84E911D4750E40033E3B9 /* ApptentiveFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApptentiveFramework.h; sourceTree = "<group>"; };
+		E2F84E931D4750E40033E3B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -713,6 +912,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		49D1118813341A7C00603373 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F84E8B1D4750E40033E3B9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1090,6 +1296,7 @@
 				49C00295133413BB0071F088 /* source */,
 				492F2F0B16E3F8060030E48A /* Resources */,
 				49C002861334137E0071F088 /* tests */,
+				E2F84E901D4750E40033E3B9 /* ApptentiveFramework */,
 				496DC3811333D35600743F65 /* Frameworks */,
 				496DC3801333D35600743F65 /* Products */,
 			);
@@ -1102,6 +1309,7 @@
 				496DC37F1333D35600743F65 /* libApptentiveConnect.a */,
 				496DC38C1333D35600743F65 /* ApptentiveConnectTests.xctest */,
 				49D1118C13341A7C00603373 /* ApptentiveResources.bundle */,
+				E2F84E8F1D4750E40033E3B9 /* ApptentiveFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1475,6 +1683,15 @@
 			path = Interactions;
 			sourceTree = "<group>";
 		};
+		E2F84E901D4750E40033E3B9 /* ApptentiveFramework */ = {
+			isa = PBXGroup;
+			children = (
+				E2F84E911D4750E40033E3B9 /* ApptentiveFramework.h */,
+				E2F84E931D4750E40033E3B9 /* Info.plist */,
+			);
+			path = ApptentiveFramework;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1580,6 +1797,110 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2F84E8C1D4750E40033E3B9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F84E921D4750E40033E3B9 /* ApptentiveFramework.h in Headers */,
+				E2F84E9E1D4751090033E3B9 /* ATConnect.h in Headers */,
+				E2F84E9F1D4751170033E3B9 /* ATConnect_Private.h in Headers */,
+				E2F84EA01D4751170033E3B9 /* ATURLConnection_Private.h in Headers */,
+				E2F84EA11D4751170033E3B9 /* ATWebClient_Private.h in Headers */,
+				E2F84EA21D47512F0033E3B9 /* ATConnect_Debugging.h in Headers */,
+				E2F84EA31D47512F0033E3B9 /* ATNetworkImageIconView.h in Headers */,
+				E2F84EA41D47512F0033E3B9 /* ATDefaultTextView.h in Headers */,
+				E2F84EA51D47512F0033E3B9 /* ATHUDView.h in Headers */,
+				E2F84EA61D47512F0033E3B9 /* ATNetworkImageView.h in Headers */,
+				E2F84EA71D47512F0033E3B9 /* ATUnreadMessagesBadgeView.h in Headers */,
+				E2F84EA81D47512F0033E3B9 /* ATMessageCenterViewController.h in Headers */,
+				E2F84EA91D47512F0033E3B9 /* ATMessageCenterErrorViewController.h in Headers */,
+				E2F84EAA1D47512F0033E3B9 /* ATBannerViewController.h in Headers */,
+				E2F84EAB1D47512F0033E3B9 /* ATAboutViewController.h in Headers */,
+				E2F84EAC1D47512F0033E3B9 /* ATAttachmentController.h in Headers */,
+				E2F84EAD1D47512F0033E3B9 /* ATAttachButton.h in Headers */,
+				E2F84EAE1D47512F0033E3B9 /* ATMessageCenterGreetingView.h in Headers */,
+				E2F84EAF1D47512F0033E3B9 /* ATMessageCenterStatusView.h in Headers */,
+				E2F84EB01D47512F0033E3B9 /* ATMessageCenterMessageCell.h in Headers */,
+				E2F84EB11D47512F0033E3B9 /* ATMessageCenterReplyCell.h in Headers */,
+				E2F84EB21D47512F0033E3B9 /* ATCompoundMessageCell.h in Headers */,
+				E2F84EB31D47512F0033E3B9 /* ATCompoundReplyCell.h in Headers */,
+				E2F84EB41D47512F0033E3B9 /* ATMessageCenterContextMessageCell.h in Headers */,
+				E2F84EB51D47512F0033E3B9 /* ATMessageCenterInputView.h in Headers */,
+				E2F84EB61D47512F0033E3B9 /* ATMessageCenterProfileView.h in Headers */,
+				E2F84EB71D47512F0033E3B9 /* ATProgressNavigationBar.h in Headers */,
+				E2F84EB81D47512F0033E3B9 /* ATIndexedCollectionView.h in Headers */,
+				E2F84EB91D47512F0033E3B9 /* ATAttachmentCell.h in Headers */,
+				E2F84EBA1D47512F0033E3B9 /* ATMessageCenterCellProtocols.h in Headers */,
+				E2F84EBB1D47512F0033E3B9 /* ATFeedbackTypes.h in Headers */,
+				E2F84EBC1D47512F0033E3B9 /* ATMessageCenterDataSource.h in Headers */,
+				E2F84EBD1D47512F0033E3B9 /* ATPersonUpdater.h in Headers */,
+				E2F84EBE1D47512F0033E3B9 /* ATDeviceUpdater.h in Headers */,
+				E2F84EBF1D47512F0033E3B9 /* ATConversationUpdater.h in Headers */,
+				E2F84EC01D47512F0033E3B9 /* ATJSONModel.h in Headers */,
+				E2F84EC11D47512F0033E3B9 /* ATMessageTask.h in Headers */,
+				E2F84EC21D47512F0033E3B9 /* ATGetMessagesTask.h in Headers */,
+				E2F84EC31D47512F0033E3B9 /* ATWebClient+MessageCenter.h in Headers */,
+				E2F84EC41D47512F0033E3B9 /* ATInteraction.h in Headers */,
+				E2F84EC51D47512F0033E3B9 /* ATMessageCenterInteraction.h in Headers */,
+				E2F84EC61D47512F0033E3B9 /* ATInteractionInvocation.h in Headers */,
+				E2F84EC71D47512F0033E3B9 /* ATInteractionUsageData.h in Headers */,
+				E2F84EC81D47512F0033E3B9 /* ATEngagementManifestParser.h in Headers */,
+				E2F84EC91D47512F0033E3B9 /* ATInteractionTextModalController.h in Headers */,
+				E2F84ECA1D47512F0033E3B9 /* ATInteractionNavigateToLink.h in Headers */,
+				E2F84ECB1D47512F0033E3B9 /* ATInteractionSurveyController.h in Headers */,
+				E2F84ECC1D47512F0033E3B9 /* ATInteractionAppStoreController.h in Headers */,
+				E2F84ECD1D47512F0033E3B9 /* ATInteractionEnjoymentDialogController.h in Headers */,
+				E2F84ECE1D47512F0033E3B9 /* ATInteractionRatingDialogController.h in Headers */,
+				E2F84ECF1D47512F0033E3B9 /* ATInteractionMessageCenterController.h in Headers */,
+				E2F84ED01D47512F0033E3B9 /* ATInteractionUpgradeMessageViewController.h in Headers */,
+				E2F84ED11D47512F0033E3B9 /* ATEngagementBackend.h in Headers */,
+				E2F84ED21D47512F0033E3B9 /* ATWebClient+EngagementAdditions.h in Headers */,
+				E2F84ED31D47512F0033E3B9 /* ATEngagementGetManifestTask.h in Headers */,
+				E2F84ED41D47512F0033E3B9 /* ApptentiveMetrics.h in Headers */,
+				E2F84ED51D47512F0033E3B9 /* ATMetric.h in Headers */,
+				E2F84ED61D47512F0033E3B9 /* ATSurveyMetrics.h in Headers */,
+				E2F84ED71D47512F0033E3B9 /* ATWebClient+Metrics.h in Headers */,
+				E2F84ED81D47512F0033E3B9 /* ATUtilities.h in Headers */,
+				E2F84ED91D47512F0033E3B9 /* ATLog.h in Headers */,
+				E2F84EDA1D47512F0033E3B9 /* ATLogger.h in Headers */,
+				E2F84EDB1D47512F0033E3B9 /* NSDictionary+ATAdditions.h in Headers */,
+				E2F84EDC1D47512F0033E3B9 /* ATTypes.h in Headers */,
+				E2F84EDD1D47512F0033E3B9 /* ATJSONSerialization.h in Headers */,
+				E2F84EDE1D47512F0033E3B9 /* ATConversation.h in Headers */,
+				E2F84EDF1D47512F0033E3B9 /* ATData.h in Headers */,
+				E2F84EE01D47512F0033E3B9 /* ATDeviceInfo.h in Headers */,
+				E2F84EE11D47512F0033E3B9 /* ATEvent.h in Headers */,
+				E2F84EE21D47512F0033E3B9 /* ATFileAttachment.h in Headers */,
+				E2F84EE31D47512F0033E3B9 /* ATMessageSender.h in Headers */,
+				E2F84EE41D47512F0033E3B9 /* ATCompoundMessage.h in Headers */,
+				E2F84EE51D47512F0033E3B9 /* ATPersonInfo.h in Headers */,
+				E2F84EE61D47512F0033E3B9 /* ATRecord.h in Headers */,
+				E2F84EE71D47512F0033E3B9 /* ATBackend.h in Headers */,
+				E2F84EE81D47512F0033E3B9 /* ATLegacyRecord.h in Headers */,
+				E2F84EE91D47512F0033E3B9 /* ATAppConfigurationUpdater.h in Headers */,
+				E2F84EEA1D47512F0033E3B9 /* ATDataManager.h in Headers */,
+				E2F84EEB1D47512F0033E3B9 /* ATReachability.h in Headers */,
+				E2F84EEC1D47512F0033E3B9 /* ATSurvey.h in Headers */,
+				E2F84EED1D47512F0033E3B9 /* ATSurveyParser.h in Headers */,
+				E2F84EEE1D47512F0033E3B9 /* ATSurveyQuestion.h in Headers */,
+				E2F84EEF1D47512F0033E3B9 /* ATSurveyResponse.h in Headers */,
+				E2F84EF01D47512F0033E3B9 /* ATSurveyQuestionResponse.h in Headers */,
+				E2F84EF11D47512F0033E3B9 /* ATWebClient+SurveyAdditions.h in Headers */,
+				E2F84EF21D47512F0033E3B9 /* ATSurveyViewController.h in Headers */,
+				E2F84EF31D47512F0033E3B9 /* ATSurveyResponseTask.h in Headers */,
+				E2F84EF41D47512F0033E3B9 /* ATTask.h in Headers */,
+				E2F84EF51D47512F0033E3B9 /* ATRecordTask.h in Headers */,
+				E2F84EF61D47512F0033E3B9 /* ATTaskQueue.h in Headers */,
+				E2F84EF71D47512F0033E3B9 /* ATAppConfigurationUpdateTask.h in Headers */,
+				E2F84EF81D47512F0033E3B9 /* ATRecordRequestTask.h in Headers */,
+				E2F84EF91D47512F0033E3B9 /* ATConnectionChannel.h in Headers */,
+				E2F84EFA1D47512F0033E3B9 /* ATConnectionManager.h in Headers */,
+				E2F84EFB1D47512F0033E3B9 /* ATURLConnection.h in Headers */,
+				E2F84EFC1D47512F0033E3B9 /* ATWebClient.h in Headers */,
+				E2F84EFD1D47512F0033E3B9 /* ATAPIRequest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1637,6 +1958,25 @@
 			productReference = 49D1118C13341A7C00603373 /* ApptentiveResources.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		E2F84E8E1D4750E40033E3B9 /* ApptentiveFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2F84E961D4750E40033E3B9 /* Build configuration list for PBXNativeTarget "ApptentiveFramework" */;
+			buildPhases = (
+				E2F84E8A1D4750E40033E3B9 /* Sources */,
+				E2F84E8B1D4750E40033E3B9 /* Frameworks */,
+				E2F84E8C1D4750E40033E3B9 /* Headers */,
+				E2F84E8D1D4750E40033E3B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E2F84E981D4750FA0033E3B9 /* PBXTargetDependency */,
+			);
+			name = ApptentiveFramework;
+			productName = ApptentiveFramework;
+			productReference = E2F84E8F1D4750E40033E3B9 /* ApptentiveFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1645,6 +1985,11 @@
 			attributes = {
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Apptentive, Inc.";
+				TargetAttributes = {
+					E2F84E8E1D4750E40033E3B9 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
 			};
 			buildConfigurationList = 496DC3791333D35600743F65 /* Build configuration list for PBXProject "ApptentiveConnect" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1680,6 +2025,7 @@
 				496DC37E1333D35600743F65 /* ApptentiveConnect */,
 				496DC38B1333D35600743F65 /* ApptentiveConnectTests */,
 				49D1118B13341A7C00603373 /* ApptentiveResources */,
+				E2F84E8E1D4750E40033E3B9 /* ApptentiveFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -1764,6 +2110,18 @@
 				0160855C1BA77B1D00050FDB /* at_info.png in Resources */,
 				0160854D1BA77B1D00050FDB /* at_account.png in Resources */,
 				016085661BA77B1D00050FDB /* at_update_logo@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F84E8D1D4750E40033E3B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F84E991D4751030033E3B9 /* ATDataModel.xcdatamodeld in Resources */,
+				E2F84E9A1D4751030033E3B9 /* ATDataModel v3 to v4.xcmappingmodel in Resources */,
+				E2F84E9B1D4751030033E3B9 /* ATDataModel v2 to v3.xcmappingmodel in Resources */,
+				E2F84E9C1D4751030033E3B9 /* ATDataModel v1 to v2.xcmappingmodel in Resources */,
+				E2F84E9D1D4751030033E3B9 /* ATDataModel v4 to v5.xcmappingmodel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1915,6 +2273,100 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2F84E8A1D4750E40033E3B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F84EFE1D47513E0033E3B9 /* ATConnect.m in Sources */,
+				E2F84EFF1D47513E0033E3B9 /* ATNetworkImageIconView.m in Sources */,
+				E2F84F001D47513E0033E3B9 /* ATDefaultTextView.m in Sources */,
+				E2F84F011D47513E0033E3B9 /* ATHUDView.m in Sources */,
+				E2F84F021D47513E0033E3B9 /* ATNetworkImageView.m in Sources */,
+				E2F84F031D47513E0033E3B9 /* ATUnreadMessagesBadgeView.m in Sources */,
+				E2F84F041D47513E0033E3B9 /* ATMessageCenterViewController.m in Sources */,
+				E2F84F051D47513E0033E3B9 /* ATMessageCenterErrorViewController.m in Sources */,
+				E2F84F061D47513E0033E3B9 /* ATBannerViewController.m in Sources */,
+				E2F84F071D47513E0033E3B9 /* ATAboutViewController.m in Sources */,
+				E2F84F081D47513E0033E3B9 /* ATAttachmentController.m in Sources */,
+				E2F84F091D47513E0033E3B9 /* ATAttachButton.m in Sources */,
+				E2F84F0A1D47513E0033E3B9 /* ATMessageCenterGreetingView.m in Sources */,
+				E2F84F0B1D47513E0033E3B9 /* ATMessageCenterStatusView.m in Sources */,
+				E2F84F0C1D47513E0033E3B9 /* ATMessageCenterMessageCell.m in Sources */,
+				E2F84F0D1D47513E0033E3B9 /* ATMessageCenterReplyCell.m in Sources */,
+				E2F84F0E1D47513E0033E3B9 /* ATCompoundMessageCell.m in Sources */,
+				E2F84F0F1D47513E0033E3B9 /* ATCompoundReplyCell.m in Sources */,
+				E2F84F101D47513E0033E3B9 /* ATMessageCenterContextMessageCell.m in Sources */,
+				E2F84F111D47513E0033E3B9 /* ATMessageCenterInputView.m in Sources */,
+				E2F84F121D47513E0033E3B9 /* ATMessageCenterProfileView.m in Sources */,
+				E2F84F131D47513E0033E3B9 /* ATProgressNavigationBar.m in Sources */,
+				E2F84F141D47513E0033E3B9 /* ATIndexedCollectionView.m in Sources */,
+				E2F84F151D47513E0033E3B9 /* ATAttachmentCell.m in Sources */,
+				E2F84F161D47513E0033E3B9 /* ATMessageCenterDataSource.m in Sources */,
+				E2F84F171D47513E0033E3B9 /* ATPersonUpdater.m in Sources */,
+				E2F84F181D47513E0033E3B9 /* ATDeviceUpdater.m in Sources */,
+				E2F84F191D47513E0033E3B9 /* ATConversationUpdater.m in Sources */,
+				E2F84F1A1D47513E0033E3B9 /* ATMessageTask.m in Sources */,
+				E2F84F1B1D47513E0033E3B9 /* ATGetMessagesTask.m in Sources */,
+				E2F84F1C1D47513E0033E3B9 /* ATWebClient+MessageCenter.m in Sources */,
+				E2F84F1D1D47513E0033E3B9 /* ATInteraction.m in Sources */,
+				E2F84F1E1D47513E0033E3B9 /* ATMessageCenterInteraction.m in Sources */,
+				E2F84F1F1D47513E0033E3B9 /* ATInteractionInvocation.m in Sources */,
+				E2F84F201D47513E0033E3B9 /* ATInteractionUsageData.m in Sources */,
+				E2F84F211D47513E0033E3B9 /* ATEngagementManifestParser.m in Sources */,
+				E2F84F221D47513E0033E3B9 /* ATInteractionTextModalController.m in Sources */,
+				E2F84F231D47513E0033E3B9 /* ATInteractionNavigateToLink.m in Sources */,
+				E2F84F241D47513E0033E3B9 /* ATInteractionSurveyController.m in Sources */,
+				E2F84F251D47513E0033E3B9 /* ATInteractionAppStoreController.m in Sources */,
+				E2F84F261D47513E0033E3B9 /* ATInteractionEnjoymentDialogController.m in Sources */,
+				E2F84F271D47513E0033E3B9 /* ATInteractionRatingDialogController.m in Sources */,
+				E2F84F281D47513E0033E3B9 /* ATInteractionMessageCenterController.m in Sources */,
+				E2F84F291D47513E0033E3B9 /* ATInteractionUpgradeMessageViewController.m in Sources */,
+				E2F84F2A1D47513E0033E3B9 /* ATEngagementBackend.m in Sources */,
+				E2F84F2B1D47513E0033E3B9 /* ATWebClient+EngagementAdditions.m in Sources */,
+				E2F84F2C1D47513E0033E3B9 /* ATEngagementGetManifestTask.m in Sources */,
+				E2F84F2D1D47513E0033E3B9 /* ApptentiveMetrics.m in Sources */,
+				E2F84F2E1D47513E0033E3B9 /* ATMetric.m in Sources */,
+				E2F84F2F1D47513E0033E3B9 /* ATSurveyMetrics.m in Sources */,
+				E2F84F301D47513E0033E3B9 /* ATWebClient+Metrics.m in Sources */,
+				E2F84F311D47513E0033E3B9 /* ATUtilities.m in Sources */,
+				E2F84F321D47513E0033E3B9 /* ATLogger.m in Sources */,
+				E2F84F331D47513E0033E3B9 /* NSDictionary+ATAdditions.m in Sources */,
+				E2F84F341D47513E0033E3B9 /* ATJSONSerialization.m in Sources */,
+				E2F84F351D47513E0033E3B9 /* ATConversation.m in Sources */,
+				E2F84F361D47513E0033E3B9 /* ATData.m in Sources */,
+				E2F84F371D47513E0033E3B9 /* ATDeviceInfo.m in Sources */,
+				E2F84F381D47513E0033E3B9 /* ATEvent.m in Sources */,
+				E2F84F391D47513E0033E3B9 /* ATFileAttachment.m in Sources */,
+				E2F84F3A1D47513E0033E3B9 /* ATMessageSender.m in Sources */,
+				E2F84F3B1D47513E0033E3B9 /* ATCompoundMessage.m in Sources */,
+				E2F84F3C1D47513E0033E3B9 /* ATPersonInfo.m in Sources */,
+				E2F84F3D1D47513E0033E3B9 /* ATRecord.m in Sources */,
+				E2F84F3E1D47513E0033E3B9 /* ATBackend.m in Sources */,
+				E2F84F3F1D47513E0033E3B9 /* ATLegacyRecord.m in Sources */,
+				E2F84F401D47513E0033E3B9 /* ATAppConfigurationUpdater.m in Sources */,
+				E2F84F411D47513E0033E3B9 /* ATDataManager.m in Sources */,
+				E2F84F421D47513E0033E3B9 /* ATReachability.m in Sources */,
+				E2F84F431D47513E0033E3B9 /* ATSurvey.m in Sources */,
+				E2F84F441D47513E0033E3B9 /* ATSurveyParser.m in Sources */,
+				E2F84F451D47513E0033E3B9 /* ATSurveyQuestion.m in Sources */,
+				E2F84F461D47513E0033E3B9 /* ATSurveyResponse.m in Sources */,
+				E2F84F471D47513E0033E3B9 /* ATSurveyQuestionResponse.m in Sources */,
+				E2F84F481D47513E0033E3B9 /* ATWebClient+SurveyAdditions.m in Sources */,
+				E2F84F491D47513E0033E3B9 /* ATSurveyViewController.m in Sources */,
+				E2F84F4A1D47513E0033E3B9 /* ATSurveyResponseTask.m in Sources */,
+				E2F84F4B1D47513E0033E3B9 /* ATTask.m in Sources */,
+				E2F84F4C1D47513E0033E3B9 /* ATRecordTask.m in Sources */,
+				E2F84F4D1D47513E0033E3B9 /* ATTaskQueue.m in Sources */,
+				E2F84F4E1D47513E0033E3B9 /* ATAppConfigurationUpdateTask.m in Sources */,
+				E2F84F4F1D47513E0033E3B9 /* ATRecordRequestTask.m in Sources */,
+				E2F84F501D47513E0033E3B9 /* ATConnectionChannel.m in Sources */,
+				E2F84F511D47513E0033E3B9 /* ATConnectionManager.m in Sources */,
+				E2F84F521D47513E0033E3B9 /* ATURLConnection.m in Sources */,
+				E2F84F531D47513E0033E3B9 /* ATWebClient.m in Sources */,
+				E2F84F541D47513E0033E3B9 /* ATAPIRequest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1927,6 +2379,11 @@
 			isa = PBXTargetDependency;
 			target = 496DC37E1333D35600743F65 /* ApptentiveConnect */;
 			targetProxy = 496DC3921333D35600743F65 /* PBXContainerItemProxy */;
+		};
+		E2F84E981D4750FA0033E3B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49D1118B13341A7C00603373 /* ApptentiveResources */;
+			targetProxy = E2F84E971D4750FA0033E3B9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2209,6 +2666,83 @@
 			};
 			name = Release;
 		};
+		E2F84E941D4750E40033E3B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "source/Misc/ApptentiveConnect-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ApptentiveFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.ApptentiveFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E2F84E951D4750E40033E3B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "source/Misc/ApptentiveConnect-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ApptentiveFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.ApptentiveFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2247,6 +2781,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E2F84E961D4750E40033E3B9 /* Build configuration list for PBXNativeTarget "ApptentiveFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2F84E941D4750E40033E3B9 /* Debug */,
+				E2F84E951D4750E40033E3B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
