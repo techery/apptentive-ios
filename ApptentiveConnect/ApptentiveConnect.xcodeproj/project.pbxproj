@@ -304,11 +304,6 @@
 		58EEBE2317C7E8150039A0F5 /* ATInteraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 58EEBE2117C7E8150039A0F5 /* ATInteraction.h */; };
 		58EEBE2417C7E8150039A0F5 /* ATInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EEBE2217C7E8150039A0F5 /* ATInteraction.m */; };
 		E2F84E921D4750E40033E3B9 /* ApptentiveFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F84E911D4750E40033E3B9 /* ApptentiveFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2F84E991D4751030033E3B9 /* ATDataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 01C7C4D51BEAD0A4005D6EC1 /* ATDataModel.xcdatamodeld */; };
-		E2F84E9A1D4751030033E3B9 /* ATDataModel v3 to v4.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 583E3969188E08DD0030B51E /* ATDataModel v3 to v4.xcmappingmodel */; };
-		E2F84E9B1D4751030033E3B9 /* ATDataModel v2 to v3.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 58CD20131821B78D0071CC72 /* ATDataModel v2 to v3.xcmappingmodel */; };
-		E2F84E9C1D4751030033E3B9 /* ATDataModel v1 to v2.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 49FECBE217D02BAD00069502 /* ATDataModel v1 to v2.xcmappingmodel */; };
-		E2F84E9D1D4751030033E3B9 /* ATDataModel v4 to v5.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = 013BB6121BF6A82300BB6C27 /* ATDataModel v4 to v5.xcmappingmodel */; };
 		E2F84E9E1D4751090033E3B9 /* ATConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C00297133413BB0071F088 /* ATConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2F84E9F1D4751170033E3B9 /* ATConnect_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4967278116B9D9CB00C679B8 /* ATConnect_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E2F84EA01D4751170033E3B9 /* ATURLConnection_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 49352ADC138CA1DC000E464A /* ATURLConnection_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -2117,11 +2112,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F84E991D4751030033E3B9 /* ATDataModel.xcdatamodeld in Resources */,
-				E2F84E9A1D4751030033E3B9 /* ATDataModel v3 to v4.xcmappingmodel in Resources */,
-				E2F84E9B1D4751030033E3B9 /* ATDataModel v2 to v3.xcmappingmodel in Resources */,
-				E2F84E9C1D4751030033E3B9 /* ATDataModel v1 to v2.xcmappingmodel in Resources */,
-				E2F84E9D1D4751030033E3B9 /* ATDataModel v4 to v5.xcmappingmodel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2725,6 +2715,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "source/Misc/ApptentiveConnect-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

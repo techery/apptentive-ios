@@ -75,6 +75,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "ApptentiveFramework"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
